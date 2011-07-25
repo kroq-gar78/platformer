@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="Tilt" basedir="." default="main">
+	<property name="src.dir" value="src"/>
+	<property name="res.dir" value="res"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="exec.dir" value="exec"/>
+	<property name="build.dir" value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="jar.dir" value="${build.dir}"/>
+	<property name="natives.dir" value="natives"/>
+	<property name="deb.dir" value="debian"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+	</target>
+	
+	<target name="jar">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="pong.gameplay.SlickPongGame"/>
+				<attribute name="Class-Path" value="."/>
+			</manifest>
+			<zipfileset src="${lib.dir}/hiero.jar"/>
+			<!--<zipfileset src="${lib.dir}/ibxm.jar"/>-->
+			<zipfileset src="${lib.dir}/jargs.jar"/>
+			<zipfileset src="${lib.dir}/jinput.jar"/>
+			<zipfileset src="${lib.dir}/jnlp.jar"/>
+			<zipfileset src="${lib.dir}/jogg-0.0.7.jar"/>
+			<zipfileset src="${lib.dir}/jorbis-0.0.15.jar"/>
+			<zipfileset src="${lib.dir}/lwjgl.jar"/>
+			<!--<zipfileset src="${lib.dir}/lwjgl_util_applet.jar"/>
+			<zipfileset src="${lib.dir}/lwjgl_util.jar"/>-->
+			<zipfileset src="${lib.dir}/lzma.jar"/>
+			<zipfileset src="${lib.dir}/packulike.jar"/>
+			<!--<zipfileset src="${lib.dir}/pedigree.jar"/>
+			<zipfileset src="${lib.dir}/scalar.jar"/>-->
+			<zipfileset src="${lib.dir}/slick.jar"/>
+			<!--<zipfileset src="${lib.dir}/slick-util.jar"/>-->
+			<!--<zipfileset src="${lib.dir}/tinylinepp.jar"/>-->
+			<fileset dir="." includes="${res.dir}/*" />
+		</jar>
+		
+		<copy todir="${build.dir}/${natives.dir}">
+			<fileset dir="${natives.dir}" includes="**/*"/>
+		</copy>
+		<copy todir="${build.dir}">
+			<fileset dir="${exec.dir}" includes="**/*"/>
+		</copy>
+		<copy todir="${build.dir}">
+			<fileset dir="${exec.dir}" includes="**/run.*"/>
+			<fileset dir="${exec.dir}" includes="**/slickpong"/>
+		</copy>
+		<chmod file="${build.dir}/slickpong" perm="755" type="both"/>
+		<chmod file="${build.dir}/run.sh" perm="775" type="both"/>
+		<chmod file="${build.dir}/run.bat" perm="775" type="both"/>
+	</target>
+	
+	<target name="deb" depends="clean,compile,jar">
+		<mkdir dir="${deb.dir}"/>
+	</target>
+	
+	<target name="main" depends="clean,compile,jar"/>
+</project>
