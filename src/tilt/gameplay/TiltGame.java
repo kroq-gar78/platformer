@@ -39,17 +39,6 @@ public class TiltGame extends BasicGame
 		collisionManager = new CollisionManager(); 
 	}
 	
-	public void render(GameContainer gc, BasicGame game, Graphics g) throws SlickException
-	{
-		
-	}
-	
-	@Override
-	public void update(GameContainer gc, int delta) throws SlickException
-	{
-		collisionManager.processCollisions();
-	}
-	
 	public static void main( String[] args ) throws SlickException
 	{
 		System.setProperty("org.lwjgl.librarypath", new File(new File(System.getProperty("user.dir"), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());

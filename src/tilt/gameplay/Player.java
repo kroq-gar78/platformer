@@ -24,7 +24,7 @@ public class Player extends Unit {
 	
 	public void update( Graphics g , Game game , int delta )
 	{
-		
+		super.update(g, game, delta);
 	}
 	
 	public void render(Graphics g)
