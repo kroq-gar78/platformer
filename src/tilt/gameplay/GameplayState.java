@@ -14,6 +14,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tilt.collision.CollisionManager;
+import tilt.collision.PlayerAndFloorCollisionHandler;
 
 public class GameplayState extends BasicGameState
 {
@@ -30,7 +31,11 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		player = new Player("Player", playerImage, new Vector2f(gc.getWidth()/2-playerImage.getWidth()/2,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
-		floor = new Platform("Floor", platformImage, new Vector2f(gc.getWidth()/2-platformImage.getWidth()/2,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 0);
+		floor = new Platform("Floor", platformImage, new Vector2f(gc.getWidth()/2-platformImage.getWidth()/2,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		
+		collisionManager.addCollidable(floor);
+		collisionManager.addCollidable(player);
+		collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
 		//bgImage = new Image( "res/bg.jpg" );
 	}

@@ -13,25 +13,28 @@ public class Unit extends CollidableImageObject
 {
 	public static final int COLLISION_TYPE = 1;
 	
-	public Unit( String name , Image image , Vector2f position , Shape collisionShape , Vector2f direction , float speed )
+	public Unit( String name , Image image , Vector2f position , Shape collisionShape , Vector2f direction , float speed , int collisionType )
 	{
-		super( name , image , position , collisionShape , COLLISION_TYPE );
+		super( name , image , position , collisionShape , collisionType );
 		this.setVelocity(direction, speed);
 	}
-	public Unit(String name, Image image, Vector2f position, Shape collisionShape ) //same as prev. but no speed
+	public Unit(String name, Image image, Vector2f position, Shape collisionShape , int collisionType ) //same as prev. but no speed
 	{
-		this( name , image , position , collisionShape, new Vector2f(0,0) , 0f );
+		this( name , image , position , collisionShape, new Vector2f(0,0) , 0f , collisionType );
 	}
 	
 	public void update( GameContainer gc , Game game , int delta )
 	{
 		// update velocity
-		Vector2f velocity = getVelocity();
-		this.position = this.position.add(velocity.scale((float)delta));
+		setVelocity(getVelocity());
+		// really would be nice if I could retrieve both direction and speed as 2 variables from 1 variable
+		this.position = this.position.add(getVelocity().scale((float)delta));
+		//System.out.println( getVelocity().y );
+		
 	}
 	
 	public float getSpeed() { return this.speed; }
-	public void getSpeed( float speed ) { this.speed = speed; }
+	public void setSpeed( float speed ) { this.speed = speed; }
 	
 	public Vector2f getDirection() { return this.direction; }
 	public void setDirection( Vector2f direction )
@@ -42,7 +45,7 @@ public class Unit extends CollidableImageObject
 	
 	public Vector2f getVelocity() // does all the things needed to update the velocity
 	{
-		return direction.copy().scale( (float)(Math.hypot(direction.x, direction.y)) ).add(gravity);
+		return direction.copy().scale( (float)( Math.hypot(direction.x, direction.y)) ).add(gravity);
 	}
 	public void setVelocity( Vector2f velocity )
 	{
@@ -56,5 +59,5 @@ public class Unit extends CollidableImageObject
 	
 	private float speed;
 	private Vector2f direction;
-	private Vector2f gravity = new Vector2f( 0 , 1f );
+	private Vector2f gravity = new Vector2f( 0 , 0.001f );
 }
