@@ -25,8 +25,8 @@ public class Unit extends CollidableImageObject
 	
 	public void update( GameContainer gc , Game game , int delta )
 	{
-		// update velocity
-		setVelocity(getVelocity());
+		// apply gravity
+		applyForce(gravity);
 		// really would be nice if I could retrieve both direction and speed as 2 variables from 1 variable
 		this.position = this.position.add(getVelocity().scale((float)delta));
 		//System.out.println( getVelocity().y );
@@ -45,7 +45,7 @@ public class Unit extends CollidableImageObject
 	
 	public Vector2f getVelocity() // does all the things needed to update the velocity
 	{
-		return direction.copy().scale( (float)( Math.hypot(direction.x, direction.y)) ).add(gravity);
+		return direction.copy().scale( (float)( Math.hypot(direction.x, direction.y)) );
 	}
 	public void setVelocity( Vector2f velocity )
 	{
@@ -53,6 +53,11 @@ public class Unit extends CollidableImageObject
 		this.direction = velocity.copy().scale( 1/velocity.length() );
 	}
 	public void setVelocity( Vector2f direction , float speed ) { this.direction = direction; this.speed = speed; }
+	
+	public void applyForce(Vector2f force)
+	{
+		setVelocity(getVelocity().add(force));
+	}
 	
 	public Vector2f getGravity() { return gravity; }
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
