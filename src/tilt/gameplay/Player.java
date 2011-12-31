@@ -1,6 +1,7 @@
 package tilt.gameplay;
 
 import org.newdawn.slick.Game;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
@@ -22,7 +23,7 @@ public class Player extends Unit {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void update( Graphics g , Game game , int delta )
+	public void update( GameContainer g , Game game , int delta )
 	{
 		super.update(g, game, delta);
 	}

@@ -1,6 +1,7 @@
 package tilt.gameplay;
 
 import org.newdawn.slick.Game;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
@@ -22,10 +23,11 @@ public class Unit extends CollidableImageObject
 		this( name , image , position , collisionShape, new Vector2f(0,0) , 0f );
 	}
 	
-	public void update( Graphics g , Game game , int delta )
+	public void update( GameContainer gc , Game game , int delta )
 	{
 		// update velocity
 		Vector2f velocity = getVelocity();
+		this.position = this.position.add(velocity.scale((float)delta));
 	}
 	
 	public float getSpeed() { return this.speed; }
@@ -54,5 +56,5 @@ public class Unit extends CollidableImageObject
 	
 	private float speed;
 	private Vector2f direction;
-	private Vector2f gravity = new Vector2f( -1f , -1f );
+	private Vector2f gravity = new Vector2f( 0 , 1f );
 }

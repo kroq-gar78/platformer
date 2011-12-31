@@ -45,10 +45,12 @@ public class GameplayState extends BasicGameState
 	}
 
 	@Override
-	public void update( GameContainer gc , StateBasedGame sbg , int delta ) throws SlickException
+	public void update( GameContainer gc , StateBasedGame game , int delta ) throws SlickException
 	{
 		//get input
 		input = gc.getInput();
+		
+		player.update(gc, game, delta);
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
