@@ -1,5 +1,6 @@
 package tilt.gameplay;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
@@ -14,4 +15,8 @@ public class Platform extends CollidableImageObject
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void render(Graphics g)
+	{
+		super.render(g);
+	}
 }

@@ -4,15 +4,15 @@ import java.io.File;
 
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import tilt.collision.CollisionManager;
 
-public class TiltGame extends BasicGame
+public class TiltGame extends StateBasedGame
 {
 	public TiltGame( String title )
 	{
@@ -24,19 +24,9 @@ public class TiltGame extends BasicGame
 	}
 	
 	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException
+	public void initStatesList(GameContainer gc) throws SlickException
 	{
-		g.setColor( Color.white );
-		g.drawRect(0 , 0 , gc.getWidth() , gc.getHeight() );
-		
-		
-	}
-
-	@Override
-	public void init(GameContainer gc) throws SlickException
-	{
-		gc.setVSync( true );
-		collisionManager = new CollisionManager(); 
+		this.addState(new GameplayState());
 	}
 	
 	public static void main( String[] args ) throws SlickException
@@ -60,11 +50,4 @@ public class TiltGame extends BasicGame
 	public static final boolean SMOOTH_DELTAS = true;
 	public static final boolean SHOW_FPS = true;
 	public static final int MAX_FPS = 60;
-	
-	private CollisionManager collisionManager;
-	
-	private Unit player;
-	private Platform floor;
-	
-	private int lives;
 }

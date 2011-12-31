@@ -23,6 +23,7 @@ public class Unit extends CollidableImageObject
 	
 	public void update( Graphics g , Game game , int delta )
 	{
+		// update velocity
 		Vector2f velocity = direction.copy();
 		velocity.scale( (float)(Math.hypot( velocity.x , velocity.y )) );
 	}

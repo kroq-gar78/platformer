@@ -19,20 +19,29 @@ public class GameplayState extends BasicGameState
 {
 
 	@Override
-	public void init( GameContainer gc , StateBasedGame sbg ) throws SlickException
+	public void init( GameContainer gc , StateBasedGame game ) throws SlickException
 	{
 
 		gc.setVSync( true );
 		collisionManager = new CollisionManager(); // initialize collision manager
+		
+		// load resources
+		playerImage = new Image("res/player.png");
+		platformImage = new Image("res/platform.png");
+		
+		player = new Player("Player", playerImage, new Vector2f(gc.getWidth()/2-playerImage.getWidth()/2,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
+		floor = new Platform("Floor", platformImage, new Vector2f(gc.getWidth()/2-platformImage.getWidth()/2,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 0);
+		
 		//bgImage = new Image( "res/bg.jpg" );
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg , Graphics g ) throws SlickException
 	{
-		bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
+		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
 		player.render(g);
+		floor.render(g);
 	}
 
 	@Override
@@ -61,7 +70,7 @@ public class GameplayState extends BasicGameState
 	public int getPlayerLives() { return playerLives; }
 	public void setPlayerLives( int lives ) { this.playerLives = lives; }
 	
-	public CollidableImageObject getPFloor() { return floor; }
+	public CollidableImageObject getFloor() { return floor; }
 	
 	public CollisionManager getCollisionManager() { return collisionManager; }
 	
@@ -69,19 +78,27 @@ public class GameplayState extends BasicGameState
 	public int getID()
 	{
 		return 1;
+		
+		/*switch(currentState)
+		{
+		case(NORMAL_GAME)
+		{
+			return 1;
+		}
+		}*/
 	}
 	
-	private static enum STATES { NORMAL_GAME , COUNTDOWN , GAME_OVER };
+	private static enum STATES { NORMAL_GAME };
 	private STATES currentState;
 	
 	private Player player;
+	private Platform floor;
 	
 	private static float PADDLE_SPEED = 0.8f; //paddle speed
 	
 	private int playerLives;
-	
-	private CollidableImageObject floor;
-	
+
+	private Image platformImage;
 	private Image playerImage;
 	private Image bgImage;
 	
