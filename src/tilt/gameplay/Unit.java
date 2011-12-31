@@ -15,6 +15,7 @@ public class Unit extends CollidableImageObject
 	public Unit( String name , Image image , Vector2f position , Shape collisionShape , Vector2f direction , float speed )
 	{
 		super( name , image , position , collisionShape , COLLISION_TYPE );
+		this.setVelocity(direction, speed);
 	}
 	public Unit(String name, Image image, Vector2f position, Shape collisionShape ) //same as prev. but no speed
 	{
@@ -24,8 +25,7 @@ public class Unit extends CollidableImageObject
 	public void update( Graphics g , Game game , int delta )
 	{
 		// update velocity
-		Vector2f velocity = direction.copy();
-		velocity.scale( (float)(Math.hypot( velocity.x , velocity.y )) );
+		Vector2f velocity = getVelocity();
 	}
 	
 	public float getSpeed() { return this.speed; }
@@ -38,9 +38,9 @@ public class Unit extends CollidableImageObject
 		this.direction.scale( 1/(float)(Math.hypot( this.direction.x , this.direction.y )));
 	}
 	
-	public Vector2f getVelocity()
+	public Vector2f getVelocity() // does all the things needed to update the velocity
 	{
-		return direction.copy().scale( (float)(Math.hypot(direction.x, direction.y)) );
+		return direction.copy().scale( (float)(Math.hypot(direction.x, direction.y)) ).add(gravity);
 	}
 	public void setVelocity( Vector2f velocity )
 	{
@@ -49,6 +49,10 @@ public class Unit extends CollidableImageObject
 	}
 	public void setVelocity( Vector2f direction , float speed ) { this.direction = direction; this.speed = speed; }
 	
+	public Vector2f getGravity() { return gravity; }
+	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
+	
 	private float speed;
 	private Vector2f direction;
+	private Vector2f gravity = new Vector2f( -1f , -1f );
 }
