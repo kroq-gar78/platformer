@@ -30,8 +30,8 @@ public class GameplayState extends BasicGameState
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
 		
-		player = new Player("Player", playerImage, new Vector2f(gc.getWidth()/2-playerImage.getWidth()/2,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
-		floor = new Platform("Floor", platformImage, new Vector2f(gc.getWidth()/2-platformImage.getWidth()/2,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
+		floor = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
 		
 		collisionManager.addCollidable(floor);
 		collisionManager.addCollidable(player);
@@ -61,10 +61,16 @@ public class GameplayState extends BasicGameState
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 		
 		//make sure paddle is within bounds of the canvas/window
-		if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
+		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
 		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
 		if( player.getPosition().y < 10 ) player.getPosition().y=11;
-		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();
+		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
+		
+		if( input.isKeyPressed( Input.KEY_UP ) )
+		{
+			//player.applyForce( new Vector2f( 0f, -1f ) );
+			System.out.println( "Jump" );
+		}
 		
 		/*switch( currentState )
 		{
@@ -95,8 +101,8 @@ public class GameplayState extends BasicGameState
 		}*/
 	}
 	
-	private static enum STATES { NORMAL_GAME };
-	private STATES currentState;
+	//private static enum STATES { NORMAL_GAME };
+	//private STATES currentState;
 	
 	private Player player;
 	private Platform floor;
@@ -107,7 +113,7 @@ public class GameplayState extends BasicGameState
 
 	private Image platformImage;
 	private Image playerImage;
-	private Image bgImage;
+	//private Image bgImage;
 	
 	private Input input;
 	
