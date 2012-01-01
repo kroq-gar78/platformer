@@ -27,42 +27,32 @@ public class Unit extends CollidableImageObject
 	{
 		// apply gravity
 		applyForce(gravity);
-		// really would be nice if I could retrieve both direction and speed as 2 variables from 1 variable
-		this.position = this.position.add(getVelocity().scale((float)delta));
+		this.position = this.position.add(velocity.copy().scale((float)delta));
 		//System.out.println( getVelocity().y );
 		
 	}
 	
-	public float getSpeed() { return this.speed; }
-	public void setSpeed( float speed ) { this.speed = speed; }
+	public float getSpeed() { return velocity.length(); }
+	public void setSpeed( float speed ) { velocity=velocity.scale(1/velocity.length()*speed); }
 	
-	public Vector2f getDirection() { return this.direction; }
+	public Vector2f getDirection() { return velocity.copy().scale(1/velocity.length()); }
 	public void setDirection( Vector2f direction )
 	{
-		this.direction = direction;
-		this.direction.scale( 1/(float)(Math.hypot( this.direction.x , this.direction.y )));
+		float speed = velocity.length();
+		velocity=direction.copy().scale(1/direction.length()*speed);
 	}
 	
-	public Vector2f getVelocity() // does all the things needed to update the velocity
-	{
-		return direction.copy().scale( (float)( Math.hypot(direction.x, direction.y)) );
-	}
-	public void setVelocity( Vector2f velocity )
-	{
-		this.speed = velocity.length();
-		this.direction = velocity.copy().scale( 1/velocity.length() );
-	}
-	public void setVelocity( Vector2f direction , float speed ) { this.direction = direction; this.speed = speed; }
+	public Vector2f getVelocity() {	return velocity; }
+	public void setVelocity( Vector2f velocity ) { this.velocity=velocity; }
+	public void setVelocity( Vector2f direction , float speed ) { this.velocity=direction.copy().scale(1/direction.length()).scale(speed); }
 	
 	public void applyForce(Vector2f force)
 	{
-		setVelocity(getVelocity().add(force));
+		this.velocity=velocity.add(force);
 	}
-	
 	public Vector2f getGravity() { return gravity; }
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 	
-	private float speed;
-	private Vector2f direction;
+	private Vector2f velocity;
 	private Vector2f gravity = new Vector2f( 0 , 0.001f );
 }

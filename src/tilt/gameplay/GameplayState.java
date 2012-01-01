@@ -56,6 +56,7 @@ public class GameplayState extends BasicGameState
 		input = gc.getInput();
 		
 		player.update(gc, game, delta);
+		System.out.println( delta );
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game

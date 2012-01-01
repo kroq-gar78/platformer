@@ -59,7 +59,7 @@ public class PlayerAndFloorCollisionHandler implements ICollisionHandler
 		}
 		while(player.isCollidingWith(object));
 		
-		player.setSpeed(0f);
+		player.setVelocity(new Vector2f(0, 0));
 		//player.setPosition(new Vector2f( player.getPosition().x , 300 ));
 	}
 
