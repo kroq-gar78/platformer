@@ -33,18 +33,18 @@ public class Unit extends CollidableImageObject
 	}
 	
 	public float getSpeed() { return velocity.length(); }
-	public void setSpeed( float speed ) { velocity=velocity.scale(1/velocity.length()*speed); }
+	public void setSpeed( float speed ) { velocity=velocity.normalise().scale(speed); }
 	
 	public Vector2f getDirection() { return velocity.copy().scale(1/velocity.length()); }
 	public void setDirection( Vector2f direction )
 	{
 		float speed = velocity.length();
-		velocity=direction.copy().scale(1/direction.length()*speed);
+		velocity=direction.copy().normalise().scale(speed);
 	}
 	
 	public Vector2f getVelocity() {	return velocity; }
 	public void setVelocity( Vector2f velocity ) { this.velocity=velocity; }
-	public void setVelocity( Vector2f direction , float speed ) { this.velocity=direction.copy().scale(1/direction.length()).scale(speed); }
+	public void setVelocity( Vector2f direction , float speed ) { this.velocity=direction.copy().normalise().scale(speed); }
 	
 	public void applyForce(Vector2f force)
 	{
@@ -54,5 +54,5 @@ public class Unit extends CollidableImageObject
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 	
 	private Vector2f velocity;
-	private Vector2f gravity = new Vector2f( 0 , 0.001f );
+	private Vector2f gravity = new Vector2f( 0 , 0.01f );
 }
