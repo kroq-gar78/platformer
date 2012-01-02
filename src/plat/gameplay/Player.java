@@ -35,7 +35,7 @@ public class Player extends Unit {
 	
 	public void jump() // call this in update
 	{
-		applyForce(new Vector2f( 0f, -1.25f ));
+		applyForce(new Vector2f( 0f, -1.5f ));
 		jumping=true;
 	}
 	
@@ -47,5 +47,5 @@ public class Player extends Unit {
 	public float getHorizSpeed() { return horizSpeed; }
 	
 	private boolean jumping=false;
-	private float horizSpeed=1f;
+	private float horizSpeed=3f;
 }
