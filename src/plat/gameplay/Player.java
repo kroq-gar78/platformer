@@ -47,5 +47,5 @@ public class Player extends Unit {
 	public float getHorizSpeed() { return horizSpeed; }
 	
 	private boolean jumping=false;
-	private float horizSpeed=3f;
+	private float horizSpeed=4f;
 }

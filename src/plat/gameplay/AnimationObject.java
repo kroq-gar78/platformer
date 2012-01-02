@@ -31,7 +31,7 @@ public class AnimationObject implements ILevelObject
 	}
 
 	@Override
-	public void gameUpdate(GameContainer gc, BasicGame bg, int delta)
+	public void gameUpdate(GameContainer gc, BasicGame game, int delta)
 	{
 		animation.update( delta );
 	}

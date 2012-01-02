@@ -4,14 +4,9 @@ import java.io.File;
 
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
-import plat.collision.CollisionManager;
-
 
 public class PlatformerGame extends StateBasedGame
 {
