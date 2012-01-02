@@ -25,12 +25,24 @@ public class Player extends Unit {
 	
 	public void update( GameContainer g , Game game , int delta )
 	{
+		if( jumping )
+		{
+			applyForce(gravity.negateLocal());
+			jumping=false;
+		}
 		super.update(g, game, delta);
+	}
+	
+	public void jump() // call this in update
+	{
+		applyForce(new Vector2f( 0f, -0.5f ));
+		jumping=true;
 	}
 	
 	public void render(Graphics g)
 	{
 		super.render(g);
 	}
-
+	
+	private boolean jumping=false;
 }

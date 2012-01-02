@@ -55,9 +55,6 @@ public class GameplayState extends BasicGameState
 		//get input
 		input = gc.getInput();
 		
-		player.update(gc, game, delta);
-		System.out.println( delta );
-		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 		
@@ -69,14 +66,15 @@ public class GameplayState extends BasicGameState
 		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
-			//player.applyForce( new Vector2f( 0f, -1f ) );
-			System.out.println( "Jump" );
+			//player.applyForce( new Vector2f( 0f, -0.5f ) );
+			player.jump();
 		}
 		
 		/*switch( currentState )
 		{
 		
 		}*/
+		player.update(gc, game, delta);
 		
 		collisionManager.processCollisions();
 	}

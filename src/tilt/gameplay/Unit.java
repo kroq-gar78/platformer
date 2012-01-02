@@ -53,6 +53,6 @@ public class Unit extends CollidableImageObject
 	public Vector2f getGravity() { return gravity; }
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 	
-	private Vector2f velocity;
-	private Vector2f gravity = new Vector2f( 0 , 0.01f );
+	protected Vector2f velocity;
+	protected Vector2f gravity = new Vector2f( 0 , 0.5f );
 }
