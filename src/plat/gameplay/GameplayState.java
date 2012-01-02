@@ -19,7 +19,8 @@ import plat.collision.PlayerAndFloorCollisionHandler;
 
 public class GameplayState extends BasicGameState
 {
-
+	// just a generic state class; extend as necessary
+	
 	@Override
 	public void init( GameContainer gc , StateBasedGame game ) throws SlickException
 	{
@@ -32,9 +33,11 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
-		floor = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		platform1 = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		platform2 = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
 		
-		collisionManager.addCollidable(floor);
+		collisionManager.addCollidable(platform1);
+		collisionManager.addCollidable(platform2);
 		collisionManager.addCollidable(player);
 		collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
@@ -42,12 +45,13 @@ public class GameplayState extends BasicGameState
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame sbg , Graphics g ) throws SlickException
+	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
 		player.render(g);
-		floor.render(g);
+		platform1.render(g);
+		platform2.render(g);
 	}
 
 	@Override
@@ -72,11 +76,11 @@ public class GameplayState extends BasicGameState
 		}
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.getPosition().add(new Vector2f(-0.5f,0f));
+			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.getPosition().add(new Vector2f(0.5f,0f));	
+			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
 		}
 		
 		/*switch( currentState )
@@ -90,8 +94,6 @@ public class GameplayState extends BasicGameState
 
 	public int getPlayerLives() { return playerLives; }
 	public void setPlayerLives( int lives ) { this.playerLives = lives; }
-	
-	public CollidableImageObject getFloor() { return floor; }
 	
 	public CollisionManager getCollisionManager() { return collisionManager; }
 	
@@ -113,7 +115,10 @@ public class GameplayState extends BasicGameState
 	//private STATES currentState;
 	
 	private Player player;
-	private Platform floor;
+	
+	// make these into an array later
+	private Platform platform1;
+	private Platform platform2;
 	
 	private static float PADDLE_SPEED = 0.8f; //paddle speed
 	

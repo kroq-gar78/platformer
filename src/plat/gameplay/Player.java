@@ -44,5 +44,8 @@ public class Player extends Unit {
 		super.render(g);
 	}
 	
+	public float getHorizSpeed() { return horizSpeed; }
+	
 	private boolean jumping=false;
+	private float horizSpeed=1f;
 }
