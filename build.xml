@@ -7,7 +7,7 @@
 	<property name="build.dir" value="build"/>
 	<property name="classes.dir" value="${build.dir}/classes"/>
 	<property name="jar.dir" value="${build.dir}"/>
-	<property name="natives.dir" value="natives"/>
+	<property name="natives.dir" value="native"/>
 	<property name="deb.dir" value="debian"/>
 
     <path id="classpath">
@@ -27,7 +27,7 @@
 		<mkdir dir="${jar.dir}"/>
 		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="pong.gameplay.SlickPongGame"/>
+				<attribute name="Main-Class" value="plat.gameplay.PlatformerGame"/>
 				<attribute name="Class-Path" value="."/>
 			</manifest>
 			<zipfileset src="${lib.dir}/hiero.jar"/>
@@ -53,7 +53,7 @@
 		<copy todir="${build.dir}/${natives.dir}">
 			<fileset dir="${natives.dir}" includes="**/*"/>
 		</copy>
-		<copy todir="${build.dir}">
+		<!--<copy todir="${build.dir}">
 			<fileset dir="${exec.dir}" includes="**/*"/>
 		</copy>
 		<copy todir="${build.dir}">
@@ -62,7 +62,7 @@
 		</copy>
 		<chmod file="${build.dir}/slickpong" perm="755" type="both"/>
 		<chmod file="${build.dir}/run.sh" perm="775" type="both"/>
-		<chmod file="${build.dir}/run.bat" perm="775" type="both"/>
+		<chmod file="${build.dir}/run.bat" perm="775" type="both"/>-->
 	</target>
 	
 	<target name="deb" depends="clean,compile,jar">
