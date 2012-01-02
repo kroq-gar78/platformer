@@ -25,18 +25,25 @@ public class Player extends Unit {
 	
 	public void update( GameContainer g , Game game , int delta )
 	{
-		if( jumping )
-		{
-			applyForce(gravity.negate());
-			jumping=false;
-		}
 		super.update(g, game, delta);
 	}
 	
-	public void jump() // call this in update
+	public void jump()
 	{
-		applyForce(new Vector2f( 0f, -1.5f ));
-		jumping=true;
+		if( jumpsTaken==1 ) // double jump; jumps==0 can never (and should never) happen
+		{
+			velocity.y=0;
+			applyForce(new Vector2f( 0f, -2f ));
+			applyForce(gravity.negate());
+			jumpsTaken=2;
+		}
+		else if( jumpsTaken==0 ) // single jump
+		{
+			velocity.y=0;
+			applyForce(new Vector2f( 0f, -1.5f ));
+			applyForce(gravity.negate());
+			jumpsTaken=1;
+		}
 	}
 	
 	public void render(Graphics g)
@@ -46,6 +53,9 @@ public class Player extends Unit {
 	
 	public float getHorizSpeed() { return horizSpeed; }
 	
-	private boolean jumping=false;
+	public int getJumpsTaken() { return this.jumpsTaken; }
+	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
+	
 	private float horizSpeed=4f;
+	private int jumpsTaken=0;
 }

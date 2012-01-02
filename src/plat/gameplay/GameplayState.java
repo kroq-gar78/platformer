@@ -16,7 +16,7 @@ import plat.collision.PlayerAndFloorCollisionHandler;
 
 public class GameplayState extends BasicGameState
 {
-	// just a generic state class; extend as necessary
+	// just a generic state class; extend as necessary (e.g. different levels and stages)
 	
 	@Override
 	public void init( GameContainer gc , StateBasedGame game ) throws SlickException
@@ -70,7 +70,6 @@ public class GameplayState extends BasicGameState
 		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
-			//player.applyForce( new Vector2f( 0f, -0.5f ) );
 			player.jump();
 		}
 		if( input.isKeyDown( Input.KEY_LEFT ) )
