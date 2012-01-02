@@ -27,7 +27,7 @@ public class Player extends Unit {
 	{
 		if( jumping )
 		{
-			applyForce(gravity.negateLocal());
+			applyForce(gravity.negate());
 			jumping=false;
 		}
 		super.update(g, game, delta);
@@ -35,7 +35,7 @@ public class Player extends Unit {
 	
 	public void jump() // call this in update
 	{
-		applyForce(new Vector2f( 0f, -0.5f ));
+		applyForce(new Vector2f( 0f, -1.25f ));
 		jumping=true;
 	}
 	
