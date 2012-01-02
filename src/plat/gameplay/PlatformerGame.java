@@ -1,4 +1,4 @@
-package tilt.gameplay;
+package plat.gameplay;
 
 import java.io.File;
 
@@ -10,15 +10,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tilt.collision.CollisionManager;
+import plat.collision.CollisionManager;
 
-public class TiltGame extends StateBasedGame
+
+public class PlatformerGame extends StateBasedGame
 {
-	public TiltGame( String title )
+	public PlatformerGame( String title )
 	{
 		super( title );
 	}
-	public TiltGame()
+	public PlatformerGame()
 	{
 		this("Tilt");
 	}
@@ -34,7 +35,7 @@ public class TiltGame extends StateBasedGame
 		System.setProperty("org.lwjgl.librarypath", new File(new File(System.getProperty("user.dir"), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
 		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
 		
-		AppGameContainer app = new AppGameContainer( new TiltGame() );
+		AppGameContainer app = new AppGameContainer( new PlatformerGame() );
 		
 		app.setDisplayMode( WIDTH , HEIGHT , FULLSCREEN );
 		app.setSmoothDeltas(SMOOTH_DELTAS);

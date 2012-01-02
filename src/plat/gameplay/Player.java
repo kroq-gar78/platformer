@@ -1,4 +1,4 @@
-package tilt.gameplay;
+package plat.gameplay;
 
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;

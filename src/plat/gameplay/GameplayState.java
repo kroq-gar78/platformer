@@ -1,4 +1,4 @@
-package tilt.gameplay;
+package plat.gameplay;
 
 import java.util.Random;
 
@@ -13,8 +13,9 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tilt.collision.CollisionManager;
-import tilt.collision.PlayerAndFloorCollisionHandler;
+import plat.collision.CollisionManager;
+import plat.collision.PlayerAndFloorCollisionHandler;
+
 
 public class GameplayState extends BasicGameState
 {

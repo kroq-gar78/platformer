@@ -1,6 +1,6 @@
-package tilt.collision;
+package plat.collision;
 
-import tilt.gameplay.ICollidableObject;;
+import plat.gameplay.ICollidableObject;
 
 public interface ICollisionHandler
 {

@@ -1,9 +1,10 @@
-package tilt.collision;
+package plat.collision;
 
 import org.newdawn.slick.geom.Vector2f;
 
-import tilt.gameplay.ICollidableObject;
-import tilt.gameplay.Player;
+import plat.gameplay.ICollidableObject;
+import plat.gameplay.Player;
+
 
 public class PlayerAndFloorCollisionHandler implements ICollisionHandler
 {

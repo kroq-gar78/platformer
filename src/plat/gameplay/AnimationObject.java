@@ -1,4 +1,4 @@
-package tilt.gameplay;
+package plat.gameplay;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.BasicGame;
