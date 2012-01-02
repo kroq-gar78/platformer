@@ -70,6 +70,14 @@ public class GameplayState extends BasicGameState
 			//player.applyForce( new Vector2f( 0f, -0.5f ) );
 			player.jump();
 		}
+		if( input.isKeyDown( Input.KEY_LEFT ) )
+		{
+			player.getPosition().add(new Vector2f(-0.5f,0f));
+		}
+		if( input.isKeyDown( Input.KEY_RIGHT ) )
+		{
+			player.getPosition().add(new Vector2f(0.5f,0f));	
+		}
 		
 		/*switch( currentState )
 		{
