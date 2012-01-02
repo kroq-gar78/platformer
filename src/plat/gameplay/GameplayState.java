@@ -1,6 +1,6 @@
 package plat.gameplay;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -33,15 +33,21 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new org.newdawn.slick.geom.Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
-		platform1 = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		/*platform1 = new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
 		platform2 = new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
 		platform3 = new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
-		platform4 = new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);
+		platform4 = new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2);*/
+		platforms = new ArrayList<Platform>();
+		platforms.add( new Platform("Floor", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
+		platforms.add( new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
+		platforms.add( new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
+		platforms.add( new Platform("Floor", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new org.newdawn.slick.geom.Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		
-		collisionManager.addCollidable(platform1);
+		/*collisionManager.addCollidable(platform1);
 		collisionManager.addCollidable(platform2);
 		collisionManager.addCollidable(platform3);
-		collisionManager.addCollidable(platform4);
+		collisionManager.addCollidable(platform4);*/
+		for( Platform platform : platforms ) { collisionManager.addCollidable(platform); }
 		collisionManager.addCollidable(player);
 		collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
@@ -54,10 +60,11 @@ public class GameplayState extends BasicGameState
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
 		player.render(g);
-		platform1.render(g);
+		/*platform1.render(g);
 		platform2.render(g);
 		platform3.render(g);
-		platform4.render(g);
+		platform4.render(g);*/
+		for( Platform platform : platforms ) { platform.render(g); }
 	}
 
 	@Override
@@ -123,10 +130,11 @@ public class GameplayState extends BasicGameState
 	private Player player;
 	
 	// make these into an array later
-	private Platform platform1;
+	/*private Platform platform1;
 	private Platform platform2;
 	private Platform platform3;
-	private Platform platform4;
+	private Platform platform4;*/
+	private ArrayList<Platform> platforms;
 	
 	private int playerLives;
 
