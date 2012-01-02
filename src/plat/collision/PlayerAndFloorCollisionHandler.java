@@ -51,8 +51,7 @@ public class PlayerAndFloorCollisionHandler implements ICollisionHandler
 		Vector2f direction = player.getDirection().copy();
 		// reverse it
 		//direction.set( direction.x*-1 , direction.y*-1 );
-		// backtrack the position of the ball until it no longer collides with
-		// the paddle/brick
+		// backtrack the position of the player until it no longer collides with the platform
 		do
 		{
 			Vector2f pos = player.getPosition();
