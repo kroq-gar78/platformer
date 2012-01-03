@@ -33,7 +33,7 @@ public class Player extends Unit {
 		if( jumpsTaken==1 ) // double jump; jumps==0 can never (and should never) happen
 		{
 			velocity.y=0;
-			applyForce(new Vector2f( 0f, -2f ));
+			applyForce(new Vector2f( 0f, -1.5f ));
 			applyForce(gravity.negate());
 			jumpsTaken=2;
 		}
@@ -53,6 +53,7 @@ public class Player extends Unit {
 	
 	public float getHorizSpeed() { return horizSpeed; }
 	
+	public boolean isJumping() { return jumpsTaken>0; }
 	public int getJumpsTaken() { return this.jumpsTaken; }
 	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
 	
