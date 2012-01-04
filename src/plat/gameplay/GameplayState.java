@@ -11,9 +11,10 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMap;
 
-import plat.collision.CollisionManager;
-import plat.collision.PlayerAndFloorCollisionHandler;
+/*import plat.collision.CollisionManager;
+import plat.collision.PlayerAndFloorCollisionHandler;*/
 
 public class GameplayState extends BasicGameState
 {
@@ -24,23 +25,24 @@ public class GameplayState extends BasicGameState
 	{
 
 		gc.setVSync( true );
-		collisionManager = new CollisionManager(); // initialize collision manager
+		//collisionManager = new CollisionManager(); // initialize collision manager
 		
 		// load resources
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
+		map = new TiledMap("res/map.tmx");
 		
 		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
 		
-		platforms = new ArrayList<Platform>();
+		/*platforms = new ArrayList<Platform>();
 		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		
-		for( Platform platform : platforms ) { collisionManager.addCollidable(platform); }
-		collisionManager.addCollidable(player);
-		collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
+		for( Platform platform : platforms ) { collisionManager.addCollidable(platform); }*/
+		//collisionManager.addCollidable(player);
+		//collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
 		//bgImage = new Image( "res/bg.jpg" );
 	}
@@ -49,9 +51,9 @@ public class GameplayState extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-
+		map.render(0, 0);
 		player.render(g);
-		for( Platform platform : platforms ) { platform.render(g); }
+		//for( Platform platform : platforms ) { platform.render(g); }
 	}
 
 	@Override
@@ -88,13 +90,19 @@ public class GameplayState extends BasicGameState
 		}*/
 		player.update(gc, game, delta);
 		
-		collisionManager.processCollisions();
+		// process collisions
+		
 	}
+	
+	/*private boolean playerColliding() throws SlickException
+	{
+		for( int i = 0; i < )
+	}*/
 
 	public int getPlayerLives() { return playerLives; }
 	public void setPlayerLives( int lives ) { this.playerLives = lives; }
 	
-	public CollisionManager getCollisionManager() { return collisionManager; }
+	//public CollisionManager getCollisionManager() { return collisionManager; }
 	
 	@Override
 	public int getID()
@@ -122,8 +130,9 @@ public class GameplayState extends BasicGameState
 	private Image playerImage;
 	//private Image bgImage;
 	
+	private TiledMap map;
+	
 	private Input input;
 	
-	private CollisionManager collisionManager;
-	
+	//private CollisionManager collisionManager;
 }
