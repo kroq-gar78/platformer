@@ -11,7 +11,9 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.tiled.Layer;
+import org.newdawn.slick.tiled.Tile;
+import org.newdawn.slick.tiled.TiledMapPlus;
 
 /*import plat.collision.CollisionManager;
 import plat.collision.PlayerAndFloorCollisionHandler;*/
@@ -30,9 +32,11 @@ public class GameplayState extends BasicGameState
 		// load resources
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
-		map = new TiledMap("res/map.tmx");
+		map = new TiledMapPlus("res/map.tmx");
 		
-		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
+		//System.out.println( map.getLayer("collision").getTileID());
+		
+		player = new Player("Player", playerImage, new Vector2f(32,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
 		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
@@ -54,6 +58,18 @@ public class GameplayState extends BasicGameState
 		map.render(0, 0);
 		player.render(g);
 		//for( Platform platform : platforms ) { platform.render(g); }
+		Layer collisionLayer = map.getLayer("collision");
+		for( int x = 0; x < collisionLayer.width; x++ )
+		{
+			for( int y = 0; y < collisionLayer.height; y++ )
+			{
+				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
+				if( tilePoly.intersects(player.getCollisionShape()) )
+				{
+					g.draw( tilePoly );
+				}
+			}
+		}
 	}
 
 	@Override
@@ -91,7 +107,32 @@ public class GameplayState extends BasicGameState
 		player.update(gc, game, delta);
 		
 		// process collisions
-		
+		Layer collisionLayer = map.getLayer("collision");
+		/*System.out.println( map.getLayer("collision").height );
+		for( Layer layer : map.getLayers() )
+		{
+			System.out.println( layer.name );
+		}*/
+		for( int x = 0; x < collisionLayer.width; x++ )
+		{
+			for( int y = 0; y < collisionLayer.height; y++ )
+			{
+				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==1 )
+				{
+					//System.out.println( x*map.getTileWidth() + " " + y*map.getTileHeight() );
+					Vector2f direction = player.getDirection().copy();
+					do
+					{
+						Vector2f pos = player.getPosition();
+						player.setPosition(new Vector2f( pos.x, pos.y - direction.y) );
+					}
+					while( tilePoly.intersects(player.getCollisionShape()) );
+					player.setVelocity(new Vector2f(player.getVelocity().x,0f));
+					player.setJumpsTaken(0);
+				}
+			}
+		}
 	}
 	
 	/*private boolean playerColliding() throws SlickException
@@ -130,7 +171,7 @@ public class GameplayState extends BasicGameState
 	private Image playerImage;
 	//private Image bgImage;
 	
-	private TiledMap map;
+	private TiledMapPlus map;
 	
 	private Input input;
 	
