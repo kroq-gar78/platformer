@@ -33,7 +33,7 @@ public class Unit extends CollidableImageObject
 	public float getSpeed() { return velocity.length(); }
 	public void setSpeed( float speed ) { velocity=velocity.normalise().scale(speed); }
 	
-	public Vector2f getDirection() { return velocity.copy().scale(1/velocity.length()); }
+	public Vector2f getDirection() { return velocity.copy().normalise(); }
 	public void setDirection( Vector2f direction )
 	{
 		float speed = velocity.length();
@@ -52,5 +52,5 @@ public class Unit extends CollidableImageObject
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 	
 	protected Vector2f velocity;
-	protected Vector2f gravity = new Vector2f( 0 , 0.125f );
+	protected Vector2f gravity = new Vector2f( 0 , 0.1f );
 }

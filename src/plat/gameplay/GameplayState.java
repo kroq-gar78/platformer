@@ -87,32 +87,13 @@ public class GameplayState extends BasicGameState
 		if( player.getPosition().y < 10 ) player.getPosition().y=11;
 		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
 		
-		if( input.isKeyPressed( Input.KEY_UP ) )
-		{
-			player.jump();
-		}
-		if( input.isKeyDown( Input.KEY_LEFT ) )
-		{
-			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
-		}
-		if( input.isKeyDown( Input.KEY_RIGHT ) )
-		{
-			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
-		}
-		
-		/*switch( currentState )
-		{
-		
-		}*/
-		player.update(gc, game, delta);
-		
 		// process collisions
 		Layer collisionLayer = map.getLayer("collision");
 		/*System.out.println( map.getLayer("collision").height );
-		for( Layer layer : map.getLayers() )
-		{
-			System.out.println( layer.name );
-		}*/
+				for( Layer layer : map.getLayers() )
+				{
+					System.out.println( layer.name );
+				}*/
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
@@ -133,6 +114,27 @@ public class GameplayState extends BasicGameState
 				}
 			}
 		}
+		
+		if( input.isKeyPressed( Input.KEY_UP ) )
+		{
+			player.jump();
+		}
+		if( input.isKeyDown( Input.KEY_LEFT ) )
+		{
+			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+		}
+		if( input.isKeyDown( Input.KEY_RIGHT ) )
+		{
+			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
+		}
+		
+		/*switch( currentState )
+		{
+		
+		}*/
+		player.update(gc, game, delta);
+		
+		
 	}
 	
 	/*private boolean playerColliding() throws SlickException
