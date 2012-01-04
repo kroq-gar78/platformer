@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="collision" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="80" height="60" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="collision" tilewidth="8" tileheight="8">
   <image source="collision.png" width="32" height="16"/>
  </tileset>
- <tileset firstgid="3" name="platform" tilewidth="16" tileheight="16">
+ <tileset firstgid="9" name="platform" tilewidth="8" tileheight="8">
   <image source="platform_tile.png" width="96" height="96"/>
  </tileset>
- <layer name="collision" width="40" height="30">
+ <layer name="collision" width="80" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3ROwoAIAwEUXP/S9tY2PiBQRJkBrbOQ6PVLcaqpo+lj6WPpY+lj6WPpY+lj6WPpY+lj/WLLxZ73c2dzDc+3c7+/939bNtsqLwO6TBqKMASAAA=
+   H4sIAAAAAAAAA+3WsQ3AMAwEsUD7D50mvQGfU5kEfgBdpXnYNd/Yo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfs9NvFruJfs2NN5+kX6Nfo1+jX6Nfs/pFzP7eCw4oZ5oASwAA
   </data>
  </layer>
- <layer name="tiles" width="40" height="30">
+ <layer name="tiles" width="80" height="60" opacity="0.42">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3ROQqAUBAE0UkFwQVFcQHvf0o7MRH0h9NKBZU/uteIqE07VGPgeGrAhw/fq68ycHzZ5/4vPnz48OHzCx8+fP/3baq7tZv4WtWb7pdpK/mybZdvVFNSc6FFnZFDZLnAEgAA
+   H4sIAAAAAAAAA+3QsQ3CUBBEwd+MQyrAARmyRAl2DOT0L18DTj7JrTTBy3fnO8ZYNNWvujXYkdrOjx+/2Pjx45cbP378cuPHj19u/Pjxy40fP3658ePHLzd+/Pjlxo8fv9z48eOXGz9+/HLjx49fbvz48cuNHz9+ufHjxy83fvz45Tbjd6/Wix4NPnX3e1bbRa8Gn7r7iR+/HvHjxy83fv/7HdVbU32qEwILAPIASwAA
   </data>
  </layer>
 </map>

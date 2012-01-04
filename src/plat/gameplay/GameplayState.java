@@ -52,19 +52,21 @@ public class GameplayState extends BasicGameState
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
+	public void render( GameContainer gc , StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 		map.render(0, 0);
 		player.render(g);
 		//for( Platform platform : platforms ) { platform.render(g); }
+		
+		// show colliding tiles
 		Layer collisionLayer = map.getLayer("collision");
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
 			{
 				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
-				if( tilePoly.intersects(player.getCollisionShape()) )
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==2 )
 				{
 					g.draw( tilePoly );
 				}
@@ -89,17 +91,13 @@ public class GameplayState extends BasicGameState
 		
 		// process collisions
 		Layer collisionLayer = map.getLayer("collision");
-		/*System.out.println( map.getLayer("collision").height );
-				for( Layer layer : map.getLayers() )
-				{
-					System.out.println( layer.name );
-				}*/
+		//System.out.println( collisionLayer.getTileID(0, 59));
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
 			{
 				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
-				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==1 )
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==2 )
 				{
 					//System.out.println( x*map.getTileWidth() + " " + y*map.getTileHeight() );
 					Vector2f direction = player.getDirection().copy();
@@ -173,6 +171,7 @@ public class GameplayState extends BasicGameState
 	private Image playerImage;
 	//private Image bgImage;
 	
+	// tilemap objects
 	private TiledMapPlus map;
 	
 	private Input input;
