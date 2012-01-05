@@ -44,10 +44,7 @@ public class Unit extends CollidableImageObject
 	public void setVelocity( Vector2f velocity ) { this.velocity=velocity; }
 	public void setVelocity( Vector2f direction , float speed ) { this.velocity=direction.copy().normalise().scale(speed); }
 	
-	public void applyForce(Vector2f force)
-	{
-		this.velocity=velocity.add(force);
-	}
+	public void applyForce(Vector2f force) { this.velocity=velocity.add(force); }
 	public Vector2f getGravity() { return gravity; }
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 	

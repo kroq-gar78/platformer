@@ -40,7 +40,7 @@ public class Player extends Unit {
 		else if( jumpsTaken==0 ) // single jump
 		{
 			velocity.y=0;
-			applyForce(new Vector2f( 0f, -1.5f ));
+			applyForce(new Vector2f( 0f, -1.25f ));
 			applyForce(gravity.negate());
 			jumpsTaken=1;
 		}
