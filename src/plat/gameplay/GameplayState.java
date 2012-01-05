@@ -70,7 +70,7 @@ public class GameplayState extends BasicGameState
 		//for( Platform platform : platforms ) { platform.render(g); }
 		
 		g.setColor(Color.green);
-		//g.draw(top);
+		g.draw(top);
 		g.draw(bottom);
 		g.draw(left);
 		g.draw(right);
@@ -143,8 +143,8 @@ public class GameplayState extends BasicGameState
 					Vector2f direction = player.getDirection();
 					do
 					{
-						Vector2f pos = player.getPosition();
-						/*if( bottom.intersects(tilePoly) )  // check if intersects bottom of player, bring player up
+						/*Vector2f pos = player.getPosition();
+						if( bottom.intersects(tilePoly) )  // check if intersects bottom of player, bring player up
 						{
 							pos.y -= direction.y/30;
 							System.out.println("bottom");
@@ -164,7 +164,7 @@ public class GameplayState extends BasicGameState
 							pos.y += direction.y/30;
 							System.out.println("top");
 						}*/
-						if( x < 3 )
+						/*if( x < 3 )
 						{
 							player.setPosition(new Vector2f(map.getTileWidth()*3,player.getPosition().y));
 							System.out.println("reset x " + x + " " + player.getPosition()  );
@@ -173,7 +173,7 @@ public class GameplayState extends BasicGameState
 						{
 							player.setPosition(new Vector2f(gc.getWidth()-map.getTileWidth()*3,player.getPosition().y));
 							System.out.println("reset x " + x + " " + player.getPosition()  );
-						}
+						}*/
 						player.setPosition(new Vector2f( player.getPosition().x - (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
