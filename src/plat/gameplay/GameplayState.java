@@ -91,8 +91,12 @@ public class GameplayState extends BasicGameState
 		//make sure paddle is within bounds of the canvas/window
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
 		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
-		if( player.getPosition().y < 10 ) player.getPosition().y=11;
-		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
+		if( player.getPosition().y < 10 ) player.getPosition().y=11;*/
+		if( player.getPosition().y > gc.getHeight()-10 )
+		{
+			player.getPosition().y=gc.getHeight()/2;
+			player.setVelocity(new Vector2f(player.getVelocity().x,0f));
+		}
 		
 		// process collisions
 		for( int x = 0; x < collisionLayer.width; x++ )
@@ -103,14 +107,14 @@ public class GameplayState extends BasicGameState
 				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
 				{
 					//System.out.println( x*map.getTileWidth() + " " + y*map.getTileHeight() );
-					Vector2f direction = player.getDirection().copy();
+					Vector2f direction = player.getDirection();
 					do
 					{
 						Vector2f pos = player.getPosition();
-						player.setPosition(new Vector2f( pos.x, pos.y + direction.negate().y ) );
+						player.setPosition(new Vector2f( pos.x + direction.x, pos.y - direction.y ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
-					player.setVelocity(new Vector2f(player.getVelocity().x,0f));
+					player.setVelocity(new Vector2f(0f,0f));
 					player.setJumpsTaken(0);
 				}
 			}
