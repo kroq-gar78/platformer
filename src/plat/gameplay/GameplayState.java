@@ -99,17 +99,16 @@ public class GameplayState extends BasicGameState
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 
-		if( input.isKeyPressed( Input.KEY_UP ) )
-		{
-			player.jump();
-		}
+		if( input.isKeyPressed( Input.KEY_UP ) ) { player.jump(); }
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			//player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+			//player.applyForce(new Vector2f(-4f,0));
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			//player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
+			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
+			//player.applyForce(new Vector2f(0.2f,0));
 		}
 		
 		/*switch( currentState )
@@ -121,11 +120,11 @@ public class GameplayState extends BasicGameState
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
 		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
 		if( player.getPosition().y < 10 ) player.getPosition().y=11;*/
-		if( player.getPosition().y > gc.getHeight()-10 )
+		/*if( player.getPosition().y > gc.getHeight()-10 )
 		{
 			player.getPosition().y=gc.getHeight()/2;
 			player.setVelocity(new Vector2f(player.getVelocity().x,0f));
-		}
+		}*/
 		
 		left = new Rectangle( player.getPosition().x , player.getPosition().y+1 , 1 , player.getImage().getHeight()-2 );
 		right = new Rectangle( player.getPosition().x+player.getImage().getWidth() , player.getPosition().y+1 , 1 , player.getImage().getHeight()-2 );
@@ -165,7 +164,17 @@ public class GameplayState extends BasicGameState
 							pos.y += direction.y/30;
 							System.out.println("top");
 						}*/
-						player.setPosition(new Vector2f( player.getPosition().x + (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
+						if( x < 3 )
+						{
+							player.setPosition(new Vector2f(map.getTileWidth()*3,player.getPosition().y));
+							System.out.println("reset x " + x + " " + player.getPosition()  );
+						}
+						else if( x > 77 )
+						{
+							player.setPosition(new Vector2f(gc.getWidth()-map.getTileWidth()*3,player.getPosition().y));
+							System.out.println("reset x " + x + " " + player.getPosition()  );
+						}
+						player.setPosition(new Vector2f( player.getPosition().x - (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
 					player.setVelocity(new Vector2f(0f,0f));

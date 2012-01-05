@@ -57,6 +57,6 @@ public class Player extends Unit {
 	public int getJumpsTaken() { return this.jumpsTaken; }
 	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
 	
-	private float horizSpeed=4f;
+	private float horizSpeed=3f;
 	private int jumpsTaken=0;
 }
