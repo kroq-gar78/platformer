@@ -2,6 +2,7 @@ package plat.gameplay;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -34,7 +35,10 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		map = new TiledMapPlus("res/map.tmx");
 		
-		//System.out.println( map.getLayer("collision").getTileID());
+		// tilemap initializations, besides the TileMapPlus itself
+		collisionLayer = map.getLayer("collision");
+		collisionID = collisionLayer.getTileID(0, collisionLayer.height-1); // bottom left corner should be a collision tile
+		//System.out.println( collisionLayer.getTileID(0, 59));
 		
 		player = new Player("Player", playerImage, new Vector2f(32,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
 		
@@ -54,21 +58,22 @@ public class GameplayState extends BasicGameState
 	@Override
 	public void render( GameContainer gc , StateBasedGame game , Graphics g ) throws SlickException
 	{
+		g.setColor(Color.white);
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 		map.render(0, 0);
 		player.render(g);
 		//for( Platform platform : platforms ) { platform.render(g); }
 		
 		// show colliding tiles
-		Layer collisionLayer = map.getLayer("collision");
+		g.setColor(Color.red);
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
 			{
 				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
-				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==2 )
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
 				{
-					g.draw( tilePoly );
+					g.draw(tilePoly);
 				}
 			}
 		}
@@ -90,21 +95,19 @@ public class GameplayState extends BasicGameState
 		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
 		
 		// process collisions
-		Layer collisionLayer = map.getLayer("collision");
-		//System.out.println( collisionLayer.getTileID(0, 59));
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
 			{
 				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
-				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==2 )
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
 				{
 					//System.out.println( x*map.getTileWidth() + " " + y*map.getTileHeight() );
 					Vector2f direction = player.getDirection().copy();
 					do
 					{
 						Vector2f pos = player.getPosition();
-						player.setPosition(new Vector2f( pos.x, pos.y - direction.y) );
+						player.setPosition(new Vector2f( pos.x, pos.y + direction.negate().y ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
 					player.setVelocity(new Vector2f(player.getVelocity().x,0f));
@@ -173,6 +176,8 @@ public class GameplayState extends BasicGameState
 	
 	// tilemap objects
 	private TiledMapPlus map;
+	private Layer collisionLayer;
+	private int collisionID;
 	
 	private Input input;
 	
