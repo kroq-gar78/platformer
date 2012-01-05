@@ -52,11 +52,10 @@ public class GameplayState extends BasicGameState
 		//collisionManager.addCollidable(player);
 		//collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
-		left = new Rectangle( player.getPosition().x , player.getPosition().y , 1 , player.getImage().getHeight() );
-		right = new Rectangle( player.getPosition().x+player.getImage().getWidth()-1 , player.getPosition().y , 1 , player.getImage().getHeight() );
-		top = new Rectangle( player.getPosition().x , player.getPosition().y+1 , player.getImage().getWidth() , 1 );
-		bottom = new Rectangle( player.getPosition().x , player.getPosition().y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 );
-		
+		left = new Rectangle( player.getPosition().x , player.getPosition().y+1 , 1 , player.getImage().getHeight()-1 );
+		right = new Rectangle( player.getPosition().x+player.getImage().getWidth() , player.getPosition().y+1 , 1 , player.getImage().getHeight()-1 );
+		top = new Rectangle( player.getPosition().x+1 , player.getPosition().y , player.getImage().getWidth() , 1 );
+		bottom = new Rectangle( player.getPosition().x+1 , player.getPosition().y+player.getImage().getHeight() , player.getImage().getWidth() , 1 );
 		
 		//bgImage = new Image( "res/bg.jpg" );
 	}
@@ -67,11 +66,11 @@ public class GameplayState extends BasicGameState
 		g.setColor(Color.white);
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 		map.render(0, 0);
-		player.render(g);
+		//player.render(g);
 		//for( Platform platform : platforms ) { platform.render(g); }
 		
 		g.setColor(Color.green);
-		g.draw(top);
+		//g.draw(top);
 		g.draw(bottom);
 		g.draw(left);
 		g.draw(right);
@@ -99,7 +98,25 @@ public class GameplayState extends BasicGameState
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
+
+		if( input.isKeyPressed( Input.KEY_UP ) )
+		{
+			player.jump();
+		}
+		if( input.isKeyDown( Input.KEY_LEFT ) )
+		{
+			//player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+		}
+		if( input.isKeyDown( Input.KEY_RIGHT ) )
+		{
+			//player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
+		}
 		
+		/*switch( currentState )
+		{
+		
+		}*/
+		player.update(gc, game, delta);
 		//make sure paddle is within bounds of the canvas/window
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
 		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
@@ -110,11 +127,10 @@ public class GameplayState extends BasicGameState
 			player.setVelocity(new Vector2f(player.getVelocity().x,0f));
 		}
 		
-		Vector2f pos = player.getPosition();
-		left = new Rectangle( player.getPosition().x , player.getPosition().y , 1 , player.getImage().getHeight() );
-		right = new Rectangle( player.getPosition().x+player.getImage().getWidth()-1 , player.getPosition().y , 1 , player.getImage().getHeight() );
-		top = new Rectangle( player.getPosition().x , player.getPosition().y+1 , player.getImage().getWidth() , 1 );
-		bottom = new Rectangle( player.getPosition().x , player.getPosition().y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 );
+		left = new Rectangle( player.getPosition().x , player.getPosition().y+1 , 1 , player.getImage().getHeight()-2 );
+		right = new Rectangle( player.getPosition().x+player.getImage().getWidth() , player.getPosition().y+1 , 1 , player.getImage().getHeight()-2 );
+		top = new Rectangle( player.getPosition().x+1 , player.getPosition().y , player.getImage().getWidth()-2 , 1 );
+		bottom = new Rectangle( player.getPosition().x+1 , player.getPosition().y+player.getImage().getHeight() , player.getImage().getWidth()-2 , 1 );
 		
 		// process collisions
 		for( int x = 0; x < collisionLayer.width; x++ )
@@ -128,23 +144,28 @@ public class GameplayState extends BasicGameState
 					Vector2f direction = player.getDirection();
 					do
 					{
-						/*if( new Rectangle( pos.x , pos.y , 1 , player.getImage().getHeight() ).intersects(tilePoly) ) // check if intersects left side of player
+						Vector2f pos = player.getPosition();
+						/*if( bottom.intersects(tilePoly) )  // check if intersects bottom of player, bring player up
 						{
-							pos.x += direction.x;
+							pos.y -= direction.y/30;
+							System.out.println("bottom");
 						}
-						if( new Rectangle( pos.x+player.getImage().getWidth()-1 , pos.y , 1 , player.getImage().getHeight() ).intersects(tilePoly) ) // check if intersects right side of player
+						if( left.intersects(tilePoly) ) // check if intersects left side of player, bring player right
 						{
-							pos.x -= direction.x;
+							pos.x += direction.x/30;
+							System.out.println("left");
 						}
-						if( new Rectangle( pos.x , pos.y+1 , player.getImage().getWidth() , 1 ).intersects(tilePoly) )  // check if intersects top of player
+						if( right.intersects(tilePoly) ) // check if intersects right side of player, bring player left
 						{
-							pos.y += direction.y;
+							pos.x -= direction.x/30;
+							System.out.println("right");
 						}
-						if( new Rectangle( pos.x , pos.y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 ).intersects(tilePoly) )  // check if intersects bottom of player
+						if( top.intersects(tilePoly) )  // check if intersects top of player, bring player down
 						{
-							pos.y -= direction.y;
+							pos.y += direction.y/30;
+							System.out.println("top");
 						}*/
-						player.setPosition(new Vector2f( pos.x + Math.abs(direction.x)/direction.x*direction.x, pos.y - Math.abs(direction.y)/direction.y*direction.y ) );
+						player.setPosition(new Vector2f( player.getPosition().x + (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
 					player.setVelocity(new Vector2f(0f,0f));
@@ -152,27 +173,6 @@ public class GameplayState extends BasicGameState
 				}
 			}
 		}
-		
-		if( input.isKeyPressed( Input.KEY_UP ) )
-		{
-			player.jump();
-		}
-		if( input.isKeyDown( Input.KEY_LEFT ) )
-		{
-			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
-		}
-		if( input.isKeyDown( Input.KEY_RIGHT ) )
-		{
-			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
-		}
-		
-		/*switch( currentState )
-		{
-		
-		}*/
-		player.update(gc, game, delta);
-		
-		
 	}
 	
 	/*private boolean playerColliding() throws SlickException

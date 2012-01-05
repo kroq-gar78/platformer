@@ -8,7 +8,7 @@
  </tileset>
  <layer name="collision" width="80" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3WsQ3AMAwEsUD7D50mvQGfU5kEfgBdpXnYNd/Yo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfs9NvFruJfs2NN5+kX6Nfo1+jX6Nfs/pFzP7eCw4oZ5oASwAA
+   H4sIAAAAAAAAA+3WIQ7AIBQFwR/uf+h6TNNuU8NM8iSCxbBmZg1PrW08o1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nf87bffu7Ud9CvOfXeX9Gv0a/Rr9Gv0a+5+4eY/bELxjtijwBLAAA=
   </data>
  </layer>
  <layer name="tiles" width="80" height="60" opacity="0.42">
