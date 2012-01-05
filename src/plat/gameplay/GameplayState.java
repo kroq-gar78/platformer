@@ -52,6 +52,12 @@ public class GameplayState extends BasicGameState
 		//collisionManager.addCollidable(player);
 		//collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
+		left = new Rectangle( player.getPosition().x , player.getPosition().y , 1 , player.getImage().getHeight() );
+		right = new Rectangle( player.getPosition().x+player.getImage().getWidth()-1 , player.getPosition().y , 1 , player.getImage().getHeight() );
+		top = new Rectangle( player.getPosition().x , player.getPosition().y+1 , player.getImage().getWidth() , 1 );
+		bottom = new Rectangle( player.getPosition().x , player.getPosition().y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 );
+		
+		
 		//bgImage = new Image( "res/bg.jpg" );
 	}
 
@@ -63,6 +69,12 @@ public class GameplayState extends BasicGameState
 		map.render(0, 0);
 		player.render(g);
 		//for( Platform platform : platforms ) { platform.render(g); }
+		
+		g.setColor(Color.green);
+		g.draw(top);
+		g.draw(bottom);
+		g.draw(left);
+		g.draw(right);
 		
 		// show colliding tiles
 		g.setColor(Color.red);
@@ -98,6 +110,12 @@ public class GameplayState extends BasicGameState
 			player.setVelocity(new Vector2f(player.getVelocity().x,0f));
 		}
 		
+		Vector2f pos = player.getPosition();
+		left = new Rectangle( player.getPosition().x , player.getPosition().y , 1 , player.getImage().getHeight() );
+		right = new Rectangle( player.getPosition().x+player.getImage().getWidth()-1 , player.getPosition().y , 1 , player.getImage().getHeight() );
+		top = new Rectangle( player.getPosition().x , player.getPosition().y+1 , player.getImage().getWidth() , 1 );
+		bottom = new Rectangle( player.getPosition().x , player.getPosition().y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 );
+		
 		// process collisions
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
@@ -110,8 +128,23 @@ public class GameplayState extends BasicGameState
 					Vector2f direction = player.getDirection();
 					do
 					{
-						Vector2f pos = player.getPosition();
-						player.setPosition(new Vector2f( pos.x + direction.x, pos.y - direction.y ) );
+						/*if( new Rectangle( pos.x , pos.y , 1 , player.getImage().getHeight() ).intersects(tilePoly) ) // check if intersects left side of player
+						{
+							pos.x += direction.x;
+						}
+						if( new Rectangle( pos.x+player.getImage().getWidth()-1 , pos.y , 1 , player.getImage().getHeight() ).intersects(tilePoly) ) // check if intersects right side of player
+						{
+							pos.x -= direction.x;
+						}
+						if( new Rectangle( pos.x , pos.y+1 , player.getImage().getWidth() , 1 ).intersects(tilePoly) )  // check if intersects top of player
+						{
+							pos.y += direction.y;
+						}
+						if( new Rectangle( pos.x , pos.y+player.getImage().getHeight()-1 , player.getImage().getWidth() , 1 ).intersects(tilePoly) )  // check if intersects bottom of player
+						{
+							pos.y -= direction.y;
+						}*/
+						player.setPosition(new Vector2f( pos.x + Math.abs(direction.x)/direction.x*direction.x, pos.y - Math.abs(direction.y)/direction.y*direction.y ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
 					player.setVelocity(new Vector2f(0f,0f));
@@ -177,6 +210,11 @@ public class GameplayState extends BasicGameState
 	private Image platformImage;
 	private Image playerImage;
 	//private Image bgImage;
+	
+	Rectangle left;
+	Rectangle right;
+	Rectangle top;
+	Rectangle bottom;
 	
 	// tilemap objects
 	private TiledMapPlus map;
