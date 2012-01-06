@@ -42,6 +42,10 @@ public class GameplayState extends BasicGameState
 		
 		player = new Player("Player", playerImage, new Vector2f(32,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
 		
+		// etc. initializations
+		deltaSinceMove=-1;
+		tilesColliding = new ArrayList<int[]>();
+		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
@@ -66,18 +70,20 @@ public class GameplayState extends BasicGameState
 		g.setColor(Color.white);
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 		map.render(0, 0);
-		//player.render(g);
+		player.render(g);
+		g.setColor(Color.blue);
+		g.drawLine( player.getPosition().x+player.getImage().getWidth()/2 , player.getPosition().y+player.getImage().getHeight()/2 , player.getDirection().scale(10).x+player.getPosition().x+player.getImage().getWidth()/2 , player.getDirection().scale(10).y+player.getPosition().y+player.getImage().getHeight()/2 );
 		//for( Platform platform : platforms ) { platform.render(g); }
 		
-		g.setColor(Color.green);
+		/*g.setColor(Color.green);
 		g.draw(top);
 		g.draw(bottom);
 		g.draw(left);
-		g.draw(right);
+		g.draw(right);*/
 		
 		// show colliding tiles
 		g.setColor(Color.red);
-		for( int x = 0; x < collisionLayer.width; x++ )
+		/*for( int x = 0; x < collisionLayer.width; x++ )
 		{
 			for( int y = 0; y < collisionLayer.height; y++ )
 			{
@@ -87,6 +93,11 @@ public class GameplayState extends BasicGameState
 					g.draw(tilePoly);
 				}
 			}
+		}*/
+		for( int i = 0; i < tilesColliding.size(); i++ )
+		{
+			Rectangle tilePoly=new Rectangle( tilesColliding.get(i)[0]*map.getTileWidth() , tilesColliding.get(i)[1]*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
+			g.draw(tilePoly);
 		}
 	}
 
@@ -100,22 +111,30 @@ public class GameplayState extends BasicGameState
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 
 		if( input.isKeyPressed( Input.KEY_UP ) ) { player.jump(); }
+		player.stopHorizMovement();
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+			//player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+			player.moveLeft();
+			deltaSinceMove=0;
 			//player.applyForce(new Vector2f(-4f,0));
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
+			//player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
+			player.moveRight();
+			deltaSinceMove=0;
 			//player.applyForce(new Vector2f(0.2f,0));
 		}
-		
+		if( deltaSinceMove>=1000 ) deltaSinceMove=-1;
+		if( deltaSinceMove>0 ) deltaSinceMove+=delta;
+		player.update(gc, game, delta);
+		System.out.println(player.getDirection());
+		tilesColliding = new ArrayList<int[]>();
 		/*switch( currentState )
 		{
 		
 		}*/
-		player.update(gc, game, delta);
 		//make sure paddle is within bounds of the canvas/window
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
 		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
@@ -131,6 +150,18 @@ public class GameplayState extends BasicGameState
 		top = new Rectangle( player.getPosition().x+1 , player.getPosition().y , player.getImage().getWidth()-2 , 1 );
 		bottom = new Rectangle( player.getPosition().x+1 , player.getPosition().y+player.getImage().getHeight() , player.getImage().getWidth()-2 , 1 );
 		
+		for( int x = 0; x < collisionLayer.width; x++ )
+		{
+			for( int y = 0; y < collisionLayer.height; y++ )
+			{
+				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
+				{
+					tilesColliding.add(new int[]{x,y});
+				}
+			}
+		}
+		
 		// process collisions
 		for( int x = 0; x < collisionLayer.width; x++ )
 		{
@@ -139,6 +170,15 @@ public class GameplayState extends BasicGameState
 				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
 				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
 				{
+					tilesColliding.add(new int[]{x,y});
+				}
+			}
+			for( int y = 0; y < collisionLayer.height; y++ )
+			{
+				Rectangle tilePoly=new Rectangle( x*map.getTileWidth() , y*map.getTileHeight() , map.getTileWidth() , map.getTileHeight() );
+				if( tilePoly.intersects(player.getCollisionShape()) && collisionLayer.getTileID(x,y)==collisionID )
+				{
+					if( tilesColliding.contains(new int[]{x,y}) ) System.out.println( "colliding" ); 
 					//System.out.println( x*map.getTileWidth() + " " + y*map.getTileHeight() );
 					Vector2f direction = player.getDirection();
 					do
@@ -164,20 +204,20 @@ public class GameplayState extends BasicGameState
 							pos.y += direction.y/30;
 							System.out.println("top");
 						}*/
-						if( x < 3 || player.getPosition().x < 24 )
+						/*if( x < 3 || player.getPosition().x < 24 )
 						{
 							player.setPosition(new Vector2f(map.getTileWidth()*3,player.getPosition().y-1));
 							System.out.println("reset x " + x + " " + player.getPosition()  );
 						}
 						else if( x > 77 )
 						{
-							player.setPosition(new Vector2f(gc.getWidth()-map.getTileWidth()*3,player.getPosition().y));
+							player.setPosition(new Vector2f(gc.getWidth()-map.getTileWidth()*4,player.getPosition().y));
 							System.out.println("reset x " + x + " " + player.getPosition()  );
-						}
-						player.setPosition(new Vector2f( player.getPosition().x - (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
+						}*/
+						player.setPosition(new Vector2f( player.getPosition().x + (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
-					player.setVelocity(new Vector2f(0f,0f));
+					player.setVelocity(new Vector2f(player.getVelocity().x,0f));
 					player.setJumpsTaken(0);
 				}
 			}
@@ -212,7 +252,9 @@ public class GameplayState extends BasicGameState
 	//private STATES currentState;
 	
 	private Player player;
-	private ArrayList<Platform> platforms;
+	private int deltaSinceMove;
+	
+	private ArrayList<int[]> tilesColliding;
 	
 	private int playerLives;
 

@@ -32,16 +32,16 @@ public class Player extends Unit {
 	{
 		if( jumpsTaken==1 ) // double jump; jumps==0 can never (and should never) happen
 		{
-			velocity.y=0;
+			getVelocity().y=0;
 			applyForce(new Vector2f( 0f, -1.5f ));
-			applyForce(gravity.negate());
+			applyForce(getGravity().negate());
 			jumpsTaken=2;
 		}
 		else if( jumpsTaken==0 ) // single jump
 		{
-			velocity.y=0;
+			getVelocity().y=0;
 			applyForce(new Vector2f( 0f, -1.25f ));
-			applyForce(gravity.negate());
+			applyForce(getGravity().negate());
 			jumpsTaken=1;
 		}
 	}
@@ -51,12 +51,9 @@ public class Player extends Unit {
 		super.render(g);
 	}
 	
-	public float getHorizSpeed() { return horizSpeed; }
-	
 	public boolean isJumping() { return jumpsTaken>0; }
 	public int getJumpsTaken() { return this.jumpsTaken; }
 	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
 	
-	private float horizSpeed=3f;
 	private int jumpsTaken=0;
 }
