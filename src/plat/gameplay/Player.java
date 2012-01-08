@@ -1,62 +1,49 @@
 package plat.gameplay;
 
+import net.phys2d.math.Vector2f;
+import net.phys2d.raw.World;
+
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Vector2f;
 
-public class Player extends Unit {
+import com.n3wt0n.G2DP.Entity;
+import com.n3wt0n.G2DP.SoundWrapper;
 
-	public Player(String name, Image image, Vector2f position,
-			Shape collisionShape, Vector2f direction, float speed)
+public class Player extends Entity
+{
+	public Player(World world, float x, float y, int width, int height,
+			float mass, String name, SoundWrapper soundWrapper)
 	{
-		super(name, image, position, collisionShape, direction, speed, 1);
+		super(world, x, y, width, height, mass, name, soundWrapper);
+		// TODO Auto-generated constructor stub
+	}
+	public Player(World world, Vector2f pos, int width, int height,
+			float mass, String name, SoundWrapper soundWrapper)
+	{
+		super(world, pos, width, height, mass, name, soundWrapper);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Player(String name, Image image, Vector2f position,
-			Shape collisionShape)
+	public void update( GameContainer g , Game game , int delta ) throws SlickException
 	{
-		super(name, image, position, collisionShape, 1);
-		// TODO Auto-generated constructor stub
+		super.update(delta);
 	}
 	
-	public void update( GameContainer g , Game game , int delta )
+	public void render(GameContainer gc , Graphics g) throws SlickException
 	{
-		super.update(g, game, delta);
+		//super.render(gc,g);
 	}
 	
-	public void jump()
-	{
-		if( jumpsTaken==1 ) // double jump; jumps==0 can never (and should never) happen
-		{
-			velocity.y=0;
-			applyForce(new Vector2f( 0f, -1.5f ));
-			applyForce(gravity.negate());
-			jumpsTaken=2;
-		}
-		else if( jumpsTaken==0 ) // single jump
-		{
-			velocity.y=0;
-			applyForce(new Vector2f( 0f, -1.25f ));
-			applyForce(gravity.negate());
-			jumpsTaken=1;
-		}
-	}
-	
-	public void render(Graphics g)
-	{
-		super.render(g);
-	}
-	
-	public float getHorizSpeed() { return horizSpeed; }
+	/*public float getHorizSpeed() { return horizSpeed; }
 	
 	public boolean isJumping() { return jumpsTaken>0; }
 	public int getJumpsTaken() { return this.jumpsTaken; }
 	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
 	
 	private float horizSpeed=4f;
-	private int jumpsTaken=0;
+	private int jumpsTaken=0;*/
 }

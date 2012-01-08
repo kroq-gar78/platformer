@@ -38,6 +38,25 @@ public abstract class Entity extends SimpleEntity {
 		super(world, x, y, width, height, mass, name, soundWrapper);
 		setXY(x, y);
 	}
+	
+	/**
+	 * Create an Entity. Extend it for use as a Lamp, NPC, or Player, etc.
+	 * 
+	 * @param pos
+	 *            Initial location in both planes (x and y)
+	 * @param width
+	 *            Width to assign the physical body.
+	 * @param height
+	 *            Height to assign the physical body.
+	 * @param mass
+	 *            Mass to assign the physical body.
+	 * @param name
+	 *            Name of the Entity.
+	 */
+	public Entity(World world, Vector2f pos, int width, int height, float mass,	String name, SoundWrapper soundWrapper) {
+		super(world, pos.x, pos.y, width, height, mass, name, soundWrapper);
+		setXY(pos.x, pos.y);
+	}
 
 	/**
 	 * Update the variables of the Entity each step.
@@ -158,6 +177,16 @@ public abstract class Entity extends SimpleEntity {
 			}
 			setFacingRight(false);
 		}
+	}
+	
+	/**
+	 * Cause the Entity to jump upward with the default force jumpPower defined in the Entity.
+	 * 
+	 * @throws SlickException
+	 */
+	public void jump() throws SlickException {
+		if (!isFalling())
+			this.applyForce(0, -jumpPower);
 	}
 
 	/**
