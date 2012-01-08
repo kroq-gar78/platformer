@@ -42,6 +42,7 @@
 			<zipfileset src="${lib.dir}/lwjgl_util.jar"/>-->
 			<zipfileset src="${lib.dir}/lzma.jar"/>
 			<zipfileset src="${lib.dir}/packulike.jar"/>
+			<zipfileset src="${lib.dir}/phys2d.jar"/>
 			<!--<zipfileset src="${lib.dir}/pedigree.jar"/>
 			<zipfileset src="${lib.dir}/scalar.jar"/>-->
 			<zipfileset src="${lib.dir}/slick.jar"/>

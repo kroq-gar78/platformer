@@ -20,5 +20,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="master/natives"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/phys2d.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
