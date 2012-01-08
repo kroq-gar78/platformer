@@ -2,6 +2,8 @@ package plat.gameplay;
 
 import java.util.ArrayList;
 
+import net.phys2d.raw.World;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,9 +14,6 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import plat.collision.CollisionManager;
-import plat.collision.PlayerAndFloorCollisionHandler;
-
 public class GameplayState extends BasicGameState
 {
 	// just a generic state class; extend as necessary (e.g. different levels and stages)
@@ -24,7 +23,6 @@ public class GameplayState extends BasicGameState
 	{
 
 		gc.setVSync( true );
-		collisionManager = new CollisionManager(); // initialize collision manager
 		
 		// load resources
 		playerImage = new Image("res/player.png");
@@ -37,10 +35,6 @@ public class GameplayState extends BasicGameState
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
-		
-		for( Platform platform : platforms ) { collisionManager.addCollidable(platform); }
-		collisionManager.addCollidable(player);
-		collisionManager.addHandler(new PlayerAndFloorCollisionHandler() );
 		
 		//bgImage = new Image( "res/bg.jpg" );
 	}
@@ -87,14 +81,10 @@ public class GameplayState extends BasicGameState
 		
 		}*/
 		player.update(gc, game, delta);
-		
-		collisionManager.processCollisions();
 	}
 
 	public int getPlayerLives() { return playerLives; }
 	public void setPlayerLives( int lives ) { this.playerLives = lives; }
-	
-	public CollisionManager getCollisionManager() { return collisionManager; }
 	
 	@Override
 	public int getID()
@@ -123,7 +113,5 @@ public class GameplayState extends BasicGameState
 	//private Image bgImage;
 	
 	private Input input;
-	
-	private CollisionManager collisionManager;
 	
 }
