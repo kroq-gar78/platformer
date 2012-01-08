@@ -49,6 +49,7 @@ public class Unit extends CollidableImageObject
 	public void setGravity( Vector2f gravity ) { this.gravity = gravity; }
 
 	public float getHorizSpeed() { return HORIZ_SPEED; }
+	public float getCurrentHorizSpeed() { return horizSpeed; }
 	
 	public void moveLeft()
 	{

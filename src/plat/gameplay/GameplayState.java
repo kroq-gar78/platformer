@@ -43,7 +43,7 @@ public class GameplayState extends BasicGameState
 		player = new Player("Player", playerImage, new Vector2f(32,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
 		
 		// etc. initializations
-		deltaSinceMove=-1;
+		deltaSinceMove = new int[]{-1,-1};
 		tilesColliding = new ArrayList<int[]>();
 		
 		/*platforms = new ArrayList<Platform>();
@@ -116,18 +116,21 @@ public class GameplayState extends BasicGameState
 		{
 			//player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
 			player.moveLeft();
-			deltaSinceMove=0;
+			deltaSinceMove[0]=0;
 			//player.applyForce(new Vector2f(-4f,0));
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			//player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));
 			player.moveRight();
-			deltaSinceMove=0;
+			deltaSinceMove[1]=0;
 			//player.applyForce(new Vector2f(0.2f,0));
 		}
-		if( deltaSinceMove>=1000 ) deltaSinceMove=-1;
-		if( deltaSinceMove>0 ) deltaSinceMove+=delta;
+		if( deltaSinceMove[0]>=1000 ) deltaSinceMove[0]=-1;
+		if( deltaSinceMove[1]>=1000 ) deltaSinceMove[1]=-1;
+		if( deltaSinceMove[0]>=0 ) deltaSinceMove[0]+=delta;
+		if( deltaSinceMove[1]>=0 ) deltaSinceMove[1]+=delta;
+		System.out.println(deltaSinceMove);
 		player.update(gc, game, delta);
 		System.out.println(player.getDirection());
 		tilesColliding = new ArrayList<int[]>();
@@ -190,7 +193,7 @@ public class GameplayState extends BasicGameState
 							System.out.println("bottom");
 						}
 						if( left.intersects(tilePoly) ) // check if intersects left side of player, bring player right
-						{
+					e	{
 							pos.x += direction.x/30;
 							System.out.println("left");
 						}
@@ -214,6 +217,10 @@ public class GameplayState extends BasicGameState
 							player.setPosition(new Vector2f(gc.getWidth()-map.getTileWidth()*4,player.getPosition().y));
 							System.out.println("reset x " + x + " " + player.getPosition()  );
 						}*/
+						if( player.getCurrentHorizSpeed()!=0 )
+						{
+							player.setPosition(new Vector2f( player.getPosition().x + player.getCurrentHorizSpeed()*0.001f , player.getPosition().y ));
+						}
 						player.setPosition(new Vector2f( player.getPosition().x + (direction.x)*0.01f , player.getPosition().y - (direction.y)*0.01f ) );
 					}
 					while( tilePoly.intersects(player.getCollisionShape()) );
@@ -252,7 +259,7 @@ public class GameplayState extends BasicGameState
 	//private STATES currentState;
 	
 	private Player player;
-	private int deltaSinceMove;
+	private int deltaSinceMove[];
 	
 	private ArrayList<int[]> tilesColliding;
 	
