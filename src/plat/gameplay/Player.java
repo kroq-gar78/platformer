@@ -8,7 +8,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Shape;
 
 import com.n3wt0n.G2DP.Entity;
 import com.n3wt0n.G2DP.SoundWrapper;

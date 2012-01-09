@@ -10,7 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -29,11 +28,13 @@ public class GameplayState extends BasicGameState
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
 		
-		worldIter=0;
-		world = new World(new Vector2f(0f,0f), worldIter);
+		worldIter=100;
+		world = new World(new Vector2f(0f,3f), worldIter);
 		
 		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper);
-
+		
+		world.add(player.getBody());
+		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
@@ -48,7 +49,7 @@ public class GameplayState extends BasicGameState
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
-		player.render(gc, g);
+		playerImage.draw(player.getX(), player.getY());
 		//for( Platform platform : platforms ) { platform.render(g); }
 	}
 
@@ -57,6 +58,7 @@ public class GameplayState extends BasicGameState
 	{
 		//get input
 		input = gc.getInput();
+		world.step(0.25f);
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
