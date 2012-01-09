@@ -23,7 +23,6 @@ public class GameplayState extends BasicGameState
 	@Override
 	public void init( GameContainer gc , StateBasedGame game ) throws SlickException
 	{
-
 		gc.setVSync( true );
 		
 		// load resources
@@ -50,7 +49,7 @@ public class GameplayState extends BasicGameState
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
 		player.render(gc, g);
-		for( Platform platform : platforms ) { platform.render(g); }
+		//for( Platform platform : platforms ) { platform.render(g); }
 	}
 
 	@Override
