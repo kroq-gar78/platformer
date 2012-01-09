@@ -3,6 +3,7 @@ package plat.gameplay;
 import java.util.ArrayList;
 
 import net.phys2d.raw.World;
+import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,9 +11,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import com.n3wt0n.G2DP.SoundWrapper;
 
 public class GameplayState extends BasicGameState
 {
@@ -28,14 +30,17 @@ public class GameplayState extends BasicGameState
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
 		
-		player = new Player("Player", playerImage, new Vector2f(0,gc.getHeight()/2), new Rectangle(0,0,playerImage.getWidth(),playerImage.getHeight()));
+		worldIter=0;
+		world = new World(new Vector2f(0f,0f), worldIter);
 		
-		platforms = new ArrayList<Platform>();
+		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper);
+
+		/*platforms = new ArrayList<Platform>();
 		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
-		
+		*/
 		//bgImage = new Image( "res/bg.jpg" );
 	}
 
@@ -67,14 +72,14 @@ public class GameplayState extends BasicGameState
 		{
 			player.jump();
 		}
-		if( input.isKeyDown( Input.KEY_LEFT ) )
+		/*if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
 			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
-		}
+		}*/
 		
 		/*switch( currentState )
 		{
@@ -107,12 +112,14 @@ public class GameplayState extends BasicGameState
 	private ArrayList<Platform> platforms;
 	
 	private int playerLives;
-
+	
+	private int worldIter;
+	
 	private Image platformImage;
 	private Image playerImage;
 	//private Image bgImage;
 	
 	private Input input;
-	
+	private SoundWrapper soundWrapper;
 	private World world;
 }
