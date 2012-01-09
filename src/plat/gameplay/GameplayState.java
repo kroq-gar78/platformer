@@ -44,7 +44,7 @@ public class GameplayState extends BasicGameState
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 
-		player.render(g);
+		player.render(gc, g);
 		for( Platform platform : platforms ) { platform.render(g); }
 	}
 
@@ -114,4 +114,5 @@ public class GameplayState extends BasicGameState
 	
 	private Input input;
 	
+	private World world;
 }

@@ -229,6 +229,36 @@ public abstract class SimpleEntity {
 	public void setXY(float x, float y) {
 		body.setPosition(x, y);
 	}
+	
+	/**
+	 * Set the location (x,y) of the Entity.
+	 * 
+	 * @param position
+	 *            Vector2f containing the location along the x- and y-planes.
+	 */
+	public void setXY(Vector2f position) {
+		body.setPosition(position.x, position.y);
+	}
+	
+	/**
+	 * Get the Entity's location (in pixels) along the y-plane.
+	 * 
+	 * @return The Y location.
+	 */
+	public Vector2f getPosition() {
+		// return y;
+		return (Vector2f)body.getPosition();
+	}
+	
+	/**
+	 * Set the location (x,y) of the Entity.
+	 * 
+	 * @param position
+	 *            Vector2f containing the location along the x- and y-planes.
+	 */
+	public void setPosition(Vector2f position) {
+		this.setXY(position);
+	}
 
 	/**
 	 * Get the Phys2D Body of the Entity.
