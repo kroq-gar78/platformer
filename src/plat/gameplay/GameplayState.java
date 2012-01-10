@@ -2,6 +2,7 @@ package plat.gameplay;
 
 import java.util.ArrayList;
 
+import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.math.Vector2f;
 
@@ -31,7 +32,7 @@ public class GameplayState extends BasicGameState
 		worldIter=100;
 		world = new World(new Vector2f(0f,3f), worldIter);
 		
-		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper);
+		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		
 		world.add(player.getBody());
 		
@@ -48,8 +49,8 @@ public class GameplayState extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-
-		playerImage.draw(player.getX(), player.getY());
+		
+		player.render(gc, g);
 		//for( Platform platform : platforms ) { platform.render(g); }
 	}
 
@@ -58,7 +59,8 @@ public class GameplayState extends BasicGameState
 	{
 		//get input
 		input = gc.getInput();
-		world.step(0.25f);
+		System.out.println((float)delta/15);
+		world.step((float)delta/20);
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game

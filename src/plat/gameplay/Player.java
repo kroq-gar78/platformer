@@ -15,15 +15,17 @@ import com.n3wt0n.G2DP.SoundWrapper;
 public class Player extends Entity
 {
 	public Player(World world, float x, float y, int width, int height,
-			float mass, String name, SoundWrapper soundWrapper)
+			float mass, String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, x, y, width, height, mass, name, soundWrapper);
+		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
 	public Player(World world, Vector2f pos, int width, int height,
-			float mass, String name, SoundWrapper soundWrapper)
+			float mass, String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, pos, width, height, mass, name, soundWrapper);
+		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,7 +36,7 @@ public class Player extends Entity
 	
 	public void render(GameContainer gc , Graphics g) throws SlickException
 	{
-		//super.render(gc,g);
+		image.draw(this.getX(), this.getY());
 	}
 	
 	/*public float getHorizSpeed() { return horizSpeed; }
@@ -45,4 +47,6 @@ public class Player extends Entity
 	
 	private float horizSpeed=4f;
 	private int jumpsTaken=0;*/
+	
+	private Image image;
 }
