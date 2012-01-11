@@ -78,7 +78,7 @@ public class GameplayState extends BasicGameState
 		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
-			player.jump();
+			player.jump(500);
 		}
 		/*if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
@@ -94,6 +94,7 @@ public class GameplayState extends BasicGameState
 		
 		}*/
 		player.update(gc, game, delta);
+		System.out.println(player.getVelocity());
 	}
 
 	public int getPlayerLives() { return playerLives; }
