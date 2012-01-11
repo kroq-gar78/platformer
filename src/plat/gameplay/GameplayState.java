@@ -2,8 +2,8 @@ package plat.gameplay;
 
 import java.util.ArrayList;
 
-import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
+import net.phys2d.raw.shapes.Box;
 import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.GameContainer;
@@ -34,15 +34,20 @@ public class GameplayState extends BasicGameState
 		
 		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		
-		world.add(player.getBody());
-		
-		/*platforms = new ArrayList<Platform>();
-		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
+		platforms = new ArrayList<Platform>();
+		platforms.add(new Platform(new Box(platformImage.getWidth(), platformImage.getHeight()), new Vector2f(0,gc.getHeight()-platformImage.getHeight()), platformImage));
+		/*platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		*/
 		//bgImage = new Image( "res/bg.jpg" );
+		
+		world.add(player.getBody());
+		for( Platform platform : platforms )
+		{
+			world.add(platform);
+		}
 	}
 
 	@Override
@@ -51,7 +56,7 @@ public class GameplayState extends BasicGameState
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
 		
 		player.render(gc, g);
-		//for( Platform platform : platforms ) { platform.render(g); }
+		for( Platform platform : platforms ) { platform.render(gc,g); }
 	}
 
 	@Override
@@ -59,7 +64,7 @@ public class GameplayState extends BasicGameState
 	{
 		//get input
 		input = gc.getInput();
-		System.out.println((float)delta/15);
+		System.out.println((float)delta/20);
 		world.step((float)delta/20);
 		
 		//look for pressed keys

@@ -4,6 +4,7 @@ import net.phys2d.raw.StaticBody;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.shapes.Shape;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -17,9 +18,11 @@ public class Platform extends StaticBody
 		// TODO Auto-generated constructor stub
 	}*/
 	
+	// there's gotta be a way to remove all these constructors...	
 	public Platform(Shape shape,Vector2f pos,Image img)
 	{
 		super(shape);
+		this.setPosition(pos.x,pos.y);
 		this.img=img;
 	}
 	public Platform(String name,Shape shape,Vector2f pos,Image img)
@@ -35,7 +38,7 @@ public class Platform extends StaticBody
 		this.img=img;
 	}
 
-	public void render(Graphics g)
+	public void render(GameContainer gc,Graphics g)
 	{
 		img.draw(this.getPosition().getX(),this.getPosition().getY());
 	}
