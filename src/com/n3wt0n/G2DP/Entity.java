@@ -16,6 +16,8 @@ public abstract class Entity extends SimpleEntity {
 	private int offGroundTimer = 0;
 
 	private boolean jumping = false, facingRight = false;
+	private int maximumJumps = 2;
+	private int jumpsTaken=0;
 	private float velx;
 
 	/**
@@ -79,6 +81,7 @@ public abstract class Entity extends SimpleEntity {
 			}
 		} else {
 			offGroundTimer = 0;
+			jumpsTaken=0;
 			setOnGround(true);
 		}
 
@@ -186,8 +189,11 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void jump() throws SlickException {
-		if (!isFalling())
+		if (!isFalling() && jumpsTaken < maximumJumps )
+		{
 			this.applyForce(0, -jumpPower);
+			jumpsTaken++;
+		}
 	}
 
 	/**
@@ -210,6 +216,10 @@ public abstract class Entity extends SimpleEntity {
 	 */
 	public void setJumping(boolean b) {
 		jumping = b;
+		if( !b )
+		{
+			jumpsTaken=0;
+		}
 	}
 
 	/**

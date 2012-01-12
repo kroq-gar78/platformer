@@ -29,11 +29,13 @@ public class GameplayState extends BasicGameState
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
 		
+		soundWrapper = new SoundWrapper();
+		
 		worldIter=100;
-		world = new World(new Vector2f(0f,3f), worldIter);
+		world = new World(new Vector2f(0f,1.5f), worldIter);
 		
 		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
-		player.setJumpPower(600);
+		player.setJumpPower(400);
 		
 		platforms = new ArrayList<Platform>();
 		platforms.add(new Platform(new Box(platformImage.getWidth(), platformImage.getHeight()), new Vector2f(0,gc.getHeight()-platformImage.getHeight()), platformImage));
