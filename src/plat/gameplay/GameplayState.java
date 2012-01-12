@@ -31,14 +31,14 @@ public class GameplayState extends BasicGameState
 		
 		soundWrapper = new SoundWrapper();
 		
-		worldIter=100;
+		worldIter=50;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		
-		player = new Player(world, 0, playerImage.getHeight(), playerImage.getWidth(), playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
+		player = new Player(world, 0, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		player.setJumpPower(400);
 		
 		platforms = new ArrayList<Platform>();
-		platforms.add(new Platform(new Box(platformImage.getWidth(), platformImage.getHeight()), new Vector2f(0,gc.getHeight()-platformImage.getHeight()), platformImage));
+		platforms.add(new Platform(new Box(platformImage.getWidth(), platformImage.getHeight()), new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
 		/*platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
@@ -83,21 +83,20 @@ public class GameplayState extends BasicGameState
 		{
 			player.jump();
 		}
-		/*if( input.isKeyDown( Input.KEY_LEFT ) )
+		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.getPosition().add(new Vector2f(-player.getHorizSpeed(),0f));
+			player.moveLeft(1f);
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.getPosition().add(new Vector2f(player.getHorizSpeed(),0f));	
-		}*/
+			player.moveRight(1f);
+		}
 		
 		/*switch( currentState )
 		{
 		
 		}*/
 		player.update(gc, game, delta);
-		System.out.println(player.getVelocity());
 	}
 
 	public int getPlayerLives() { return playerLives; }

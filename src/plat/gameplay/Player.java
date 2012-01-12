@@ -14,17 +14,17 @@ import com.n3wt0n.G2DP.SoundWrapper;
 
 public class Player extends Entity
 {
-	public Player(World world, float x, float y, int width, int height,
-			float mass, String name, SoundWrapper soundWrapper, Image image)
+	public Player(World world, float x, float y, float mass,
+			String name, SoundWrapper soundWrapper, Image image)
 	{
-		super(world, x, y, width, height, mass, name, soundWrapper);
+		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
-	public Player(World world, Vector2f pos, int width, int height,
-			float mass, String name, SoundWrapper soundWrapper, Image image)
+	public Player(World world, Vector2f pos, float mass,
+			String name, SoundWrapper soundWrapper, Image image)
 	{
-		super(world, pos, width, height, mass, name, soundWrapper);
+		super(world, pos, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
