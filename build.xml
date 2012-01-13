@@ -8,7 +8,6 @@
 	<property name="classes.dir" value="${build.dir}/classes"/>
 	<property name="jar.dir" value="${build.dir}"/>
 	<property name="natives.dir" value="native"/>
-	<property name="deb.dir" value="debian"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
@@ -18,12 +17,12 @@
 		<delete dir="${build.dir}"/>
 	</target>
 	
-	<target name="compile">
+	<target name="classes">
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
 	</target>
 	
-	<target name="jar">
+	<target name="jar" depends="classes">
 		<mkdir dir="${jar.dir}"/>
 		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
 			<manifest>
@@ -66,9 +65,5 @@
 		<chmod file="${build.dir}/run.bat" perm="775" type="both"/>-->
 	</target>
 	
-	<target name="deb" depends="clean,compile,jar">
-		<mkdir dir="${deb.dir}"/>
-	</target>
-	
-	<target name="main" depends="clean,compile,jar"/>
+	<target name="main" depends="clean,classes,jar"/>
 </project>
