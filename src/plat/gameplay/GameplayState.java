@@ -36,6 +36,7 @@ public class GameplayState extends BasicGameState
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		
 		player = new Player(world, 0, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
+		player.getBody().setFriction(200f);
 		player.setJumpPower(400);
 		
 		platforms = new ArrayList<Platform>();

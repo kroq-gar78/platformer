@@ -45,7 +45,7 @@ public class Platform extends StaticBody
 	public Platform(float x, float y, Image img)
 	{
 		this( new Box((float)img.getWidth(),(float)img.getHeight()) , x , y , img );
-		System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
+		//System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
 	}
 	public Platform(Vector2f pos, Image img)
 	{
