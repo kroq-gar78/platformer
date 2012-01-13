@@ -34,7 +34,7 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=5;
+		worldIter=gc.getFPS()+1;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		map = new TiledMapPlus("res/map.tmx");
 		mapUtil = new MapUtil(map, world);
@@ -70,7 +70,7 @@ public class GameplayState extends BasicGameState
 		camera.render(gc, g);
 		
 		//g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
-		player.render(gc, g);
+		//player.render(gc, g);
 		//for( Platform platform : platforms ) { platform.render(gc,g); }
 	}
 
