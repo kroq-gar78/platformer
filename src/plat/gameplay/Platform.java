@@ -3,6 +3,7 @@ package plat.gameplay;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.shapes.Shape;
+import net.phys2d.raw.shapes.Box;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -36,6 +37,11 @@ public class Platform extends StaticBody
 		super(name,shape);
 		this.setPosition(x,y);
 		this.img=img;
+	}
+	public Platform(Vector2f pos, Image img)
+	{
+		this( new Box(img.getWidth(),img.getHeight()) , pos , img );
+		System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
 	}
 
 	public void render(GameContainer gc,Graphics g)
