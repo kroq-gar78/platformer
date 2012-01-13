@@ -15,5 +15,5 @@ public interface ILevelObject
 	
 	public void render( Graphics graphics );
 	
-	public void gameUpdate( GameContainer gc , BasicGame bg , int delta );
+	public void update( GameContainer gc , BasicGame bg , int delta );
 }

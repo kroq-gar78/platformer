@@ -22,7 +22,7 @@ import com.n3wt0n.G2DP.SoundWrapper;
 
 public class GameplayState extends BasicGameState
 {
-	// just a generic state class; extend as necessary (e.g. different levels and stages)
+	// just a generic state class; extend as necessary (e.g. different stages; use ILevelObject for levels)
 	
 	@Override
 	public void init( GameContainer gc , StateBasedGame game ) throws SlickException
