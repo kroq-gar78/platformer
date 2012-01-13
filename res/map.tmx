@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="80" height="60" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="collision" tilewidth="8" tileheight="8">
+  <image source="collision.png" width="32" height="16"/>
+ </tileset>
+ <tileset firstgid="9" name="platform" tilewidth="8" tileheight="8">
+  <image source="platform_tile.png" width="96" height="96"/>
+ </tileset>
+ <layer name="PLATFORMS" width="80" height="60">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3WIQ7AIBQFwR/uf+h6TNNuU8NM8iSCxbBmZg1PrW08o1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nfo1+jX6Nf87bffu7Ud9CvOfXeX9Gv0a/Rr9Gv0a+5+4eY/bELxjtijwBLAAA=
+  </data>
+ </layer>
+ <layer name="FOREGROUND" width="80" height="60" opacity="0.4">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3QsQ3CUBBEwd+MQyrAARmyRAl2DOT0L18DTj7JrTTBy3fnO8ZYNNWvujXYkdrOjx+/2Pjx45cbP378cuPHj19u/Pjxy40fP3658ePHLzd+/Pjlxo8fv9z48eOXGz9+/HLjx49fbvz48cuNHz9+ufHjxy83fvz45Tbjd6/Wix4NPnX3e1bbRa8Gn7r7iR+/HvHjxy83fv/7HdVbU32qEwILAPIASwAA
+  </data>
+ </layer>
+</map>

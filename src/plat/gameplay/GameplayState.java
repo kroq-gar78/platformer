@@ -16,6 +16,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
+import com.n3wt0n.G2DP.Camera;
 import com.n3wt0n.G2DP.MapUtil;
 import com.n3wt0n.G2DP.SoundWrapper;
 
@@ -53,6 +54,8 @@ public class GameplayState extends BasicGameState
 		//bgImage = new Image( "res/bg.jpg" );
 		
 		world.add(player.getBody());
+		
+		camera = new Camera(gc, map, mapUtil, player);
 		/*for( Platform platform : platforms )
 		{
 			world.add(platform);
@@ -138,9 +141,10 @@ public class GameplayState extends BasicGameState
 	private Image playerImage;
 	//private Image bgImage;
 	
-	private Input input;
+	private Camera camera;
+	private Input input;;
+	private MapUtil mapUtil;
 	private SoundWrapper soundWrapper;
 	private TiledMapPlus map;
-	private MapUtil mapUtil;
 	private World world;
 }
