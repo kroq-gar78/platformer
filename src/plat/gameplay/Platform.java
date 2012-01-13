@@ -19,12 +19,16 @@ public class Platform extends StaticBody
 		// TODO Auto-generated constructor stub
 	}*/
 	
-	// there's gotta be a way to remove all these constructors...	
-	public Platform(Shape shape,Vector2f pos,Image img)
+	// there's gotta be a way to condense all these constructors...	
+	public Platform(Shape shape,float x, float y,Image img)
 	{
 		super(shape);
-		this.setPosition(pos.x,pos.y);
+		this.setPosition(x,y);
 		this.img=img;
+	}
+	public Platform(Shape shape,Vector2f pos,Image img)
+	{
+		this(shape,pos.x,pos.y,img);
 	}
 	public Platform(String name,Shape shape,float x,float y,Image img)
 	{
@@ -36,10 +40,14 @@ public class Platform extends StaticBody
 	{
 		this(name,shape,pos.x,pos.y,img);
 	}
+	public Platform(float x, float y, Image img)
+	{
+		this( new Box(img.getWidth(),img.getHeight()) , x , y , img );
+		System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
+	}
 	public Platform(Vector2f pos, Image img)
 	{
-		this( new Box(img.getWidth(),img.getHeight()) , pos , img );
-		System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
+		this( pos.x , pos.y , img );
 	}
 
 	public void render(GameContainer gc,Graphics g)
