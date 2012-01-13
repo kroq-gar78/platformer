@@ -26,17 +26,15 @@ public class Platform extends StaticBody
 		this.setPosition(pos.x,pos.y);
 		this.img=img;
 	}
-	public Platform(String name,Shape shape,Vector2f pos,Image img)
-	{
-		super(name,shape);
-		this.setPosition(pos.x,pos.y);
-		this.img=img;
-	}
 	public Platform(String name,Shape shape,float x,float y,Image img)
 	{
 		super(name,shape);
 		this.setPosition(x,y);
 		this.img=img;
+	}
+	public Platform(String name,Shape shape,Vector2f pos,Image img)
+	{
+		this(name,shape,pos.x,pos.y,img);
 	}
 	public Platform(Vector2f pos, Image img)
 	{
