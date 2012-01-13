@@ -8,6 +8,7 @@
 	<property name="classes.dir" value="${build.dir}/classes"/>
 	<property name="jar.dir" value="${build.dir}"/>
 	<property name="natives.dir" value="native"/>
+	<property name="main-class" value="plat.gameplay.PlatformerGame"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
@@ -22,11 +23,11 @@
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
 	</target>
 	
-	<target name="jar" depends="classes">
+	<target name="jar" depends="clean,classes">
 		<mkdir dir="${jar.dir}"/>
 		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="plat.gameplay.PlatformerGame"/>
+				<attribute name="Main-Class" value="${main-class}"/>
 				<attribute name="Class-Path" value="."/>
 			</manifest>
 			<zipfileset src="${lib.dir}/hiero.jar"/>
