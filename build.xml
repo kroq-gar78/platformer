@@ -66,8 +66,8 @@
 		<chmod file="${build.dir}/run.bat" perm="775" type="both"/>-->
 	</target>
 	
-	<target name="run" depends="classes">
-		<java dir="${classes.dir}" classname="${main-class}" classpathref="classpath" />
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true" />
 	</target>
 	
 	<target name="main" depends="clean,classes,jar"/>
