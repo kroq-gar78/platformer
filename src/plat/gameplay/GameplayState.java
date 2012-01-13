@@ -66,7 +66,8 @@ public class GameplayState extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-		map.render(0, 0, g);
+		//map.render(0, 0, g);
+		camera.render(gc, g);
 		
 		//g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
 		player.render(gc, g);

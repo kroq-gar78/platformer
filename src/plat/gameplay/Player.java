@@ -18,6 +18,7 @@ public class Player extends Entity
 			String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
+		//this.setVisualLocation(x, y);
 		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +37,7 @@ public class Player extends Entity
 	
 	public void render(GameContainer gc , Graphics g) throws SlickException
 	{
-		image.draw(this.getX(), this.getY());
+		image.draw(this.getX()-this.getWidth()/2, this.getY()-this.getHeight()/2);
 	}
 	
 	/*public float getHorizSpeed() { return horizSpeed; }
