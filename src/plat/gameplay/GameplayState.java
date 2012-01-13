@@ -14,7 +14,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMapPlus;
 
+import com.n3wt0n.G2DP.MapUtil;
 import com.n3wt0n.G2DP.SoundWrapper;
 
 public class GameplayState extends BasicGameState
@@ -31,16 +33,18 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		soundWrapper = new SoundWrapper();
-		
 		worldIter=5;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
+		map = new TiledMapPlus("res/map.tmx");
+		mapUtil = new MapUtil(map, world);
+		mapUtil.buildMap();
 		
-		player = new Player(world, 0, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
+		player = new Player(world, 30, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
 		player.setJumpPower(400);
 		
-		platforms = new ArrayList<Platform>();
-		platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
+		//platforms = new ArrayList<Platform>();
+		//platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
 		/*platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
@@ -49,19 +53,21 @@ public class GameplayState extends BasicGameState
 		//bgImage = new Image( "res/bg.jpg" );
 		
 		world.add(player.getBody());
-		for( Platform platform : platforms )
+		/*for( Platform platform : platforms )
 		{
 			world.add(platform);
-		}
+		}*/
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-		g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
+		map.render(0, 0, g);
+		
+		//g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
 		player.render(gc, g);
-		for( Platform platform : platforms ) { platform.render(gc,g); }
+		//for( Platform platform : platforms ) { platform.render(gc,g); }
 	}
 
 	@Override
@@ -134,5 +140,7 @@ public class GameplayState extends BasicGameState
 	
 	private Input input;
 	private SoundWrapper soundWrapper;
+	private TiledMapPlus map;
+	private MapUtil mapUtil;
 	private World world;
 }
