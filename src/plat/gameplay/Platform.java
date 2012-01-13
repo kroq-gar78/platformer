@@ -25,6 +25,7 @@ public class Platform extends StaticBody
 		super(shape);
 		this.setPosition(x,y);
 		this.img=img;
+		this.setFriction(200f);
 	}
 	public Platform(Shape shape,Vector2f pos,Image img)
 	{
@@ -35,6 +36,7 @@ public class Platform extends StaticBody
 		super(name,shape);
 		this.setPosition(x,y);
 		this.img=img;
+		this.setFriction(200f);
 	}
 	public Platform(String name,Shape shape,Vector2f pos,Image img)
 	{
@@ -42,7 +44,7 @@ public class Platform extends StaticBody
 	}
 	public Platform(float x, float y, Image img)
 	{
-		this( new Box(img.getWidth(),img.getHeight()) , x , y , img );
+		this( new Box((float)img.getWidth(),(float)img.getHeight()) , x , y , img );
 		System.out.println("Platform width: " + img.getWidth() + "\nPlatform height: " + img.getHeight());
 	}
 	public Platform(Vector2f pos, Image img)
