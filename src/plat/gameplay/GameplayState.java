@@ -34,7 +34,7 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=PlatformerGame.MAX_FPS*2/4;
+		worldIter=PlatformerGame.MAX_FPS*3/4;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		map = new TiledMapPlus("res/map.tmx");
 		mapUtil = new MapUtil(map, world);
