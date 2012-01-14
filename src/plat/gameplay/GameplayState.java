@@ -34,13 +34,13 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=PlatformerGame.MAX_FPS*3/4;
+		worldIter=PlatformerGame.MAX_FPS;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		map = new TiledMapPlus("res/map.tmx");
 		mapUtil = new MapUtil(map, world);
 		mapUtil.buildMap();
 		
-		player = new Player(world, 30, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
+		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
 		
 		//platforms = new ArrayList<Platform>();
@@ -79,7 +79,7 @@ public class GameplayState extends BasicGameState
 		//get input
 		input = gc.getInput();
 		//System.out.println((float)delta/20);
-		world.step((float)delta/20);
+		world.step(1f);
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
@@ -92,15 +92,15 @@ public class GameplayState extends BasicGameState
 		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
-			player.jump(300f);
+			player.jump(200f);
 		}
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.moveLeft(1f);
+			player.moveLeft(0.5f);
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.moveRight(1f);
+			player.moveRight(0.5f);
 		}
 		if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
 		{

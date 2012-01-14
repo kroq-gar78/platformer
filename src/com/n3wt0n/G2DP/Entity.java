@@ -81,8 +81,13 @@ public abstract class Entity extends SimpleEntity {
 			}
 		} else {
 			offGroundTimer = 0;
-			jumpsTaken=0;
 			setOnGround(true);
+		}
+		if( isOnGround() )
+		{
+			jumpsTaken = 0;
+			jumping = false;
+			System.out.print(jumpsTaken);
 		}
 
 		// if we've been pushed back from a collision horizontally
@@ -188,12 +193,9 @@ public abstract class Entity extends SimpleEntity {
 	 * 
 	 * @throws SlickException
 	 */
-	public void jump() throws SlickException {
-		if (!isFalling() && jumpsTaken < maximumJumps )
-		{
-			this.applyForce(0, -this.jumpPower);
-			jumpsTaken++;
-		}
+	public void jump() throws SlickException
+	{
+		this.jump(this.jumpPower);
 	}
 
 	/**
@@ -204,10 +206,20 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void jump(float jumpPower) throws SlickException {
-		if ( !isFalling() && jumpsTaken < maximumJumps )
+		if ( (!isFalling()||!isJumping()) && (jumpsTaken+1 < maximumJumps) )
 		{
-			this.applyForce(0, -jumpPower);
-			jumpsTaken++;
+			jumpsTaken = (int)(jumpsTaken+1);
+			//System.out.println(jumpsTaken + " " + (int)jumpsTaken+1 );
+			if( jumpsTaken == 2 )
+			{
+				this.applyForce(0, -jumpPower*1.5f);
+				System.out.println("Double jump");
+			}
+			else
+			{
+				System.out.println("\n"+(int)(jumpsTaken));
+				this.applyForce(0, -jumpPower);
+			}
 		}
 	}
 
