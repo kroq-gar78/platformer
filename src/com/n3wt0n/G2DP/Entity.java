@@ -233,6 +233,27 @@ public abstract class Entity extends SimpleEntity {
 	public boolean isJumping() {
 		return jumping;
 	}
+	
+	/**
+	 * Get the number of maximum jumps the Entity can take without touching the ground.
+	 * 
+	 * @return The maximum number of jumps the Entity can take without touching the ground
+	 */
+	public int getMaximumJumps()
+	{
+		return maximumJumps;
+	}
+	
+	/**
+	 * Set the number of maximum jumps the Entity can take without touching the ground.
+	 * 
+	 * @param max
+	 * 			The new maximum number of jumps the Entity can take without touching the ground
+	 */
+	public void setMaximumJumps(int max)
+	{
+		this.maximumJumps = max;
+	}
 
 	/**
 	 * Set the facingRight flag to True or False.

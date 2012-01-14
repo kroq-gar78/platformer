@@ -42,7 +42,6 @@ public class GameplayState extends BasicGameState
 		
 		player = new Player(world, 30, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
-		player.setJumpPower(300);
 		
 		//platforms = new ArrayList<Platform>();
 		//platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
@@ -93,7 +92,7 @@ public class GameplayState extends BasicGameState
 		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
-			player.jump();
+			player.jump(300f);
 		}
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
