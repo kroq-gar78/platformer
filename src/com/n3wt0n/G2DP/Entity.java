@@ -87,7 +87,7 @@ public abstract class Entity extends SimpleEntity {
 		{
 			jumpsTaken = 0;
 			jumping = false;
-			System.out.print(jumpsTaken);
+			//System.out.print(jumpsTaken);
 		}
 
 		// if we've been pushed back from a collision horizontally
