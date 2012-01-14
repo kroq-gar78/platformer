@@ -6,19 +6,19 @@
  <tileset firstgid="9" name="platform" tilewidth="8" tileheight="8">
   <image source="platform_tile.png" width="96" height="96"/>
  </tileset>
+ <layer name="BACKGROUND" width="100" height="60" opacity="0.62">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3DAQ0AAADCoLexf0OLwMaqqaqqqqqqqqqqqqqqqqqqqqqqqqqqqqraASjjoZbAXQAA
+  </data>
+ </layer>
+ <layer name="FOREGROUND" width="100" height="60" opacity="0.34">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3BAQ0AAADCoPdP7ewBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN7SqhPfAXQAA
+  </data>
+ </layer>
  <layer name="PLATFORMS" width="100" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3TQQqAMBAEwSX/f7QHHyCKgUarYK45bJM1M2u4a82eu+169+v0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVr0aNGjRY8WPVoqPdbF/kKPlkoPTnq06NGiR4seLXq07O5hz/Y2/6PlAJ9LHH7AXQAA
-  </data>
- </layer>
- <layer name="BACKGROUND" width="100" height="60" opacity="0.65">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3DAQ0AAADCoOewf1CLwMaqqaqqqqqqqqqqqqqqqqqqqqqqqqqqqqraAZXLDnbAXQAA
-  </data>
- </layer>
- <layer name="FOREGROUND" width="100" height="60" opacity="0.37">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2STUrEQBBG60KeQBfuRPAIulb3XsF7G5BAKKo7mZ5O+qvkFTyY/knmq3r5NrNfaOLH+teDQF9ZeW+Y91rhAx9nAR9a4EMLfGiBDy3woQU+tMCHFvjQAh9a4EMLfGiBDy3woQU+2rCVNT72nfe979j6vjP62Nr7yGy2+K3mI8oV7V0BBR+AD1XwoQU+xmHB3tl8RD3u8UyPnNH/ZvIR5fdntTtKXuZS91HK2XuGrc9dzcc9s436U2VZWX347KPe0dtJVh+3zNVuuHu0r1q2rD6i78v3ttXNso7KXcqi5KOWszbLHt/pCOZS9hFlrPkq3VV2sezD51Dysfbt+HXNkzK1vKo+rsBcaj58ptJZ7V4WfA9+reDjyP5H4/P4dRYfPndWrPA7m48zYsEePsZ5sOAMH+O94EMDC/bwMcaDFc7wgY+rY5UzfGg5wQc+4L/woYMV9hV8PE48FXju1H8WFHy8TLwWeDt4HqNR8AH4UAUfWuBDC3xogQ8t8KHFHj4+Jj6hia+Gea/VHwJOptXAXQAA
+   H4sIAAAAAAAAA+3RMQ4BUQBFURuyAgqdSCyBGr0lWLjfqaaZGDkj9yRvAS/3sclcz7HXl7f96YP/ctnUQ1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bDUw1IPSz0s9bAIPXZj+4kd5h5bKaHHcew0sfPsZ+sk9MhHPSz1sNTDUg9LPSz1sCzR4zp2a7N2X6DHG2wZmInAXQAA
   </data>
  </layer>
 </map>
