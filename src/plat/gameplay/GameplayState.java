@@ -34,7 +34,7 @@ public class GameplayState extends BasicGameState
 		platformImage = new Image("res/platform.png");
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=PlatformerGame.MAX_FPS*3/4;
+		worldIter=PlatformerGame.MAX_FPS*2/4;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
 		map = new TiledMapPlus("res/map.tmx");
 		mapUtil = new MapUtil(map, world);
@@ -42,7 +42,7 @@ public class GameplayState extends BasicGameState
 		
 		player = new Player(world, 30, playerImage.getHeight(), 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
-		player.setJumpPower(400);
+		player.setJumpPower(300);
 		
 		//platforms = new ArrayList<Platform>();
 		//platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
@@ -102,6 +102,10 @@ public class GameplayState extends BasicGameState
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			player.moveRight(1f);
+		}
+		if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
+		{
+			player.setMoving(false);
 		}
 		
 		/*switch( currentState )
