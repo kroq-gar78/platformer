@@ -191,7 +191,7 @@ public abstract class Entity extends SimpleEntity {
 	public void jump() throws SlickException {
 		if (!isFalling() && jumpsTaken < maximumJumps )
 		{
-			this.applyForce(0, -jumpPower);
+			this.applyForce(0, -this.jumpPower);
 			jumpsTaken++;
 		}
 	}
@@ -204,8 +204,11 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void jump(float jumpPower) throws SlickException {
-		if (!isFalling())
+		if ( !isFalling() && jumpsTaken < maximumJumps )
+		{
 			this.applyForce(0, -jumpPower);
+			jumpsTaken++;
+		}
 	}
 
 	/**
