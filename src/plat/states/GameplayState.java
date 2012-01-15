@@ -40,7 +40,7 @@ public class GameplayState extends BasicGameState
 		soundWrapper = new SoundWrapper(); // this is only here because player needs SoundWrapper
 		
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
-		player.getBody().setFriction(200f);
+		//player.getBody().setFriction(200f);
 		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));*/

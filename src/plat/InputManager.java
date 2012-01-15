@@ -36,17 +36,20 @@ public class InputManager
 		
 		// move player
 		player.setMoving(false);
-		if( input.isKeyPressed( Input.KEY_UP ) )
+		if( input.isKeyPressed( Input.KEY_UP ) || input.isKeyPressed( Input.KEY_W ) )
 		{
 			player.jump(200f);
+			System.out.println("Jump");
 		}
-		if( input.isKeyDown( Input.KEY_LEFT ) )
+		if( input.isKeyDown( Input.KEY_LEFT ) || input.isKeyDown( Input.KEY_A ) )
 		{
 			player.moveLeft(player.getHorizSpeed());
+			System.out.println("Move left");
 		}
-		if( input.isKeyDown( Input.KEY_RIGHT ) )
+		if( input.isKeyDown( Input.KEY_RIGHT ) || input.isKeyDown( Input.KEY_D ) )
 		{
 			player.moveRight(player.getHorizSpeed());
+			System.out.println("Move right");
 		}
 	}
 	
