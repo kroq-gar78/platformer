@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 
 import plat.entities.Player;
 
+// turn this into an interface later for versatility
 public class InputManager
 {
 	public InputManager(Player player)
@@ -18,16 +19,22 @@ public class InputManager
 	// make sure that, somewhere in here, it checks for the different states, or make this an interface/abstract class
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
-		Input input = gc.getInput();
+		input = gc.getInput();
+
+		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 		
 		player.preUpdate(delta);
 		
-		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
+		// THIS IS OLD CODE; IMPORTED FROM SlickPong
+		//make sure paddle is within bounds of the canvas/window
+		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
+		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
+		if( player.getPosition().y < 10 ) player.getPosition().y=11;
+		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
+		// ^^^ THIS IS OLD CODE; IMPORTED FROM SlickPong ^^^
 		
 		// move player
-		
 		player.setMoving(false);
-		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
 			player.jump(200f);
@@ -42,5 +49,6 @@ public class InputManager
 		}
 	}
 	
+	private Input input;
 	private Player player;
 }

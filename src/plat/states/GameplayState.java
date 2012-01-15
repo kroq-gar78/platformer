@@ -94,17 +94,6 @@ public class GameplayState extends BasicGameState
 		
 		inputManager.update(gc, delta);
 		
-		//make sure paddle is within bounds of the canvas/window
-		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
-		if( input.isKeyDown( Input.KEY_S ) ) player.getPosition().y+=1*delta*PADDLE_SPEED;
-		if( player.getPosition().y < 10 ) player.getPosition().y=11;
-		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
-		
-		/*if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
-		{
-			player.setMoving(false);
-		}*/
-		
 		/*switch( currentState )
 		{
 		
