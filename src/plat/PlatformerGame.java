@@ -1,4 +1,4 @@
-package plat.gameplay;
+package plat;
 
 import java.io.File;
 

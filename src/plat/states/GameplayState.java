@@ -17,8 +17,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
-import plat.gameplay.Platform;
-import plat.gameplay.Player;
+import plat.entities.Platform;
+import plat.entities.Player;
 
 import com.n3wt0n.G2DP.Backdrop;
 import com.n3wt0n.G2DP.Camera;

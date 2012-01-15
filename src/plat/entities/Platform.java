@@ -1,4 +1,4 @@
-package plat.gameplay;
+package plat.entities;
 
 import net.phys2d.raw.StaticBody;
 import net.phys2d.math.Vector2f;

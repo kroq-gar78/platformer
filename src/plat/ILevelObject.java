@@ -1,4 +1,4 @@
-package plat.gameplay;
+package plat;
 
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
