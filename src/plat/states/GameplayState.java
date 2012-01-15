@@ -35,6 +35,7 @@ public class GameplayState extends BasicGameState
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
 		map = new TiledMapPlus("res/map.tmx");
+		//bgImage = new BigImage( "res/bg.jpg" );
 		
 		soundWrapper = new SoundWrapper();
 		worldIter=20;
@@ -48,14 +49,13 @@ public class GameplayState extends BasicGameState
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
 		
-		//platforms = new ArrayList<Platform>();
-		//platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
-		/*platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
+		/*platforms = new ArrayList<Platform>();
+		platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
+		platforms.add( new Platform("Platform", platformImage, new Vector2f(0,gc.getHeight()-platformImage.getHeight()), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*1+40*1 , gc.getHeight()-platformImage.getHeight()-20*1 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		*/
-		//bgImage = new Image( "res/bg.jpg" );
 		
 		world.add(player.getBody());
 		
@@ -149,7 +149,7 @@ public class GameplayState extends BasicGameState
 	
 	private Image platformImage;
 	private Image playerImage;
-	//private Image bgImage;
+	//private BigImage bgImage;
 	
 	private Backdrop backdrop;
 	private Camera camera;
