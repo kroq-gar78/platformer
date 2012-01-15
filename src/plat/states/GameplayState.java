@@ -1,29 +1,26 @@
 package plat.states;
 
+import com.n3wt0n.G2DP.Backdrop;
+import com.n3wt0n.G2DP.Camera;
+import com.n3wt0n.G2DP.MapUtil;
+import com.n3wt0n.G2DP.SoundWrapper;
+
 import java.util.ArrayList;
 
 import net.phys2d.raw.World;
-import net.phys2d.raw.shapes.Box;
 import net.phys2d.math.Vector2f;
 
-import org.newdawn.slick.BigImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
 import plat.entities.Platform;
 import plat.entities.Player;
-
-import com.n3wt0n.G2DP.Backdrop;
-import com.n3wt0n.G2DP.Camera;
-import com.n3wt0n.G2DP.MapUtil;
-import com.n3wt0n.G2DP.SoundWrapper;
 
 public class GameplayState extends BasicGameState
 {
