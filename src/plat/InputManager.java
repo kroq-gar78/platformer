@@ -15,6 +15,7 @@ public class InputManager
 	
 	public void init() {}
 	
+	// make sure that, somewhere in here, it checks for the different states, or make this an interface/abstract class
 	public void update(GameContainer gc, int delta) throws SlickException
 	{
 		Input input = gc.getInput();
