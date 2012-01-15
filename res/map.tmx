@@ -3,9 +3,9 @@
  <tileset firstgid="1" name="platform" tilewidth="8" tileheight="8">
   <image source="platform_tile.png" width="96" height="96"/>
  </tileset>
- <layer name="BACKGROUND" width="100" height="60" opacity="0.62">
+ <layer name="BACKGROUND" width="100" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3DAQ0AAADCoDexf0uLwMaqqaqqqqqqqqqqqqqqqqqqqqqqqqqqqqraAXjAbCvAXQAA
+   H4sIAAAAAAAAA+3BAQ0AAADCoPdP7ewBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN7SqhPfAXQAA
   </data>
  </layer>
  <layer name="FOREGROUND" width="100" height="60" opacity="0.34">

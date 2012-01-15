@@ -6,6 +6,7 @@ import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
 import net.phys2d.math.Vector2f;
 
+import org.newdawn.slick.BigImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -41,6 +42,8 @@ public class GameplayState extends BasicGameState
 		mapUtil = new MapUtil(map, world);
 		mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
+		backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
+		backdrop.sort();
 		
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
@@ -113,7 +116,7 @@ public class GameplayState extends BasicGameState
 		{
 		
 		}*/
-		player.update(gc, game, delta);
+		//player.update(gc, game, delta);
 		camera.update(gc, delta);
 	}
 
