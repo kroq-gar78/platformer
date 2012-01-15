@@ -68,7 +68,6 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void update(int delta) throws SlickException {
-		this.preUpdate(delta);
 		// update the flag for the actor being on the ground. The
 		// physics engine will cause constant tiny bounces as the
 		// the body tries to settle - so don't consider the body

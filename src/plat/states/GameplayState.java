@@ -19,6 +19,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
+import plat.InputManager;
 import plat.entities.Platform;
 import plat.entities.Player;
 
@@ -48,6 +49,7 @@ public class GameplayState extends BasicGameState
 		
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
+		world.add(player.getBody());
 		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
@@ -56,8 +58,6 @@ public class GameplayState extends BasicGameState
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*2+40*2 , gc.getHeight()-platformImage.getHeight()-20*2 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		*/
-		
-		world.add(player.getBody());
 		
 		camera = new Camera(gc, map, mapUtil, player, backdrop);
 		/*for( Platform platform : platforms )
@@ -88,6 +88,8 @@ public class GameplayState extends BasicGameState
 		
 		//look for pressed keys
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
+
+		player.preUpdate(delta);
 		
 		//make sure paddle is within bounds of the canvas/window
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
@@ -154,7 +156,8 @@ public class GameplayState extends BasicGameState
 	
 	private Backdrop backdrop;
 	private Camera camera;
-	private Input input;;
+	private Input input;
+	private InputManager inputManager;
 	private MapUtil mapUtil;
 	private SoundWrapper soundWrapper;
 	private TiledMapPlus map;
