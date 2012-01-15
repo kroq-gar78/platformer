@@ -55,9 +55,7 @@ public class MapUtil {
 			x = x / map.getTileWidth();
 			y = y / map.getTileHeight();
 			result = (map.getTileImage(x, y, map.getLayerIndex(type)) == null) ? false : true;
-		} catch (Exception e) {
-
-		}
+		} catch (Exception e) {}
 		return result;
 	}
 	
@@ -107,7 +105,7 @@ public class MapUtil {
 
 					Body body = new StaticBody("StaticBody_" + x + "_" + y,
 							new Box(localWidth, tileHeight));
-					body.setFriction(1f);
+					//body.setFriction(10f);
 					body.setRestitution(1f);
 					body.setPosition((localX * tileWidth + (localWidth / 2)),
 							(y * tileHeight + (tileHeight / 2)));

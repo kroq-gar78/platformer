@@ -82,9 +82,6 @@ public abstract class Entity extends SimpleEntity {
 		} else {
 			offGroundTimer = 0;
 			setOnGround(true);
-		}
-		if( isOnGround() )
-		{
 			jumpsTaken = 0;
 			jumping = false;
 			//System.out.print(jumpsTaken);
@@ -217,7 +214,7 @@ public abstract class Entity extends SimpleEntity {
 			}
 			else
 			{
-				System.out.println("\n"+(int)(jumpsTaken));
+				System.out.println((int)(jumpsTaken));
 				this.applyForce(0, -jumpPower);
 			}
 		}
@@ -231,10 +228,11 @@ public abstract class Entity extends SimpleEntity {
 	 */
 	public void setJumping(boolean b) {
 		jumping = b;
-		if( !b )
+		jumpsTaken = b?jumpsTaken:0;
+		/*if( !b )
 		{
 			jumpsTaken=0;
-		}
+		}*/
 	}
 
 	/**
