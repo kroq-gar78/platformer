@@ -41,11 +41,11 @@ public class InputManager
 		}
 		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.moveLeft(0.5f);
+			player.moveLeft(player.getHorizSpeed());
 		}
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.moveRight(0.5f);
+			player.moveRight(player.getHorizSpeed());
 		}
 	}
 	
