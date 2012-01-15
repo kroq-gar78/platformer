@@ -95,6 +95,7 @@ public class GameplayState extends BasicGameState
 		if( player.getPosition().y < 10 ) player.getPosition().y=11;
 		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
 		
+		player.setMoving(false);		
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
 			player.jump(200f);
@@ -107,10 +108,10 @@ public class GameplayState extends BasicGameState
 		{
 			player.moveRight(0.5f);
 		}
-		if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
+		/*if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			player.setMoving(false);
-		}
+		}*/
 		
 		/*switch( currentState )
 		{
