@@ -24,7 +24,7 @@ public class InputManager
 
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 		
-		player.preUpdate(delta);
+		//player.preUpdate(delta);
 		
 		// THIS IS OLD CODE; IMPORTED FROM SlickPong
 		//make sure paddle is within bounds of the canvas/window

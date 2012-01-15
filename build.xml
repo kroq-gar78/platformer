@@ -8,7 +8,7 @@
 	<property name="classes.dir" value="${build.dir}/classes"/>
 	<property name="jar.dir" value="${build.dir}"/>
 	<property name="natives.dir" value="native"/>
-	<property name="main-class" value="plat.gameplay.PlatformerGame"/>
+	<property name="main-class" value="plat.PlatformerGame"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
