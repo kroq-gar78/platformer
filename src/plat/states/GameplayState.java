@@ -60,6 +60,8 @@ public class GameplayState extends BasicGameState
 		*/
 		
 		camera = new Camera(gc, map, mapUtil, player, backdrop);
+		inputManager = new InputManager(player);
+		
 		/*for( Platform platform : platforms )
 		{
 			world.add(platform);
@@ -87,9 +89,10 @@ public class GameplayState extends BasicGameState
 		world.step(1f);
 		
 		//look for pressed keys
-		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 
-		player.preUpdate(delta);
+		//player.preUpdate(delta);
+		
+		inputManager.update(gc, delta);
 		
 		//make sure paddle is within bounds of the canvas/window
 		/*if( input.isKeyDown( Input.KEY_W ) ) player.getPosition().y-=1*delta*PADDLE_SPEED;
@@ -97,19 +100,6 @@ public class GameplayState extends BasicGameState
 		if( player.getPosition().y < 10 ) player.getPosition().y=11;
 		if( player.getPosition().y+player.getImage().getHeight() > gc.getHeight()-10 ) player.getPosition().y=gc.getHeight()-11-player.getImage().getHeight();*/
 		
-		player.setMoving(false);		
-		if( input.isKeyPressed( Input.KEY_UP ) )
-		{
-			player.jump(200f);
-		}
-		if( input.isKeyDown( Input.KEY_LEFT ) )
-		{
-			player.moveLeft(0.5f);
-		}
-		if( input.isKeyDown( Input.KEY_RIGHT ) )
-		{
-			player.moveRight(0.5f);
-		}
 		/*if( !input.isKeyDown( Input.KEY_LEFT ) && !input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			player.setMoving(false);
