@@ -34,16 +34,16 @@ public class GameplayState extends BasicGameState
 		// load resources
 		playerImage = new Image("res/player.png");
 		platformImage = new Image("res/platform.png");
+		map = new TiledMapPlus("res/map.tmx");
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=PlatformerGame.MAX_FPS*2;
+		worldIter=20;
 		world = new World(new Vector2f(0f,1.5f), worldIter);
-		map = new TiledMapPlus("res/map.tmx");
 		mapUtil = new MapUtil(map, world);
 		mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
-		backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
-		backdrop.sort();
+		//backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
+		//backdrop.sort();
 		
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
