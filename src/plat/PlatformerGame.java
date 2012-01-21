@@ -1,4 +1,4 @@
-package plat.gameplay;
+package plat;
 
 import java.io.File;
 
@@ -7,6 +7,8 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import plat.states.GameplayState;
 
 public class PlatformerGame extends StateBasedGame
 {

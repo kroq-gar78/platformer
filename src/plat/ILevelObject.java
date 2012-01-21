@@ -1,9 +1,9 @@
-package plat.gameplay;
+package plat;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.state.StateBasedGame;
 
 public interface ILevelObject
 {
@@ -15,5 +15,5 @@ public interface ILevelObject
 	
 	public void render( Graphics graphics );
 	
-	public void gameUpdate( GameContainer gc , BasicGame bg , int delta );
+	public void update( GameContainer gc , StateBasedGame game , int delta );
 }
