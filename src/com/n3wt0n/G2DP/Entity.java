@@ -202,10 +202,11 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void jump(float jumpPower) throws SlickException {
-		if ( (!isFalling()||!isJumping()) && (jumpsTaken+1 < maximumJumps) )
+		if ( (!isFalling()||!isJumping()) && (jumpsTaken < maximumJumps) )
 		{
-			jumpsTaken = (int)(jumpsTaken+1);
+			jumpsTaken++;
 			//System.out.println(jumpsTaken + " " + (int)jumpsTaken+1 );
+			System.out.println(getVelY());
 			if( jumpsTaken == 2 )
 			{
 				this.applyForce(0, -jumpPower*1.5f);
