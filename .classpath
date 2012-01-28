@@ -6,9 +6,9 @@
 	<classpathentry kind="lib" path="lib/jargs.jar"/>
 	<classpathentry kind="lib" path="lib/jinput.jar"/>
 	<classpathentry kind="lib" path="lib/jnlp.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl.jar" sourcepath="/home/kroq-gar78/prog/java/lib/lwjgl-2.8.2/src">
+	<classpathentry kind="lib" path="lib/lwjgl.jar" sourcepath="/home/kroq-gar78/prog/java/lib/lwjgl-2.8.3/src">
 		<attributes>
-			<attribute name="javadoc_location" value="file:/home/kroq-gar78/prog/java/lib/lwjgl-2.8.2/javadoc/"/>
+			<attribute name="javadoc_location" value="file:/home/kroq-gar78/prog/java/lib/lwjgl-2.8.3/javadoc/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="master/native"/>
 		</attributes>
 	</classpathentry>
