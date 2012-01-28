@@ -40,15 +40,14 @@ public class Player extends Entity
 		image.draw(this.getX()-this.getWidth()/2, this.getY()-this.getHeight()/2);
 	}
 	
-	public float getHorizSpeed() { return horizSpeed; }
+	/*public float getHorizSpeed() { return horizSpeed; }
 	
-	/*public boolean isJumping() { return jumpsTaken>0; }
+	public boolean isJumping() { return jumpsTaken>0; }
 	public int getJumpsTaken() { return this.jumpsTaken; }
 	public void setJumpsTaken(int jumps) { this.jumpsTaken=jumps; }
 	
+	private float horizSpeed=4f;
 	private int jumpsTaken=0;*/
-
-	private float horizSpeed=0.5f;
 	
 	private Image image;
 }
