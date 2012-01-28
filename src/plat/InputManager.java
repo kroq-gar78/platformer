@@ -5,6 +5,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import plat.entities.Player;
+import plat.entities.Projectile;
 
 // turn this into an interface later for versatility
 public class InputManager
@@ -47,6 +48,10 @@ public class InputManager
 		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
 			player.moveRight(0.5f);
+		}
+		if( input.isKeyPressed( Input.KEY_SPACE ) )
+		{
+			player.shoot();
 		}
 	}
 	

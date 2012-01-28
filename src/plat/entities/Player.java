@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 
 import com.n3wt0n.G2DP.Entity;
 import com.n3wt0n.G2DP.SoundWrapper;
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class Player extends Entity
 {
@@ -19,14 +20,14 @@ public class Player extends Entity
 	{
 		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		//this.setVisualLocation(x, y);
-		this.image = image;
+		setImage(image);
 		// TODO Auto-generated constructor stub
 	}
 	public Player(World world, Vector2f pos, float mass,
 			String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, pos, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
-		this.image = image;
+		setImage(image);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,8 +38,19 @@ public class Player extends Entity
 	
 	public void render(GameContainer gc , Graphics g) throws SlickException
 	{
-		image.draw(this.getX()-this.getWidth()/2, this.getY()-this.getHeight()/2);
+		getImage().draw(this.getX()-this.getWidth()/2, this.getY()-this.getHeight()/2);
+		if( proj != null ) proj.render(gc, g);
 	}
+	
+	public void shoot() throws SlickException
+	{
+		proj = new Projectile(getWorld(), getX()+20, getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
+		getWorld().add(proj.getBody());
+		proj.getBody().setGravityEffected(false);
+		proj.setVelocity(20f, 0f);
+	}
+	
+	private Projectile proj;
 	
 	/*public float getHorizSpeed() { return horizSpeed; }
 	
@@ -49,5 +61,5 @@ public class Player extends Entity
 	private float horizSpeed=4f;
 	private int jumpsTaken=0;*/
 	
-	private Image image;
+	//private Image image;
 }

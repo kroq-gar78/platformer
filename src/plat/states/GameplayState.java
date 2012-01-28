@@ -34,6 +34,7 @@ public class GameplayState extends BasicGameState
 		
 		// load resources
 		playerImage = new Image("res/player.png");
+		projectileImage = new Image("res/projectile.png");
 		//platformImage = new Image("res/platform.png");
 		map = new TiledMapPlus("res/map.tmx");
 		//bgImage = new BigImage( "res/bg.jpg" );
@@ -122,6 +123,7 @@ public class GameplayState extends BasicGameState
 	private Player player;
 	private int playerLives;
 	private Image playerImage;
+	private Image projectileImage;
 	
 	private Backdrop backdrop;
 	private Camera camera;

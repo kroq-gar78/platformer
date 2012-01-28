@@ -530,6 +530,8 @@ public abstract class SimpleEntity {
 
 		return false;
 	}
+	
+	public World getWorld() { return this.world; }
 
 	/**
 	 * Have the SoundWrapper play a sound.
@@ -541,6 +543,8 @@ public abstract class SimpleEntity {
 		// System.out.println ("Parent playSound");
 		soundWrapper.playSound(sound);
 	}
+	
+	public SoundWrapper getSoundWrapper() { return this.soundWrapper; }
 
 	/**
 	 * Flip the Entity Image horizontally.
