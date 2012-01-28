@@ -44,6 +44,7 @@ public class Player extends Entity
 	
 	public void shoot() throws SlickException
 	{
+		if( proj != null ) getWorld().remove(proj.getBody());
 		proj = new Projectile(getWorld(), getX()+20, getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
 		getWorld().add(proj.getBody());
 		proj.getBody().setGravityEffected(false);
