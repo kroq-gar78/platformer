@@ -12,6 +12,7 @@ public class InputManager
 	public InputManager(Player player)
 	{
 		this.player = player;
+		init();
 	}
 	
 	public void init() {}

@@ -34,13 +34,12 @@ public class GameplayState extends BasicGameState
 		
 		// load resources
 		playerImage = new Image("res/player.png");
-		platformImage = new Image("res/platform.png");
+		//platformImage = new Image("res/platform.png");
 		map = new TiledMapPlus("res/map.tmx");
 		//bgImage = new BigImage( "res/bg.jpg" );
 		
 		soundWrapper = new SoundWrapper();
-		worldIter=20;
-		world = new World(new Vector2f(0f,1.5f), worldIter);
+		world = new World(new Vector2f(0f,1.5f), 20);
 		mapUtil = new MapUtil(map, world);
 		mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
@@ -83,8 +82,6 @@ public class GameplayState extends BasicGameState
 	@Override
 	public void update( GameContainer gc , StateBasedGame game , int delta ) throws SlickException
 	{
-		//get input
-		input = gc.getInput();
 		//System.out.println((float)delta/20);
 		world.step(1f);
 		
@@ -123,19 +120,11 @@ public class GameplayState extends BasicGameState
 	//private STATES currentState;
 	
 	private Player player;
-	private ArrayList<Platform> platforms;
-	
 	private int playerLives;
-	
-	private int worldIter;
-	
-	private Image platformImage;
 	private Image playerImage;
-	//private BigImage bgImage;
 	
 	private Backdrop backdrop;
 	private Camera camera;
-	private Input input;
 	private InputManager inputManager;
 	private MapUtil mapUtil;
 	private SoundWrapper soundWrapper;
