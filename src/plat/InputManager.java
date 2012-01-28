@@ -12,7 +12,6 @@ public class InputManager
 	public InputManager(Player player)
 	{
 		this.player = player;
-		this.init();
 	}
 	
 	public void init() {}
@@ -24,7 +23,7 @@ public class InputManager
 
 		if( input.isKeyDown( Input.KEY_ESCAPE ) ) gc.exit(); // if escape pressed, exit game
 		
-		//player.preUpdate(delta);
+		player.preUpdate(delta);
 		
 		// THIS IS OLD CODE; IMPORTED FROM SlickPong
 		//make sure paddle is within bounds of the canvas/window
@@ -36,20 +35,17 @@ public class InputManager
 		
 		// move player
 		player.setMoving(false);
-		if( input.isKeyPressed( Input.KEY_UP ) || input.isKeyPressed( Input.KEY_W ) )
+		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
 			player.jump(200f);
-			System.out.println("Jump");
 		}
-		if( input.isKeyDown( Input.KEY_LEFT ) || input.isKeyDown( Input.KEY_A ) )
+		if( input.isKeyDown( Input.KEY_LEFT ) )
 		{
-			player.moveLeft(player.getHorizSpeed());
-			System.out.println("Move left");
+			player.moveLeft(0.5f);
 		}
-		if( input.isKeyDown( Input.KEY_RIGHT ) || input.isKeyDown( Input.KEY_D ) )
+		if( input.isKeyDown( Input.KEY_RIGHT ) )
 		{
-			player.moveRight(player.getHorizSpeed());
-			System.out.println("Move right");
+			player.moveRight(0.5f);
 		}
 	}
 	

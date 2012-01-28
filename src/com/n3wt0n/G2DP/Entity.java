@@ -68,7 +68,6 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void update(int delta) throws SlickException {
-		this.preUpdate(delta);
 		// update the flag for the actor being on the ground. The
 		// physics engine will cause constant tiny bounces as the
 		// the body tries to settle - so don't consider the body
@@ -80,7 +79,6 @@ public abstract class Entity extends SimpleEntity {
 				setOnGround(false);
 			}
 		} else {
-			System.out.println("On ground");
 			offGroundTimer = 0;
 			setOnGround(true);
 			jumpsTaken = 0;
@@ -204,10 +202,9 @@ public abstract class Entity extends SimpleEntity {
 	 * @throws SlickException
 	 */
 	public void jump(float jumpPower) throws SlickException {
-		System.out.println(jumpsTaken);
-		if ( (!isFalling() || !isJumping()) && (jumpsTaken < maximumJumps) )
+		if ( (!isFalling()||!isJumping()) && (jumpsTaken+1 < maximumJumps) )
 		{
-			jumpsTaken++;
+			jumpsTaken = (int)(jumpsTaken+1);
 			//System.out.println(jumpsTaken + " " + (int)jumpsTaken+1 );
 			if( jumpsTaken == 2 )
 			{
