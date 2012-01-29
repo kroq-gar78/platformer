@@ -30,6 +30,8 @@ public class Player extends Entity
 	public void update( GameContainer g , Game game , int delta ) throws SlickException
 	{
 		super.update(delta);
+		proj.preUpdate(delta);
+		proj.update(delta);
 	}
 	
 	public void render(GameContainer gc , Graphics g) throws SlickException
