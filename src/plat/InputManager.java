@@ -5,7 +5,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import plat.entities.Player;
-import plat.entities.Projectile;
 
 // turn this into an interface later for versatility
 public class InputManager

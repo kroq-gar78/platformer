@@ -11,7 +11,6 @@ import org.newdawn.slick.SlickException;
 
 import com.n3wt0n.G2DP.Entity;
 import com.n3wt0n.G2DP.SoundWrapper;
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class Player extends Entity
 {
