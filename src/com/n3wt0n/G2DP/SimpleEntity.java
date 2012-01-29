@@ -1,11 +1,14 @@
 package com.n3wt0n.G2DP;
 
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
 
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -61,7 +64,10 @@ public abstract class SimpleEntity {
 		this.mass = mass;
 
 		this.name = name;
-
+		BodyDef bd = new BodyDef();
+		body = world.createBody(bd);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(width/2, height/2);
 		body = new Body(new Box(width, height), mass);
 		body.setUserData(this);
 		body.setRestitution(0);

@@ -49,10 +49,10 @@ public class InputManager
 		{
 			player.moveRight(0.5f);
 		}
-		if( input.isKeyPressed( Input.KEY_SPACE ) )
+		/*if( input.isKeyPressed( Input.KEY_SPACE ) )
 		{
 			player.shoot();
-		}
+		}*/
 	}
 	
 	private Input input;

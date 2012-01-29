@@ -1,8 +1,8 @@
 package plat.entities;
 
 import net.phys2d.math.Vector2f;
-import net.phys2d.raw.World;
 
+import org.jbox2d.dynamics.World;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,7 +11,6 @@ import org.newdawn.slick.SlickException;
 
 import com.n3wt0n.G2DP.Entity;
 import com.n3wt0n.G2DP.SoundWrapper;
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class Player extends Entity
 {
@@ -39,14 +38,14 @@ public class Player extends Entity
 		if( proj != null ) proj.render(gc, g);
 	}
 	
-	public void shoot() throws SlickException
+	/*public void shoot() throws SlickException
 	{
 		if( proj != null ) getWorld().remove(proj.getBody());
 		proj = new Projectile(getWorld(), getX()+20*(isFacingRight()?1:-1), getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
 		getWorld().add(proj.getBody());
 		proj.getBody().setGravityEffected(false);
 		proj.setVelocity(20f*(isFacingRight()?1:-1), 0f);
-	}
+	}*/
 	
 	private Projectile proj;
 	

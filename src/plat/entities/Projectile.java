@@ -1,10 +1,9 @@
 package plat.entities;
 
+import org.jbox2d.dynamics.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-
-import net.phys2d.raw.World;
 
 import com.n3wt0n.G2DP.SoundWrapper;
 

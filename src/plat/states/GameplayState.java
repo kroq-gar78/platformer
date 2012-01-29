@@ -5,22 +5,22 @@ import com.n3wt0n.G2DP.Camera;
 import com.n3wt0n.G2DP.MapUtil;
 import com.n3wt0n.G2DP.SoundWrapper;
 
-import java.util.ArrayList;
-
-import net.phys2d.raw.World;
 import net.phys2d.math.Vector2f;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
 import plat.InputManager;
-import plat.entities.Platform;
 import plat.entities.Player;
 
 public class GameplayState extends BasicGameState
@@ -40,9 +40,10 @@ public class GameplayState extends BasicGameState
 		//bgImage = new BigImage( "res/bg.jpg" );
 		
 		soundWrapper = new SoundWrapper();
-		world = new World(new Vector2f(0f,1.5f), 20);
-		mapUtil = new MapUtil(map, world);
-		mapUtil.buildMap();
+		//world = new World(new Vector2f(0f,1.5f), 20);
+		world = new World(new Vec2(0f,1.5f), false);
+		//mapUtil = new MapUtil(map, world);
+		//mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
 		//backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
 		//backdrop.sort();
@@ -59,7 +60,8 @@ public class GameplayState extends BasicGameState
 		platforms.add( new Platform("Platform", platformImage, new Vector2f( platformImage.getWidth()*3+40*3 , gc.getHeight()-platformImage.getHeight()-20*3 ), new Rectangle(0,0 , platformImage.getWidth() , platformImage.getHeight()), 2) );
 		*/
 		
-		camera = new Camera(gc, map, mapUtil, player, backdrop);
+		//camera = new 
+		//camera = new Camera(gc, map, mapUtil, player, backdrop);
 		inputManager = new InputManager(player);
 		
 		/*for( Platform platform : platforms )
@@ -72,11 +74,11 @@ public class GameplayState extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-		//map.render(0, 0, g);
-		camera.render(gc, g);
+		map.render(0, 0, g);
+		//camera.render(gc, g);
 		
 		//g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
-		//player.render(gc, g);
+		player.render(gc, g);
 		//for( Platform platform : platforms ) { platform.render(gc,g); }
 	}
 
@@ -84,7 +86,7 @@ public class GameplayState extends BasicGameState
 	public void update( GameContainer gc , StateBasedGame game , int delta ) throws SlickException
 	{
 		//System.out.println((float)delta/20);
-		world.step(1f);
+		//world.step(1f);
 		
 		//look for pressed keys
 
@@ -96,8 +98,8 @@ public class GameplayState extends BasicGameState
 		{
 		
 		}*/
-		//player.update(gc, game, delta);
-		camera.update(gc, delta);
+		player.update(gc, game, delta);
+		//camera.update(gc, delta);
 	}
 
 	public int getPlayerLives() { return playerLives; }
@@ -128,7 +130,7 @@ public class GameplayState extends BasicGameState
 	private Backdrop backdrop;
 	private Camera camera;
 	private InputManager inputManager;
-	private MapUtil mapUtil;
+	//private MapUtil mapUtil;
 	private SoundWrapper soundWrapper;
 	private TiledMapPlus map;
 	private World world;
