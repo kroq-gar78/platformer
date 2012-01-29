@@ -19,16 +19,13 @@ public class Player extends Entity
 			String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
-		//this.setVisualLocation(x, y);
 		setImage(image);
-		// TODO Auto-generated constructor stub
 	}
 	public Player(World world, Vector2f pos, float mass,
 			String name, SoundWrapper soundWrapper, Image image)
 	{
 		super(world, pos, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		setImage(image);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void update( GameContainer g , Game game , int delta ) throws SlickException
@@ -45,10 +42,10 @@ public class Player extends Entity
 	public void shoot() throws SlickException
 	{
 		if( proj != null ) getWorld().remove(proj.getBody());
-		proj = new Projectile(getWorld(), getX()+20, getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
+		proj = new Projectile(getWorld(), getX()+20*(isFacingRight()?1:-1), getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
 		getWorld().add(proj.getBody());
 		proj.getBody().setGravityEffected(false);
-		proj.setVelocity(20f, 0f);
+		proj.setVelocity(20f*(isFacingRight()?1:-1), 0f);
 	}
 	
 	private Projectile proj;

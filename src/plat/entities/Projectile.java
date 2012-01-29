@@ -20,6 +20,4 @@ public class Projectile extends com.n3wt0n.G2DP.Entity
 	{
 		getImage().draw(this.getX(), this.getY());
 	}
-	
-	private Image image;
 }
