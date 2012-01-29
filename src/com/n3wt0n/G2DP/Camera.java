@@ -592,9 +592,21 @@ public class Camera {
 	public float getPlayerStartY() {
 		return this.playerStartY;
 	}
-
+	
+	/**
+	 * Add entity to the drawing list
+	 * @param e Entity to add to the drawing list
+	 */
 	public void addEntity(Entity e) {
 		entity.add(e);
+	}
+	/**
+	 * Remove entity to the drawing list
+	 * @param e Entity to remove from the drawing list
+	 */
+	public void removeEntity(Entity e)
+	{
+		entity.remove(e);
 	}
 
 	public void drawEntity(Entity e, GameContainer gc, Graphics g)
