@@ -25,6 +25,8 @@ public class Body {
 	private Shape shape;
 	/** The userdata assigned to this body if any */
 	private Object userData;
+	/** A World the object is in */
+	private World world;
 	
 	/**
 	 * Create a new body
@@ -252,7 +254,7 @@ public class Body {
 		if (!staticBody) {
 			jboxBody.setMassFromShapes();
 		} else {
-			jboxBody.m_type = org.jbox2d.dynamics.Body.e_staticType;
+			jboxBody.m_type = org.jbox2d.dynamics.BodyType.STATIC;
 		}
 	}
 
@@ -265,13 +267,21 @@ public class Body {
 		org.jbox2d.dynamics.World jboxWorld = world.getJBoxWorld();
 		jboxWorld.destroyBody(jboxBody);
 	}
+
+	public void setWorld(World world)
+	{
+		this.world = world;
+		addToWorld(world);
+	}
+	
+	public World getWorld() { return this.world; }
 	
 	/**
 	 * Get the JBox2D body that is wrapped by this class
 	 * 
 	 * @return The body that is wrapped by this proxy class
 	 */
-	org.jbox2d.dynamics.Body getJBoxBody() {
+	public org.jbox2d.dynamics.Body getJBoxBody() {
 		return jboxBody;
 	}
 	
@@ -317,9 +327,9 @@ public class Body {
 	}
 	
 	/**
-	 * Check if this body is "sleeping", i.e. its not moving any more
+	 * Check if this body is "awake", i.e. it's moving any more. A sleeping body takes fewer CPU cycles.
 	 * 
-	 * @return True if this body is sleeping
+	 * @return True if this body is awake
 	 */
 	public boolean isAwake() {
 		checkBody();
@@ -327,7 +337,7 @@ public class Body {
 	}
 
 	/**
-	 * Check if this body is "sleeping", i.e. its not moving any more
+	 * Check if this body is "sleeping", i.e. it's not moving any more
 	 * 
 	 * @return True if this body is sleeping
 	 */

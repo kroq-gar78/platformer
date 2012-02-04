@@ -1,7 +1,7 @@
 package org.newdawn.fizzy;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.common.XForm;
+import org.jbox2d.common.Transform;
 
 public class Polygon extends PolygonBasedShape {
 	/**

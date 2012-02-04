@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.jbox2d.collision.AABB;
+import org.jbox2d.collision.Manifold;
+import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.ContactListener;
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.dynamics.contacts.Contact;
+import org.jbox2d.collision.;
 import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
 
@@ -34,7 +39,7 @@ public class World {
 	/** The list of bodies added to the world */
 	private ArrayList<Body> bodies = new ArrayList<Body>();
 	/** A map from shapes that will be reported from collision to the bodies that own them */
-	private HashMap<org.jbox2d.collision.Shape, Body> shapeMap = new HashMap<org.jbox2d.collision.Shape, Body>();
+	private HashMap<org.jbox2d.collision.shapes.Shape, Body> shapeMap = new HashMap<org.jbox2d.collision.shapes.Shape, Body>();
 	/** The list of listeners to be notified of collision events */
 	private ArrayList<WorldListener> listeners = new ArrayList<WorldListener>();
 	/** The number of iterations to integrate over */
@@ -89,6 +94,8 @@ public class World {
 		Vec2 gravity = new Vec2(0.0f, g);
 		boolean doSleep = true;
 		jboxWorld = new org.jbox2d.dynamics.World(m_worldAABB, gravity, doSleep);
+		jboxWorld = new org.jbox2d.dynamics.World(gravity,doSleep,m_worldAABB);
+		jboxWorld.
 		jboxWorld.setContactListener(new ProxyContactListener());		
 	}
 	
@@ -108,7 +115,7 @@ public class World {
 	 */
 	public void add(Body body) {
 		body.addToWorld(this);
-		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
+		//ArrayList<org.jbox2d.collision.shapes.Shape> shapes = body.getShape().getJBoxShapes();
 		
 		for (int i=0;i<shapes.size();i++) {
 			shapeMap.put(shapes.get(i), body);
@@ -160,7 +167,7 @@ public class World {
 		jboxWorld.setPositionCorrection(true);
 		jboxWorld.setWarmStarting(true);
 		
-		jboxWorld.step(timeStep, iterations);
+		jboxWorld.step(timeStep, iterations,iterations);
 	}
 	
 	/**
@@ -217,6 +224,15 @@ public class World {
 
 		@Override
 		public void add(ContactPoint point) {
+			Contact contact = new Contact() {
+				
+				@Override
+				public void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+			contact.get
 			Body bodyA = shapeMap.get(point.shape1);
 			Body bodyB = shapeMap.get(point.shape2);
 			
@@ -251,6 +267,30 @@ public class World {
 
 		@Override
 		public void result(ContactResult point) {
+		}
+
+		@Override
+		public void beginContact(Contact contact) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void endContact(Contact contact) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void preSolve(Contact contact, Manifold oldManifold) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void postSolve(Contact contact, ContactImpulse impulse) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}

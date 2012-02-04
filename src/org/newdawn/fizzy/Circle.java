@@ -1,6 +1,7 @@
 package org.newdawn.fizzy;
 
-import org.jbox2d.collision.CircleDef;
+import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.MassData;
 
 
 /** 

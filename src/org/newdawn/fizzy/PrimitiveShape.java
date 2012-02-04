@@ -2,7 +2,7 @@ package org.newdawn.fizzy;
 
 import java.util.ArrayList;
 
-import org.jbox2d.collision.ShapeDef;
+//import org.jbox2d.collision.shapes.Shape;
 
 /**
  * A primitive shape handling adding to the world and configuration of physics 
@@ -12,13 +12,12 @@ import org.jbox2d.collision.ShapeDef;
  *
  * @param <T> A shape definition for the primitive
  */
-public abstract class PrimitiveShape<T extends ShapeDef> implements Shape {
+public abstract class PrimitiveShape<T extends org.jbox2d.collision.shapes.Shape> implements Shape {
 	/** The array list that contains this shape */
-	protected ArrayList<org.jbox2d.collision.Shape> jbox2DShapes = new ArrayList<org.jbox2d.collision.Shape>();
+	protected ArrayList<org.jbox2d.collision.shapes.Shape> jbox2DShapes = new ArrayList<org.jbox2d.collision.shapes.Shape>();
 	/** The primitive shape that represent this fizzy shape */
-	protected org.jbox2d.collision.Shape jbox2DShape;
-	/** The definition of the core shape */
-	protected T def;
+	protected T jbox2DShape;
+
 	/** The body this shape is being used in if any */
 	protected Body body;
 	
@@ -68,7 +67,7 @@ public abstract class PrimitiveShape<T extends ShapeDef> implements Shape {
 		} else {
 			jbox2DShape.setFriction(friction);
 		}
-	}
+	}													
 
 	@Override
 	public void setRestitution(float rest) {
