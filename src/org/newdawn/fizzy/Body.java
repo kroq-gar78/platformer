@@ -315,6 +315,16 @@ public class Body {
 			throw new RuntimeException("This method requires that the body has been added to the world first");
 		}
 	}
+	
+	/**
+	 * Check if this body is "sleeping", i.e. its not moving any more
+	 * 
+	 * @return True if this body is sleeping
+	 */
+	public boolean isAwake() {
+		checkBody();
+		return jboxBody.isAwake();
+	}
 
 	/**
 	 * Check if this body is "sleeping", i.e. its not moving any more
