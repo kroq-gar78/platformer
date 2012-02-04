@@ -12,39 +12,6 @@ public class Rectangle extends PolygonBasedShape {
 	private float width;
 	/** The height of the rectangle */
 	private float height;
-	
-	/**
-	 * Create a new rectangle shape
-	 * 
-	 * @param width The width of the rectangle
-	 * @param height The height of the rectangle
-	 */
-	public Rectangle(float width, float height) {
-		this(width, height, DEFAULT_DENSITY, DEFAULT_RESTIUTION, DEFAULT_FRICTION);
-	}
-
-	/**
-	 * Create a new rectangle shape
-	 * 
-	 * @param width The width of the rectangle
-	 * @param height The height of the rectangle
-	 * @param density The density of the rectangle
-	 */
-	public Rectangle(float width, float height, float density) {
-		this(width, height, density, DEFAULT_RESTIUTION, DEFAULT_FRICTION);
-	}
-
-	/**
-	 * Create a new rectangle shape
-	 * 
-	 * @param width The width of the rectangle
-	 * @param height The height of the rectangle
-	 * @param density The density of the rectangle
-	 * @param resitution The resitution of the rectangle
-	 */
-	public Rectangle(float width, float height, float density, float resitution) {
-		this(width, height, density, resitution, DEFAULT_FRICTION);
-	}
 
 	/**
 	 * Create a new rectangle shape
@@ -55,12 +22,7 @@ public class Rectangle extends PolygonBasedShape {
 	 * @param restitution The resitution of the rectangle
 	 * @param friction The friction of the rectangle
 	 */
-	public Rectangle(float width, float height, float density, float restitution, float friction) {
-		def.setAsBox(width / 2, height / 2);
-		def.density = density;
-		def.restitution = restitution;
-		def.friction = friction;
-		
+	public Rectangle(float width, float height) {
 		this.width = width;
 		this.height = height;
 	}
@@ -86,5 +48,11 @@ public class Rectangle extends PolygonBasedShape {
 	@Override
 	protected void applyOffset(float x, float y, float angle) {
 		def.setAsBox(width/2, height/2, new Vec2(x,y), angle);
+	}
+
+	@Override
+	public void createInBody(Body body) {
+		// TODO Auto-generated method stub
+		
 	}
 }

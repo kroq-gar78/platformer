@@ -4,23 +4,35 @@ import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.Fixture;
+import org.jbox2d.dynamics.FixtureDef;
 
 /**
  * A single body in the world. A body holds a shape which collide with
  * the rest of the world. It also holds properties about the shapes once
  * they have been created
  * 
- * @author kglass
+ * @author kglass | kroq-gar78
  */
 public class Body {
+	
+	/** The default density applied to shapes if none is specified (25.0f) */
+	public static final float DEFAULT_DENSITY = 25.0f;
+	/** The default restitution applied to shapes if none is specified (0.9f) */
+	public static final float DEFAULT_RESTIUTION = 0.9f;
+	/** The default friction applied to shapes if none is specified (0.1f) */
+	public static final float DEFAULT_FRICTION = 0.1f;
+	
 	/** The body held by JBox2D */
 	private org.jbox2d.dynamics.Body jboxBody;
 	/** The body definition held by JBox2D */
-	private BodyDef jboxBodyDef;
+	private BodyDef bd;
 	/** True if this should be a static body */
 	private boolean staticBody;
 	/** The list of bodies this body is touching */
 	private ArrayList<Body> touching = new ArrayList<Body>();
+	/** The Fixture defining all of the material properties of the body */
+	private FixtureDef fd;
 	/** The shape used to represent this body */
 	private Shape shape;
 	/** The userdata assigned to this body if any */
@@ -48,8 +60,9 @@ public class Body {
 	 * @param staticBody True if this body should be static
 	 */
 	public Body(Shape shape, float x, float y, boolean staticBody) {
-		jboxBodyDef = new BodyDef();
-		jboxBodyDef.position = new Vec2(x,y);
+		bd = new BodyDef();
+		bd.position = new Vec2(x,y);
+		fd = new FixtureDef();
 		this.staticBody = staticBody;
 		this.shape = shape;
 	}
@@ -208,7 +221,12 @@ public class Body {
 	 * @param rest The restitution applied when this body collides
 	 */
 	public void setRestitution(float rest) {
-		shape.setRestitution(rest);
+		fd.restitution = rest;
+		/*if (jbox2DShape == null) {
+			def.restitution = rest;
+		} else {
+			jbox2DShape.setRestitution(rest);
+		}*/
 	}
 
 	/**
@@ -216,18 +234,14 @@ public class Body {
 	 * 
 	 * @param f The friction applied when this body collides
 	 */
-	public void setFriction(float f) {
-		shape.setFriction(f);
-	}
+	public void setFriction(float f) { fd.restitution = f; }
 	
 	/**
 	 * Set the density of this body
 	 * 
 	 * @param den The density of this body
 	 */
-	public void setDensity(float den) {
-		shape.setDensity(den);
-	}
+	public void setDensity(float den) { fd.density = den; }
 	
 	/**
 	 * True if this body has reached the edge of the world bounds and hence
@@ -248,7 +262,7 @@ public class Body {
 	void addToWorld(World world) {
 		org.jbox2d.dynamics.World jboxWorld = world.getJBoxWorld();
 				
-		jboxBody = jboxWorld.createBody(jboxBodyDef);
+		jboxBody = jboxWorld.createBody(bd);
 		shape.createInBody(this);
 		
 		if (!staticBody) {
@@ -364,7 +378,7 @@ public class Body {
 	 */
 	public void setDamping(float damping) {
 		if (jboxBody == null) {
-			jboxBodyDef.linearDamping = damping;
+			bd.linearDamping = damping;
 		}
 	}
 

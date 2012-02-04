@@ -2,7 +2,7 @@ package org.newdawn.fizzy;
 
 import org.jbox2d.collision.shapes.PolygonShape;
 
-public abstract class PolygonBasedShape extends PrimitiveShape<PolygonDef> {
+public abstract class PolygonBasedShape extends PrimitiveShape<PolygonShape> {
 	/** The horizontal axis offset */
 	protected float xoffset;
 	/** The vertical axis offset */
@@ -14,7 +14,7 @@ public abstract class PolygonBasedShape extends PrimitiveShape<PolygonDef> {
 	 * Create a new shape
 	 */
 	public PolygonBasedShape() {
-		super(new PolygonDef());
+		//super(new PolygonDef());
 	}
 	
 	/**

@@ -35,47 +35,22 @@ public abstract class PrimitiveShape<T extends org.jbox2d.collision.shapes.Shape
 	 * 
 	 * @param localDef The shape definition backing this fizzy shape
 	 */
-	protected PrimitiveShape(T localDef) {
+	/*protected PrimitiveShape(T localDef) {
 		this.def = localDef;
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public void createInBody(Body body) {
 		this.body = body;
 		jbox2DShape = body.getJBoxBody().createShape(def);
 		jbox2DShapes.add(jbox2DShape);
-	}
+	}*/
 
 	@Override
-	public ArrayList<org.jbox2d.collision.Shape> getJBoxShapes() {
+	public ArrayList<org.jbox2d.collision.shapes.Shape> getJBoxShapes() {
 		return jbox2DShapes;
 	}
 
-	@Override
-	public void setDensity(float density) {
-		if (jbox2DShape == null) {
-			def.density = density;
-		} else {
-			jbox2DShape.m_density = density;
-		}
-	}
-
-	@Override
-	public void setFriction(float friction) {
-		if (jbox2DShape == null) {
-			def.friction = friction;
-		} else {
-			jbox2DShape.setFriction(friction);
-		}
-	}													
-
-	@Override
-	public void setRestitution(float rest) {
-		if (jbox2DShape == null) {
-			def.restitution = rest;
-		} else {
-			jbox2DShape.setRestitution(rest);
-		}
-	}
+	
 
 }
