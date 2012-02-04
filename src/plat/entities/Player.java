@@ -1,8 +1,6 @@
 package plat.entities;
 
-import net.phys2d.math.Vector2f;
-
-import org.jbox2d.dynamics.World;
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

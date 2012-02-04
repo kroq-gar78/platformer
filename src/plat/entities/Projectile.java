@@ -1,6 +1,6 @@
 package plat.entities;
 
-import org.jbox2d.dynamics.World;
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

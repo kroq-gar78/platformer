@@ -1,16 +1,12 @@
 package plat.entities;
 
-import net.phys2d.raw.StaticBody;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.shapes.Shape;
-import net.phys2d.raw.shapes.Box;
-
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 
-public class Platform extends StaticBody
+public class Platform extends net.phys2d.raw.StaticBody
 {
 
 	/*public Platform(String name, Image image, Vector2f position, Shape collisionShape, int collisionType)
