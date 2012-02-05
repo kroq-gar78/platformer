@@ -198,10 +198,6 @@ public class World {
 			if ((bodyA != null) && (bodyB != null)) {
 				bodyA.touch(bodyB);
 				bodyB.touch(bodyA);
-				
-				if (bodyA.touchCount(bodyB) == 1) {
-					fireCollision(bodyA, bodyB);
-				}
 			}
 		}
 
@@ -211,27 +207,40 @@ public class World {
 			Body bodyA = fixtureMap.get(contact.m_fixtureA);
 			Body bodyB = fixtureMap.get(contact.m_fixtureB);
 			
-			if ((bodyA != null) && (bodyB != null)) {
-				bodyA.untouch(bodyB);
-				bodyB.untouch(bodyA);
-				
-				if (bodyA.touchCount(bodyB) == 0) {
-					fireSeparated(bodyA, bodyB);
+			if( bodyA != null && bodyB != null)
+			{
+				if( bodyA.touchCount(bodyB) == 1 )
+				{
+					fireCollision(bodyA, bodyB);
 				}
-			}	
+			}
 		}
 
 		@Override
 		public void preSolve(Contact contact, Manifold oldManifold)
 		{
-			// TODO Auto-generated method stub
+			Body bodyA = fixtureMap.get(contact.m_fixtureA);
+			Body bodyB = fixtureMap.get(contact.m_fixtureB);
 			
+			if ((bodyA != null) && (bodyB != null)) {
+				bodyA.untouch(bodyB);
+				bodyB.untouch(bodyA);
+			}
 		}
 
 		@Override
 		public void postSolve(Contact contact, ContactImpulse impulse)
 		{
-			// TODO Auto-generated method stub
+			Body bodyA = fixtureMap.get(contact.m_fixtureA);
+			Body bodyB = fixtureMap.get(contact.m_fixtureB);
+			
+			if( bodyA != null && bodyB != null)
+			{
+				if( bodyA.touchCount(bodyB) == 1 )
+				{
+					fireSeparated(bodyA, bodyB);
+				}
+			}
 		}
 		
 	}
