@@ -2,6 +2,7 @@ package org.newdawn.fizzy;
 
 import java.util.ArrayList;
 
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.Fixture;
@@ -261,6 +262,12 @@ public class Body {
 		else fixture.m_density = den;
 	}
 	
+	public void setShape(Shape newShape)
+	{
+		if(fixture==null) fd.shape=newShape;
+		else fixture.m_shape=newShape;
+	}
+	
 	/* // append a '*' to the previous '*' before this to restore this comment block to a Javadoc thing
 	 * True if this body has reached the edge of the world bounds and hence
 	 * is frozen in space.
@@ -303,7 +310,7 @@ public class Body {
 
 	public void setWorld(World world)
 	{
-		removeFromWorld(this.world); // remove from old world before adding to new world
+		if(this.world!=null)removeFromWorld(this.world); // remove from old world before adding to new world
 		this.world = world;
 		addToWorld(world);
 	}

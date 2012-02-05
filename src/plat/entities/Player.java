@@ -1,5 +1,6 @@
 package plat.entities;
 
+import org.jbox2d.common.Vec2;
 import org.newdawn.fizzy.World;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
@@ -18,10 +19,10 @@ public class Player extends Entity
 		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		setImage(image);
 	}
-	public Player(World world, Vector2f pos, float mass,
+	public Player(World world, Vec2 pos, float mass,
 			String name, SoundWrapper soundWrapper, Image image)
 	{
-		super(world, pos, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
+		super(world, pos.x,pos.y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		setImage(image);
 	}
 

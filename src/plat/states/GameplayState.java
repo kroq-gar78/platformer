@@ -87,6 +87,7 @@ public class GameplayState extends BasicGameState
 	{
 		//System.out.println((float)delta/20);
 		//world.step(1f);
+		world.update(1f);
 		
 		//look for pressed keys
 
