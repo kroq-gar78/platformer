@@ -74,7 +74,7 @@ public abstract class Entity extends SimpleEntity {
 		// physics engine will cause constant tiny bounces as the
 		// the body tries to settle - so don't consider the body
 		// to have left the ground until it's done so for some time
-		/*boolean on = onGroundImpl(getBody());
+		boolean on = onGroundImpl(getBody());
 		if (!on) {
 			offGroundTimer += delta;
 			if (offGroundTimer > 100) {
@@ -120,7 +120,7 @@ public abstract class Entity extends SimpleEntity {
 			if (getVelY() > 0) {
 				jumping = false;
 			}
-		}*/
+		}
 	}
 
 	/**

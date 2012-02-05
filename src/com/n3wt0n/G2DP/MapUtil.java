@@ -112,6 +112,7 @@ public class MapUtil {
 					body.setWorld(world);
 					body.setPosition((localX * tileWidth + (localWidth / 2)),
 							(y * tileHeight + (tileHeight / 2)));
+					body.getJBoxBody().setAwake(false);
 				}
 			}
 		}

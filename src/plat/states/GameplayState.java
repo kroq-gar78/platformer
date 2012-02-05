@@ -41,7 +41,7 @@ public class GameplayState extends BasicGameState
 		
 		soundWrapper = new SoundWrapper();
 		//world = new World(new Vector2f(0f,1.5f), 20);
-		world = new World(new Vec2(0f,1.5f));
+		world = new World(new Vec2(0f,10f));
 		mapUtil = new MapUtil(map, world);
 		mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
@@ -91,7 +91,7 @@ public class GameplayState extends BasicGameState
 	{
 		//System.out.println((float)delta/20);
 		//world.step(1f);
-		world.update(0.5f);
+		world.update(1f);
 		//System.out.println(world.getJBoxWorld().getGravity());
 		//System.out.println(player.getBody().getVelocity());
 		//System.out.println(player.getPosition());
