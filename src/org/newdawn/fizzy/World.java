@@ -3,12 +3,13 @@ package org.newdawn.fizzy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.collision.Manifold;
 import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.callbacks.ContactImpulse;
-import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.contacts.Contact;
 //import org.jbox2d.dynamics.contacts.ContactPoint;
 //import org.jbox2d.dynamics.contacts.ContactResult;
@@ -38,7 +39,7 @@ public class World {
 	/** The list of bodies added to the world */
 	private ArrayList<Body> bodies = new ArrayList<Body>();
 	/** A map from shapes that will be reported from collision to the bodies that own them */
-	private HashMap<org.jbox2d.collision.shapes.Shape, Body> shapeMap = new HashMap<org.jbox2d.collision.shapes.Shape, Body>();
+	private HashMap<Fixture, Body> fixtureMap = new HashMap<Fixture, Body>();
 	/** The list of listeners to be notified of collision events */
 	private ArrayList<WorldListener> listeners = new ArrayList<WorldListener>();
 	/** The number of iterations to integrate over */
@@ -114,7 +115,7 @@ public class World {
 		//for (int i=0;i<shapes.size();i++) {
 		//	shapeMap.put(shapes.get(i), body);
 		//}
-		shapeMap.put(body.getShape(), body);
+		fixtureMap.put(body.getFixture(), body);
 		bodies.add(body);
 	}
 
@@ -129,6 +130,7 @@ public class World {
 		//for (int i=0;i<shapes.size();i++) {
 		//	shapeMap.remove(shapes.get(i));
 		//}
+		fixtureMap.remove(body.getFixture());
 		body.removeFromWorld(this);
 		bodies.remove(body);
 	}
@@ -159,7 +161,7 @@ public class World {
  	 */
 	public void update(float timeStep) {
 		jboxWorld.setContinuousPhysics(true);
-		jboxWorld.setPositionCorrection(true);
+		//jboxWorld.setPositionCorrection(true); // this is already set in the "positionIterationCount" field in World's constructor
 		jboxWorld.setWarmStarting(true);
 		
 		jboxWorld.step(timeStep, iterations,iterations);
@@ -213,15 +215,16 @@ public class World {
 	 * A contact listener to collect effects and proxy them on to 
 	 * world listeners
 	 * 
-	 * @author kevin
+	 * @author kevin | kroq-gar78
 	 */
-	private class ProxyContactListener implements ContactListener {
+	private class ProxyContactListener implements ContactListener
+	{
 
 		@Override
-		public void add(ContactPoint point) {
-			
-			Body bodyA = shapeMap.get(point.shape1);
-			Body bodyB = shapeMap.get(point.shape2);
+		public void beginContact(Contact contact)
+		{
+			Body bodyA = fixtureMap.get(contact.m_fixtureA);
+			Body bodyB = fixtureMap.get(contact.m_fixtureB);
 			
 			if ((bodyA != null) && (bodyB != null)) {
 				bodyA.touch(bodyB);
@@ -234,13 +237,10 @@ public class World {
 		}
 
 		@Override
-		public void persist(ContactPoint point) {
-		}
-
-		@Override
-		public void remove(ContactPoint point) {
-			Body bodyA = shapeMap.get(point.shape1);
-			Body bodyB = shapeMap.get(point.shape2);
+		public void endContact(Contact contact)
+		{
+			Body bodyA = fixtureMap.get(contact.m_fixtureA);
+			Body bodyB = fixtureMap.get(contact.m_fixtureB);
 			
 			if ((bodyA != null) && (bodyB != null)) {
 				bodyA.untouch(bodyB);
@@ -249,35 +249,20 @@ public class World {
 				if (bodyA.touchCount(bodyB) == 0) {
 					fireSeparated(bodyA, bodyB);
 				}
-			}
+			}	
 		}
 
 		@Override
-		public void result(ContactResult point) {
-		}
-
-		@Override
-		public void beginContact(Contact contact) {
+		public void preSolve(Contact contact, Manifold oldManifold)
+		{
 			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
-		public void endContact(Contact contact) {
+		public void postSolve(Contact contact, ContactImpulse impulse)
+		{
 			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void preSolve(Contact contact, Manifold oldManifold) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void postSolve(Contact contact, ContactImpulse impulse) {
-			// TODO Auto-generated method stub
-			
 		}
 		
 	}

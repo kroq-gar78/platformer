@@ -32,6 +32,8 @@ public class Body {
 	/** The list of bodies this body is touching */
 	private ArrayList<Body> touching = new ArrayList<Body>();
 	/** The Fixture defining all of the material properties of the body */
+	private Fixture fixture;
+	/** The definition of the Fixture defining all of the material properties of the body */
 	private FixtureDef fd;
 	/** The shape used to represent this body */
 	private org.jbox2d.collision.shapes.Shape shape;
@@ -265,7 +267,7 @@ public class Body {
 				
 		jboxBody = jboxWorld.createBody(bd);
 		//shape.createInBody(this);
-		jboxBody.createFixture(fd);
+		fixture = jboxBody.createFixture(fd);
 		
 		if (!staticBody) {
 			jboxBody.resetMassData();
@@ -276,7 +278,7 @@ public class Body {
 
 	/**
 	 * Notification that this body is being removed from the world
-	 * 
+	 * key
 	 * @param world The world this body is being removed from
 	 */
 	void removeFromWorld(World world) {
@@ -310,6 +312,13 @@ public class Body {
 	public org.jbox2d.collision.shapes.Shape getShape() {
 		return shape;
 	}
+	
+	/**
+	 * Get the JBox2D Fixture containing the physical properties of this body
+	 * 
+	 * @return The JBox2D Fixture containing the physical properties of this body
+	 */
+	public Fixture getFixture() { return this.fixture; }
 	
 	/**
 	 * Set the position of the body. This can only be called after the body has been added
