@@ -55,7 +55,7 @@ public class Body {
 
 	/**
 	 * Create a new body
-	 * 
+	 * last
 	 * @param shape The shape the body should have
 	 * @param x The x axis location of the body
 	 * @param y The y axis location of the body
@@ -224,12 +224,8 @@ public class Body {
 	 * @param rest The restitution applied when this body collides
 	 */
 	public void setRestitution(float rest) {
-		fd.restitution = rest;
-		/*if (jbox2DShape == null) {
-			def.restitution = rest;
-		} else {
-			jbox2DShape.setRestitution(rest);
-		}*/
+		if(fixture == null) fd.restitution = rest;
+		else fixture.m_restitution = rest;
 	}
 
 	/**
@@ -237,16 +233,24 @@ public class Body {
 	 * 
 	 * @param f The friction applied when this body collides
 	 */
-	public void setFriction(float f) { fd.restitution = f; }
+	public void setFriction(float f)
+	{
+		if(fixture == null) fd.restitution = f;
+		else fixture.m_friction = f;
+	}
 	
 	/**
 	 * Set the density of this body
 	 * 
 	 * @param den The density of this body
 	 */
-	public void setDensity(float den) { fd.density = den; }
+	public void setDensity(float den)
+	{
+		if(fixture==null) fd.density = den;
+		else fixture.m_density = den;
+	}
 	
-	/**
+	/* // append a '*' to the previous '*' before this to restore this comment block to a Javadoc thing
 	 * True if this body has reached the edge of the world bounds and hence
 	 * is frozen in space.
 	 * 
@@ -254,7 +258,7 @@ public class Body {
 	 */
 	/*public boolean isOutOfBounds() {
 		checkBody();
-		//return jboxBody.;
+		return jboxBody.isFrozen();
 	}*/
 	
 	/**
@@ -270,7 +274,7 @@ public class Body {
 		fixture = jboxBody.createFixture(fd);
 		
 		if (!staticBody) {
-			jboxBody.resetMassData();
+			jboxBody.resetMassData(); // set Mass to the total of all of its fixtures
 		} else {
 			jboxBody.m_type = org.jbox2d.dynamics.BodyType.STATIC;
 		}
@@ -363,6 +367,7 @@ public class Body {
 	}
 
 	/**
+	 * @deprecated Use isAwake() function instead.
 	 * Check if this body is "sleeping", i.e. it's not moving any more
 	 * 
 	 * @return True if this body is sleeping
@@ -389,9 +394,8 @@ public class Body {
 	 * @param damping The amount to dampen the movement by
 	 */
 	public void setDamping(float damping) {
-		if (jboxBody == null) {
-			bd.linearDamping = damping;
-		}
+		if (jboxBody == null) bd.linearDamping = damping;
+		else jboxBody.m_linearDamping = damping;
 	}
 
 	/**

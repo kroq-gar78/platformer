@@ -22,17 +22,9 @@ import org.jbox2d.dynamics.contacts.Contact;
  */
 public class World {
 	/** The default gravity applied if none is specified (-10) */
-	public static final float DEFAULT_GRAVITY = -10;
-	/** The default left hand bound of the physics world if none is specified (-200) */
-	public static final float DEFAULT_LEFT_BOUND = -200;
-	/** The default right hand bound of the physics world if none is specified (200) */
-	public static final float DEFAULT_RIGHT_BOUND = 200;
-	/** The default top bound of the physics world if none is specified (-200) */
-	public static final float DEFAULT_TOP_BOUND = -200;
-	/** The default bottom bound of the physics world if none is specified (200) */
-	public static final float DEFAULT_BOTTOM_BOUND = 200;
+	public static final Vec2 DEFAULT_GRAVITY = new Vec2(0f,-10f);
 	/** The default number of iteration used in the integration if none specified (10) */
-	public static final float DEFAULT_ITERATIONS = 10;
+	public static final int DEFAULT_ITERATIONS = 10;
 	
 	/** The JBox2D world this World object is wrapping */
 	private org.jbox2d.dynamics.World jboxWorld;
@@ -52,27 +44,14 @@ public class World {
 	 * becomes more accurate but slower.
 	 */
 	public World(int iterations) {
-		this(DEFAULT_LEFT_BOUND,DEFAULT_TOP_BOUND,DEFAULT_RIGHT_BOUND,DEFAULT_BOTTOM_BOUND
-				 ,DEFAULT_GRAVITY, iterations);
+		this(DEFAULT_GRAVITY, iterations);
 	}
 	
 	/**
 	 * Create a new world simulation with default settings
 	 */
 	public World() {
-		this(DEFAULT_LEFT_BOUND,DEFAULT_TOP_BOUND,DEFAULT_RIGHT_BOUND,DEFAULT_BOTTOM_BOUND
-			 ,DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
-	}
-
-	/**
-	 * Create a new world simulation 
-	 * 
-	 * @param worldWidth The width of the physics world
-	 * @param worldHeight The height of the physics world
-	 */
-	public World(float worldWidth, float worldHeight) {
-		this(-worldWidth/2,-worldHeight/2,worldWidth/2,worldHeight/2
-			 ,DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
+		this(DEFAULT_ITERATIONS);
 	}
 	
 	/**
@@ -85,10 +64,10 @@ public class World {
 	 * @param g The gravity to apply
 	 * @param iterations The number of iterations to integrate over
 	 */
-	public World(float x1, float y1, float x2, float y2, float g, float iterations) {
+	public World(Vec2 gravity, float iterations) {
 		this.iterations = 10;
 
-		Vec2 gravity = new Vec2(0.0f, g);
+		//Vec2 gravity = new Vec2(0.0f, g);
 		boolean doSleep = true;
 		jboxWorld = new org.jbox2d.dynamics.World(gravity, doSleep);
 		jboxWorld.setContactListener(new ProxyContactListener());		
@@ -110,11 +89,6 @@ public class World {
 	 */
 	public void add(Body body) {
 		body.addToWorld(this);
-		//ArrayList<org.jbox2d.collision.shapes.Shape> shapes = body.getShape().getJBoxShapes();
-		
-		//for (int i=0;i<shapes.size();i++) {
-		//	shapeMap.put(shapes.get(i), body);
-		//}
 		fixtureMap.put(body.getFixture(), body);
 		bodies.add(body);
 	}
@@ -125,11 +99,6 @@ public class World {
 	 * @param body The body to be removed from the world
 	 */
 	public void remove(Body body) {
-		//ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
-		
-		//for (int i=0;i<shapes.size();i++) {
-		//	shapeMap.remove(shapes.get(i));
-		//}
 		fixtureMap.remove(body.getFixture());
 		body.removeFromWorld(this);
 		bodies.remove(body);
