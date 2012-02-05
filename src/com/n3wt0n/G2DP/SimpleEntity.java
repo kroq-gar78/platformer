@@ -5,10 +5,9 @@ import net.phys2d.raw.shapes.Box;
 
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.contacts.Contact;
+import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -64,16 +63,15 @@ public abstract class SimpleEntity {
 		this.mass = mass;
 
 		this.name = name;
-		BodyDef bd = new BodyDef();
-		body = world.createBody(bd);
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(width/2, height/2);
-		body = new Body(new Box(width, height), mass);
-		body.setUserData(this);
-		body.setRestitution(0);
+		body = new Body(shape,x,y,false);
+		//body.setUserData(this);
+		body.setRestitution(0f);
 		body.setFriction(0f);
-		body.setMaxVelocity(200, 500);
-		body.setRotatable(false);
+		//body.setMaxVelocity(200, 500);
+		//body.setRotatable(false);
+		body.setWorld(world);
 		setXY(x, y);
 	}
 
@@ -147,7 +145,7 @@ public abstract class SimpleEntity {
 	 *            Force in the y-plane.
 	 */
 	public void applyForce(float x, float y) {
-		body.addForce(new Vector2f(x, y));
+		body.applyForce(x, y);
 	}
 
 	/**
@@ -160,10 +158,11 @@ public abstract class SimpleEntity {
 	 *            The new force in the y-plane.
 	 */
 	public void setVelocity(float x, float y) {
-		Vector2f vec = new Vector2f(body.getVelocity());
-		vec.scale(-1);
-		body.adjustVelocity(vec);
-		body.adjustVelocity(new Vector2f(x, y));
+		Vec2 vel = new Vec2(body.getVelocity());
+		vel = vel.mul(-1);
+		//body.setVelocity((vec));
+		body.setVelocity(vel.x, vel.y);
+		//body.adjustVelocity(new Vector2f(x, y));
 	}
 
 	/**
@@ -172,7 +171,7 @@ public abstract class SimpleEntity {
 	 * @return The X velocity of the Entity.
 	 */
 	public float getVelX() {
-		return body.getVelocity().getX();
+		return body.getVelocity().x;
 	}
 
 	/**
@@ -181,7 +180,7 @@ public abstract class SimpleEntity {
 	 * @return The Y velocity of the Entity.
 	 */
 	public float getVelY() {
-		return body.getVelocity().getY();
+		return body.getVelocity().y;
 	}
 
 	/**
@@ -191,7 +190,7 @@ public abstract class SimpleEntity {
 	 */
 	public float getX() {
 		// return x;
-		return body.getPosition().getX();
+		return body.getX();
 	}
 
 	/**
@@ -211,7 +210,7 @@ public abstract class SimpleEntity {
 	 */
 	public float getY() {
 		// return y;
-		return body.getPosition().getY();
+		return body.getY();
 	}
 
 	/**
@@ -242,7 +241,7 @@ public abstract class SimpleEntity {
 	 * @param position
 	 *            Vector2f containing the location along the x- and y-planes.
 	 */
-	public void setXY(Vector2f position) {
+	public void setXY(Vec2 position) {
 		body.setPosition(position.x, position.y);
 	}
 	
@@ -251,9 +250,9 @@ public abstract class SimpleEntity {
 	 * 
 	 * @return The Y location.
 	 */
-	public Vector2f getPosition() {
+	public Vec2 getPosition() {
 		// return y;
-		return (Vector2f)body.getPosition();
+		return (Vec2)body.getPosition();
 	}
 	
 	/**
@@ -262,7 +261,7 @@ public abstract class SimpleEntity {
 	 * @param position
 	 *            Vector2f containing the location along the x- and y-planes.
 	 */
-	public void setPosition(Vector2f position) {
+	public void setPosition(Vec2 position) {
 		this.setXY(position);
 	}
 
@@ -510,23 +509,24 @@ public abstract class SimpleEntity {
 
 		// loop through the collision events that have occurred in the
 		// world
-		CollisionEvent[] events = world.getContacts(body);
-
-		for (int i = 0; i < events.length; i++) {
+		Contact contacts = world.getJBoxWorld().getContactList();
+		while( contacts != null )
+		{
+			contacts = contacts.getNext();
 			// if the point of collision was below the centre of the actor
 			// i.e. near the feet
-			if (events[i].getPoint().getY() > getY() + (height / 4)) {
+			if (contacts.getManifold().localPoint.y > getY() + (height / 4)) {
 				// check the normal to work out which body we care about
 				// if the right body is involved and a collision has happened
 				// below it then we're on the ground
-				if (events[i].getNormal().getY() < -0.5) {
-					if (events[i].getBodyB() == body) {
+				if (contacts.getManifold().localNormal.y < -0.5) {
+					if (contacts.getFixtureB() == body.getFixture()) {
 						// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 						return true;
 					}
 				}
-				if (events[i].getNormal().getY() > 0.5) {
-					if (events[i].getBodyA() == body) {
+				if (contacts.getManifold().localNormal.y > 0.5) {
+					if (contacts.getFixtureB() == body.getFixture()) {
 						// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 						return true;
 					}

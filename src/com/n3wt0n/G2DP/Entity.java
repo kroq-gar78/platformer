@@ -3,10 +3,8 @@ package com.n3wt0n.G2DP;
 import net.phys2d.math.Vector2f;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.World;
+import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -104,7 +102,7 @@ public abstract class Entity extends SimpleEntity {
 		setVelocity(velx, getVelY());
 		// if we're standing on the ground negate gravity. This stops
 		// some instability in physics
-		getBody().setGravityEffected(!on);
+		//getBody().setGravityEffected(!on);
 
 		// clamp y
 		if (getVelY() < -MAX_JUMP_VEL) {
@@ -164,7 +162,7 @@ public abstract class Entity extends SimpleEntity {
 	 *            Force in the y-plane.
 	 */
 	public void applyForce(float x, float y) {
-		getBody().addForce(new Vector2f(x, y));
+		getBody().applyForce(x, y);
 
 		// if the force applied is up into the air the actor is
 		// considered to be jumping

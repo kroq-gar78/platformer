@@ -177,6 +177,12 @@ public class Body {
 		return jboxBody.getPosition().y;		
 	}
 	
+	public Vec2 getPosition()
+	{
+		checkBody();
+		return jboxBody.getPosition();
+	}
+	
 	/**
 	 * Get the rotation of the body
 	 * 
@@ -206,6 +212,11 @@ public class Body {
 	public float getYVelocity() {
 		checkBody();
 		return jboxBody.getLinearVelocity().y;		
+	}
+	
+	public Vec2 getVelocity()
+	{
+		return jboxBody.getLinearVelocity();
 	}
 	
 	/**

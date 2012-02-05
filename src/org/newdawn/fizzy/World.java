@@ -88,7 +88,7 @@ public class World {
 	 * 
 	 * @return The JBox2D world that is being wrapped
 	 */
-	org.jbox2d.dynamics.World getJBoxWorld() {
+	public org.jbox2d.dynamics.World getJBoxWorld() {
 		return jboxWorld;
 	}
 	
