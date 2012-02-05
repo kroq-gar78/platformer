@@ -3,16 +3,15 @@ package org.newdawn.fizzy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.Manifold;
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.dynamics.contacts.Contact;
-import org.jbox2d.collision.;
-import org.jbox2d.dynamics.contacts.ContactPoint;
-import org.jbox2d.dynamics.contacts.ContactResult;
+//import org.jbox2d.dynamics.contacts.ContactPoint;
+//import org.jbox2d.dynamics.contacts.ContactResult;
 
 /**
  * The central object of the simulation. The world contains the bodies (and joints) which
@@ -87,15 +86,10 @@ public class World {
 	 */
 	public World(float x1, float y1, float x2, float y2, float g, float iterations) {
 		this.iterations = 10;
-		
-		AABB m_worldAABB = new AABB();
-		m_worldAABB.lowerBound = new Vec2(x1, y1);
-		m_worldAABB.upperBound = new Vec2(x2, y2);
+
 		Vec2 gravity = new Vec2(0.0f, g);
 		boolean doSleep = true;
-		jboxWorld = new org.jbox2d.dynamics.World(m_worldAABB, gravity, doSleep);
-		jboxWorld = new org.jbox2d.dynamics.World(gravity,doSleep,m_worldAABB);
-		jboxWorld.
+		jboxWorld = new org.jbox2d.dynamics.World(gravity, doSleep);
 		jboxWorld.setContactListener(new ProxyContactListener());		
 	}
 	
@@ -117,9 +111,10 @@ public class World {
 		body.addToWorld(this);
 		//ArrayList<org.jbox2d.collision.shapes.Shape> shapes = body.getShape().getJBoxShapes();
 		
-		for (int i=0;i<shapes.size();i++) {
-			shapeMap.put(shapes.get(i), body);
-		}
+		//for (int i=0;i<shapes.size();i++) {
+		//	shapeMap.put(shapes.get(i), body);
+		//}
+		shapeMap.put(body.getShape(), body);
 		bodies.add(body);
 	}
 
@@ -129,11 +124,11 @@ public class World {
 	 * @param body The body to be removed from the world
 	 */
 	public void remove(Body body) {
-		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
+		//ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
 		
-		for (int i=0;i<shapes.size();i++) {
-			shapeMap.remove(shapes.get(i));
-		}
+		//for (int i=0;i<shapes.size();i++) {
+		//	shapeMap.remove(shapes.get(i));
+		//}
 		body.removeFromWorld(this);
 		bodies.remove(body);
 	}
@@ -224,15 +219,7 @@ public class World {
 
 		@Override
 		public void add(ContactPoint point) {
-			Contact contact = new Contact() {
-				
-				@Override
-				public void evaluate(Manifold manifold, Transform xfA, Transform xfB) {
-					// TODO Auto-generated method stub
-					
-				}
-			};
-			contact.get
+			
 			Body bodyA = shapeMap.get(point.shape1);
 			Body bodyB = shapeMap.get(point.shape2);
 			

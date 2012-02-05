@@ -250,10 +250,10 @@ public class Body {
 	 * 
 	 * @return True if this body has reached the edge of the world bounds.
 	 */
-	public boolean isOutOfBounds() {
+	/*public boolean isOutOfBounds() {
 		checkBody();
-		return jboxBody.isFrozen();
-	}
+		//return jboxBody.;
+	}*/
 	
 	/**
 	 * Notification that this body is being added to the world
@@ -268,7 +268,7 @@ public class Body {
 		jboxBody.createFixture(fd);
 		
 		if (!staticBody) {
-			jboxBody.setMassFromShapes();
+			jboxBody.resetMassData();
 		} else {
 			jboxBody.m_type = org.jbox2d.dynamics.BodyType.STATIC;
 		}
@@ -286,6 +286,7 @@ public class Body {
 
 	public void setWorld(World world)
 	{
+		removeFromWorld(this.world); // remove from old world before adding to new world
 		this.world = world;
 		addToWorld(world);
 	}
