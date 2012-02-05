@@ -54,7 +54,7 @@ public abstract class SimpleEntity {
 	 */
 	public SimpleEntity(World world, float x, float y, int width, int height, float mass, String name, SoundWrapper soundWrapper) {
 		
-		setWorld(world);
+		//setWorld(world);
 		
 		this.soundWrapper = soundWrapper;
 		
@@ -112,17 +112,18 @@ public abstract class SimpleEntity {
 	 * @return False.
 	 */
 	public boolean collidedWith(SimpleEntity entity) {
-		return false;
+		return body.isTouching(entity.getBody());
 	}
 
 	/**
-	 * Set the Phys2D World.
+	 * Set the JBox2D World.
 	 * 
 	 * @param world
-	 *            The Phys2D World.
+	 *            The JBox2D World.
 	 */
 	public void setWorld(World world) {
 		this.world = world;
+		body.setWorld(world);
 	}
 
 	/**

@@ -2,9 +2,11 @@ package org.newdawn.fizzy;
 
 import java.util.ArrayList;
 
+import org.jbox2d.collision.shapes.MassData;
 import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.FixtureDef;
 
@@ -20,7 +22,7 @@ public class Body {
 	/** The default density applied to shapes if none is specified (25.0f) */
 	public static final float DEFAULT_DENSITY = 25.0f;
 	/** The default restitution applied to shapes if none is specified (0.9f) */
-	public static final float DEFAULT_RESTIUTION = 0.9f;
+	public static final float DEFAULT_RESTITUTION = 0.9f;
 	/** The default friction applied to shapes if none is specified (0.1f) */
 	public static final float DEFAULT_FRICTION = 0.1f;
 	
@@ -65,10 +67,14 @@ public class Body {
 	public Body(org.jbox2d.collision.shapes.Shape shape, float x, float y, boolean staticBody) {
 		bd = new BodyDef();
 		bd.position = new Vec2(x,y);
+		bd.type = BodyType.DYNAMIC;
 		this.staticBody = staticBody;
 		this.shape = shape;
 		fd = new FixtureDef();
 		fd.shape = shape;
+		fd.density = DEFAULT_DENSITY;
+		fd.friction = DEFAULT_FRICTION;
+		fd.restitution = DEFAULT_RESTITUTION;
 	}
 	
 	/**
@@ -230,6 +236,11 @@ public class Body {
 		return jboxBody.getAngularVelocity();
 	}
 	
+	/*public void setMass(float mass)
+	{
+		if(fixture==null) fixture.
+	}*/
+	
 	/**
 	 * Set the restitution applied when this body collides
 	 * 
@@ -293,6 +304,10 @@ public class Body {
 		
 		if (!staticBody) {
 			jboxBody.resetMassData(); // set Mass to the total of all of its fixtures
+			MassData md = new MassData();
+			//jboxBody.getMass();
+			System.out.println("JBox2D body mass: " + jboxBody.getMass());
+			System.out.println("JBox2D fixture density: " + fixture.getDensity());
 		} else {
 			jboxBody.m_type = org.jbox2d.dynamics.BodyType.STATIC;
 		}

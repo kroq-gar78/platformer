@@ -48,9 +48,12 @@ public class GameplayState extends BasicGameState
 		//backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
 		//backdrop.sort();
 		
-		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
+		player = new Player(world, 30, 50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
-		player.setWorld(world);
+		player.getBody().setDensity(1.0f);
+		//player.setWorld(world);
+		System.out.println("Velocity: " + player.getBody().getVelocity());
+		System.out.println("Position: " + player.getPosition());
 		//world.add(player.getBody());
 		
 		/*platforms = new ArrayList<Platform>();
@@ -88,8 +91,10 @@ public class GameplayState extends BasicGameState
 	{
 		//System.out.println((float)delta/20);
 		//world.step(1f);
-		world.update(1f);
-		System.out.println(player.getPosition());
+		world.update(0.5f);
+		//System.out.println(world.getJBoxWorld().getGravity());
+		//System.out.println(player.getBody().getVelocity());
+		//System.out.println(player.getPosition());
 		//look for pressed keys
 
 		//player.preUpdate(delta);

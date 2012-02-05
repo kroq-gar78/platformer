@@ -109,8 +109,8 @@ public class World {
 	 * @param body The body to be removed from the world
 	 */
 	public void remove(Body body) {
-		fixtureMap.remove(body.getFixture());
 		body.removeFromWorld(this);
+		fixtureMap.remove(body.getFixture());
 		bodies.remove(body);
 	}
 	
