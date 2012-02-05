@@ -34,7 +34,7 @@ public class Body {
 	/** The Fixture defining all of the material properties of the body */
 	private FixtureDef fd;
 	/** The shape used to represent this body */
-	private Shape shape;
+	private org.jbox2d.collision.shapes.Shape shape;
 	/** The userdata assigned to this body if any */
 	private Object userData;
 	/** A World the object is in */
@@ -47,7 +47,7 @@ public class Body {
 	 * @param x The x axis location of the body
 	 * @param y The y axis location of the body
 	 */
-	public Body(Shape shape, float x, float y) {
+	public Body(org.jbox2d.collision.shapes.Shape shape, float x, float y) {
 		this(shape,x,y,false);
 	}
 
@@ -59,12 +59,13 @@ public class Body {
 	 * @param y The y axis location of the body
 	 * @param staticBody True if this body should be static
 	 */
-	public Body(Shape shape, float x, float y, boolean staticBody) {
+	public Body(org.jbox2d.collision.shapes.Shape shape, float x, float y, boolean staticBody) {
 		bd = new BodyDef();
 		bd.position = new Vec2(x,y);
-		fd = new FixtureDef();
 		this.staticBody = staticBody;
 		this.shape = shape;
+		fd = new FixtureDef();
+		fd.shape = shape;
 	}
 	
 	/**
@@ -263,7 +264,8 @@ public class Body {
 		org.jbox2d.dynamics.World jboxWorld = world.getJBoxWorld();
 				
 		jboxBody = jboxWorld.createBody(bd);
-		shape.createInBody(this);
+		//shape.createInBody(this);
+		jboxBody.createFixture(fd);
 		
 		if (!staticBody) {
 			jboxBody.setMassFromShapes();
@@ -304,7 +306,7 @@ public class Body {
 	 * 
 	 * @return The fizzy shape representing this body
 	 */
-	public Shape getShape() {
+	public org.jbox2d.collision.shapes.Shape getShape() {
 		return shape;
 	}
 	
