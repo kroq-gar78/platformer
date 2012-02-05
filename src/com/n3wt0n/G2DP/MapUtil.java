@@ -1,10 +1,11 @@
 package com.n3wt0n.G2DP;
 
-import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
-import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
 
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.World;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class MapUtil {
@@ -103,13 +104,14 @@ public class MapUtil {
 						x++;
 					}
 
-					Body body = new StaticBody("StaticBody_" + x + "_" + y,
-							new Box(localWidth, tileHeight));
+					PolygonShape rect = new PolygonShape();
+					rect.setAsBox(localWidth/2, tileHeight/2);
+					Body body = new Body(rect, localX, y, true);
 					//body.setFriction(10f);
 					body.setRestitution(1f);
+					body.setWorld(world);
 					body.setPosition((localX * tileWidth + (localWidth / 2)),
 							(y * tileHeight + (tileHeight / 2)));
-					world.add(body);
 				}
 			}
 		}

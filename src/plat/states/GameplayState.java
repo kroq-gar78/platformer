@@ -42,15 +42,16 @@ public class GameplayState extends BasicGameState
 		soundWrapper = new SoundWrapper();
 		//world = new World(new Vector2f(0f,1.5f), 20);
 		world = new World(new Vec2(0f,1.5f));
-		//mapUtil = new MapUtil(map, world);
-		//mapUtil.buildMap();
+		mapUtil = new MapUtil(map, world);
+		mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
 		//backdrop.add(new BigImage("res/background_sunSmiley.jpg"));
 		//backdrop.sort();
 		
 		player = new Player(world, 30, playerImage.getHeight()-50, 10, "Player", soundWrapper, playerImage);
 		player.getBody().setFriction(200f);
-		world.add(player.getBody());
+		player.setWorld(world);
+		//world.add(player.getBody());
 		
 		/*platforms = new ArrayList<Platform>();
 		platforms.add(new Platform(new Vector2f(0,gc.getHeight()-platformImage.getHeight()-50), platformImage));
@@ -61,7 +62,7 @@ public class GameplayState extends BasicGameState
 		*/
 		
 		//camera = new 
-		//camera = new Camera(gc, map, mapUtil, player, backdrop);
+		camera = new Camera(gc, map, mapUtil, player, backdrop);
 		inputManager = new InputManager(player);
 		
 		/*for( Platform platform : platforms )
@@ -74,11 +75,11 @@ public class GameplayState extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame game , Graphics g ) throws SlickException
 	{
 		//bgImage.draw( 0 , 0 , gc.getWidth() , gc.getHeight() );
-		map.render(0, 0, g);
-		//camera.render(gc, g);
+		//map.render(0, 0, g);
+		camera.render(gc, g);
 		
 		//g.draw(new Rectangle(platforms.get(0).getPosition().getX() , platforms.get(0).getPosition().getY() , ((Box)platforms.get(0).getShape()).getSize().getX() , ((Box)platforms.get(0).getShape()).getSize().getY()) );
-		player.render(gc, g);
+		//player.render(gc, g);
 		//for( Platform platform : platforms ) { platform.render(gc,g); }
 	}
 
@@ -88,7 +89,7 @@ public class GameplayState extends BasicGameState
 		//System.out.println((float)delta/20);
 		//world.step(1f);
 		world.update(1f);
-		
+		System.out.println(player.getPosition());
 		//look for pressed keys
 
 		//player.preUpdate(delta);
@@ -99,8 +100,8 @@ public class GameplayState extends BasicGameState
 		{
 		
 		}*/
-		player.update(gc, game, delta);
-		//camera.update(gc, delta);
+		//player.update(gc, game, delta);
+		camera.update(gc, delta);
 	}
 
 	public int getPlayerLives() { return playerLives; }
@@ -131,7 +132,7 @@ public class GameplayState extends BasicGameState
 	private Backdrop backdrop;
 	private Camera camera;
 	private InputManager inputManager;
-	//private MapUtil mapUtil;
+	private MapUtil mapUtil;
 	private SoundWrapper soundWrapper;
 	private TiledMapPlus map;
 	private World world;
