@@ -48,6 +48,16 @@ public class World {
 	}
 	
 	/**
+	 * Create a new world simulation
+	 * 
+	 * @param iterations The number of iterations to apply integration across, higher number
+	 * becomes more accurate but slower.
+	 */
+	public World(Vec2 grav) {
+		this(grav, DEFAULT_ITERATIONS);
+	}
+	
+	/**
 	 * Create a new world simulation with default settings
 	 */
 	public World() {
@@ -64,8 +74,8 @@ public class World {
 	 * @param g The gravity to apply
 	 * @param iterations The number of iterations to integrate over
 	 */
-	public World(Vec2 gravity, float iterations) {
-		this.iterations = 10;
+	public World(Vec2 gravity, int iterations) {
+		this.iterations = iterations;
 
 		//Vec2 gravity = new Vec2(0.0f, g);
 		boolean doSleep = true;

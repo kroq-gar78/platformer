@@ -41,7 +41,7 @@ public class GameplayState extends BasicGameState
 		
 		soundWrapper = new SoundWrapper();
 		//world = new World(new Vector2f(0f,1.5f), 20);
-		world = new World(new Vec2(0f,1.5f), false);
+		world = new World(new Vec2(0f,1.5f));
 		//mapUtil = new MapUtil(map, world);
 		//mapUtil.buildMap();
 		backdrop = new Backdrop( map.getWidth() , map.getHeight() , gc.getWidth() , gc.getHeight() );
