@@ -18,7 +18,7 @@ public class PlatformerGame extends StateBasedGame
 	}
 	public PlatformerGame()
 	{
-		this("Tilt");
+		this("Platformer Test");
 	}
 	
 	@Override

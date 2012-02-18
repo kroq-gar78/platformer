@@ -13,6 +13,7 @@ public class Projectile extends com.n3wt0n.G2DP.Entity
 	{
 		super(world, x, y, image.getWidth(), image.getHeight(), mass, name, soundWrapper);
 		setImage(image);
+		getBody().getJBoxBody().setBullet(true);
 	}
 	
 	public void render(GameContainer gc, Graphics g)

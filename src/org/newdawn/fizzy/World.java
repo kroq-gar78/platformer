@@ -140,10 +140,11 @@ public class World {
  	 */
 	public void update(float timeStep) {
 		jboxWorld.setContinuousPhysics(true);
-		//jboxWorld.setPositionCorrection(true); // this is already set in the "positionIterationCount" field in World's constructor
+		//jboxWorld.setPositionCorrection(true); // this is already set in the "positionIterationCount" field in jbox.World's step()
 		jboxWorld.setWarmStarting(true);
 		
-		jboxWorld.step(timeStep, iterations,iterations);
+		//jboxWorld.step(timeStep, iterations,iterations);
+		jboxWorld.step(timeStep, iterations, 0);
 	}
 	
 	/**

@@ -3,6 +3,7 @@ package com.n3wt0n.G2DP;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.shapes.Box;
 
+import org.jbox2d.collision.ManifoldPoint;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.contacts.Contact;
@@ -67,8 +68,8 @@ public abstract class SimpleEntity {
 		shape.setAsBox(width/2, height/2);
 		body = new Body(shape,x,y,false);
 		//body.setUserData(this);
-		body.setRestitution(0f);
-		body.setFriction(0f);
+		//body.setRestitution(0f);
+		//body.setFriction(0f);
 		//body.setMaxVelocity(200, 500);
 		//body.setRotatable(false);
 		body.setWorld(world);
@@ -513,26 +514,29 @@ public abstract class SimpleEntity {
 		Contact contacts = world.getJBoxWorld().getContactList();
 		while( contacts != null )
 		{
-			contacts = contacts.getNext();
-			// if the point of collision was below the centre of the actor
-			// i.e. near the feet
-			if (contacts.getManifold().localPoint.y > getY() + (height / 4)) {
-				// check the normal to work out which body we care about
-				// if the right body is involved and a collision has happened
-				// below it then we're on the ground
-				if (contacts.getManifold().localNormal.y < -0.5) {
-					if (contacts.getFixtureB() == body.getFixture()) {
-						// System.out.println(events[i].getPoint()+","+events[i].getNormal());
-						return true;
+			for( ManifoldPoint contactPoint : contacts.getManifold().points )
+			{
+				// if the point of collision was below the centre of the actor
+				// i.e. near the feet
+				if (contactPoint.localPoint.y > getY() + (height / 4)) {
+					// check the normal to work out which body we care about
+					// if the right body is involved and a collision has happened
+					// below it then we're on the ground
+					if (contactPoint.localPoint.y < -0.5) {
+						if (contacts.getFixtureB() == body.getFixture()) {
+							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
+							return true;
+						}
 					}
-				}
-				if (contacts.getManifold().localNormal.y > 0.5) {
-					if (contacts.getFixtureB() == body.getFixture()) {
-						// System.out.println(events[i].getPoint()+","+events[i].getNormal());
-						return true;
+					if (contactPoint.localPoint.y > 0.5) {
+						if (contacts.getFixtureB() == body.getFixture()) {
+							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
+							return true;
+						}
 					}
 				}
 			}
+			contacts = contacts.getNext();	
 		}
 
 		return false;

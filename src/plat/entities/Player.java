@@ -42,7 +42,8 @@ public class Player extends Entity
 		if( proj != null ) getWorld().remove(proj.getBody());
 		proj = new Projectile(getWorld(), getX()+20*(isFacingRight()?1:-1), getY(), 10f, "projectile", getSoundWrapper(), new Image("res/projectile.png"));
 		getWorld().add(proj.getBody());
-		proj.getBody().setGravityEffected(false);
+		//proj.getBody().setGravityEffected(false);
+		proj.setBullet(true);
 		proj.setVelocity(20f*(isFacingRight()?1:-1), 0f);
 	}*/
 	

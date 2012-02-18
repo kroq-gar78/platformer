@@ -304,7 +304,7 @@ public class Body {
 		
 		if (!staticBody) {
 			jboxBody.resetMassData(); // set Mass to the total of all of its fixtures
-			MassData md = new MassData();
+			//MassData md = new MassData();
 			//jboxBody.getMass();
 			System.out.println("JBox2D body mass: " + jboxBody.getMass());
 			System.out.println("JBox2D fixture density: " + fixture.getDensity());
@@ -365,8 +365,9 @@ public class Body {
 	 * @param y The new y coordinate of the body
 	 */
 	public void setPosition(float x, float y) {
-		checkBody();
-		jboxBody.setTransform(new Vec2(x,y), jboxBody.getAngle());
+		//checkBody();
+		if(jboxBody == null) bd.position = new Vec2(x,y);
+		else jboxBody.setTransform(new Vec2(x,y), jboxBody.getAngle());
 	}
 	
 	/**
@@ -376,8 +377,9 @@ public class Body {
 	 * @param rotation The new rotation of the body
 	 */
 	public void setRotation(float rotation) {
-		checkBody();
-		jboxBody.setTransform(jboxBody.getPosition(), rotation);
+		//checkBody();
+		if(jboxBody==null) bd.angle = rotation;
+		else jboxBody.setTransform(jboxBody.getPosition(), rotation);
 	}
 	
 	/**

@@ -36,7 +36,7 @@ public class InputManager
 		// ^^^ THIS IS OLD CODE; IMPORTED FROM SlickPong ^^^
 		
 		// move player
-		player.setMoving(false);
+		//player.setMoving(false);
 		if( input.isKeyPressed( Input.KEY_UP ) )
 		{
 			player.jump(200f);

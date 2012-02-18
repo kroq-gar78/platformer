@@ -85,6 +85,7 @@ public abstract class Entity extends SimpleEntity {
 			setOnGround(true);
 			jumpsTaken = 0;
 			jumping = false;
+			System.out.println("On ground");
 			//System.out.print(jumpsTaken);
 		}
 
