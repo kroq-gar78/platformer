@@ -182,12 +182,8 @@ public class WorldCanvas extends Canvas {
 
 		g.setColor(Color.black);
 		for (int i=0;i<shape.getVertexCount();i++) {
-			int n = i+1;
-			if (n >= shape.getVertexCount()) {
-				n = 0;
-			}
 			g.drawLine((int) shape.getVertex(i).x, (int) shape.getVertex(i).y,
-					   (int) shape.getVertex(n).x, (int) shape.getVertex(n).y);
+					   (int) shape.getVertex((i+1)%i).x, (int) shape.getVertex((i+1)%i).y);
 		}
 		
 	}
