@@ -5,12 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
+import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.collision.shapes.Shape;
 import org.newdawn.fizzy.Body;
-import org.newdawn.fizzy.Circle;
-import org.newdawn.fizzy.CompoundShape;
-import org.newdawn.fizzy.Polygon;
-import org.newdawn.fizzy.Rectangle;
-import org.newdawn.fizzy.Shape;
 import org.newdawn.fizzy.World;
 
 /**
@@ -100,18 +98,18 @@ public class WorldCanvas extends Canvas {
 	 * @param shape The shape representing the body
 	 */
 	private void drawShape(Graphics2D g, Body body, Shape shape) {
-		if (shape instanceof Circle) {
-			drawCircle(g, body, (Circle) shape);
+		if (shape instanceof CircleShape) {
+			drawCircle(g, body, (CircleShape) shape);
 		}
-		if (shape instanceof Rectangle) {
+		/*if (shape instanceof Rectangle) {
 			drawRectangle(g, body, (Rectangle) shape);
+		}*/
+		if (shape instanceof PolygonShape) {
+			drawPolygon(g, body, (PolygonShape) shape);
 		}
-		if (shape instanceof Polygon) {
-			drawPolygon(g, body, (Polygon) shape);
-		}
-		if (shape instanceof CompoundShape) {
+		/*if (shape instanceof CompoundShape) {
 			drawCompound(g, body, (CompoundShape) shape);
-		}
+		}*/
 	}
 
 	/**
@@ -121,12 +119,12 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 * @param shape The shape representing the body
 	 */
-	private void drawCompound(Graphics2D g, Body body, CompoundShape shape) {
+	/*private void drawCompound(Graphics2D g, Body body, CompoundShape shape) {
 		int count = shape.getShapeCount();
 		for (int i=0;i<count;i++) {
 			drawShape(g, body, shape.getShape(i));
 		}
-	}
+	}*/
 	
 	/**
 	 * Draw a body represented by a circle
@@ -135,12 +133,12 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 * @param shape The shape representing the body
 	 */
-	private void drawCircle(Graphics2D g, Body body, Circle shape) {
+	private void drawCircle(Graphics2D g, Body body, CircleShape shape) {
 		g = (Graphics2D) g.create();
 		g.translate(body.getX(), body.getY());
 		g.rotate(body.getRotation());
 		
-		float radius = shape.getRadius();
+		float radius = shape.m_radius;
 		
 		g.setColor(Color.black);
 		g.drawOval((int) -radius,(int) -radius,(int) (radius*2),(int) (radius*2));
@@ -154,7 +152,7 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 * @param shape The shape representing the body
 	 */
-	private void drawRectangle(Graphics2D g, Body body, Rectangle shape) {
+	/*private void drawRectangle(Graphics2D g, Body body, Rectangle shape) {
 		g = (Graphics2D) g.create();
 		g.translate(body.getX(), body.getY());
 		g.rotate(body.getRotation());
@@ -166,7 +164,7 @@ public class WorldCanvas extends Canvas {
 		
 		g.setColor(Color.black);
 		g.drawRect((int) -(width/2),(int) -(height/2),(int) width,(int) height);
-	}
+	}*/
 	
 	/**
 	 * Draw a body represented by a polygon
@@ -175,21 +173,21 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 * @param shape The shape representing the body
 	 */
-	private void drawPolygon(Graphics2D g, Body body, Polygon shape) {
+	private void drawPolygon(Graphics2D g, Body body, PolygonShape shape) {
 		g = (Graphics2D) g.create();
 		g.translate(body.getX(), body.getY());
 		g.rotate(body.getRotation());
-		g.translate(shape.getXOffset(), shape.getYOffset());
-		g.rotate(shape.getAngleOffset());
+		//g.translate(shape.getXOffset(), shape.getYOffset());
+		//g.rotate(shape.getAngleOffset());
 
 		g.setColor(Color.black);
-		for (int i=0;i<shape.getPointCount();i++) {
+		for (int i=0;i<shape.getVertexCount();i++) {
 			int n = i+1;
-			if (n >= shape.getPointCount()) {
+			if (n >= shape.getVertexCount()) {
 				n = 0;
 			}
-			g.drawLine((int) shape.getPointX(i), (int) shape.getPointY(i),
-					   (int) shape.getPointX(n), (int) shape.getPointY(n));
+			g.drawLine((int) shape.getVertex(i).x, (int) shape.getVertex(i).y,
+					   (int) shape.getVertex(n).x, (int) shape.getVertex(n).y);
 		}
 		
 	}
