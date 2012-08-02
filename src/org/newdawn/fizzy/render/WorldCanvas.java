@@ -86,8 +86,7 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 */
 	private void drawBody(Graphics2D g, Body body) {
-		Shape shape = body.getShape();
-		drawShape(g,body,shape);
+		drawShape(g,body,body.getShape());
 	}
 
 	/**
@@ -101,9 +100,6 @@ public class WorldCanvas extends Canvas {
 		if (shape instanceof CircleShape) {
 			drawCircle(g, body, (CircleShape) shape);
 		}
-		/*if (shape instanceof Rectangle) {
-			drawRectangle(g, body, (Rectangle) shape);
-		}*/
 		if (shape instanceof PolygonShape) {
 			drawPolygon(g, body, (PolygonShape) shape);
 		}
@@ -144,27 +140,6 @@ public class WorldCanvas extends Canvas {
 		g.drawOval((int) -radius,(int) -radius,(int) (radius*2),(int) (radius*2));
 		g.drawLine(0,0,0,(int) -radius);
 	}
-	
-	/**
-	 * Draw a body represented by a rectangle
-	 * 
-	 * @param g The graphics context on which to render
-	 * @param body The body to be rendered
-	 * @param shape The shape representing the body
-	 */
-	/*private void drawRectangle(Graphics2D g, Body body, Rectangle shape) {
-		g = (Graphics2D) g.create();
-		g.translate(body.getX(), body.getY());
-		g.rotate(body.getRotation());
-		g.translate(shape.getXOffset(), shape.getYOffset());
-		g.rotate(shape.getAngleOffset());
-		
-		float width = shape.getWidth();
-		float height = shape.getHeight();
-		
-		g.setColor(Color.black);
-		g.drawRect((int) -(width/2),(int) -(height/2),(int) width,(int) height);
-	}*/
 	
 	/**
 	 * Draw a body represented by a polygon
