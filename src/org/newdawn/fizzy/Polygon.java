@@ -3,6 +3,11 @@ package org.newdawn.fizzy;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 
+/**
+ * A simple wrapper class which only has constructors for JBox2D's PolygonShape
+ * 
+ * @author kroq-gar78
+ */
 public class Polygon extends PolygonShape
 {
 	/**
