@@ -24,7 +24,7 @@ public class SimpleRenderTest extends AbstractTest {
 
 	@Override
 	public World createWorld() {
-		World world = new World(new Vec2(800,800));
+		World world = new World(new Vec2(0,-20.0f));
 		
 		for (int i=0;i<5;i++) {
 			CircleShape cs = new CircleShape();
