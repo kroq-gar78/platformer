@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jbox2d.collision.shapes.MassData;
 import org.jbox2d.collision.shapes.Shape;
+import org.jbox2d.collision.shapes.ShapeType;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
@@ -15,7 +16,7 @@ import org.jbox2d.dynamics.FixtureDef;
  * the rest of the world. It also holds properties about the shapes once
  * they have been created
  * 
- * @author kglass | kroq-gar78
+ * @author kglass and kroq-gar78
  */
 public class Body {
 	
