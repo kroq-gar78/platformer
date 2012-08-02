@@ -1,8 +1,5 @@
 package com.n3wt0n.G2DP;
 
-import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.shapes.Box;
-
 import org.jbox2d.collision.ManifoldPoint;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;

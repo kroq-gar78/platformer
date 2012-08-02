@@ -1,9 +1,9 @@
 package org.newdawn.fizzy.examples;
 
-import org.jbox2d.collision.shapes.CircleShape;
-import org.jbox2d.collision.shapes.PolygonShape;
 import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.Circle;
 import org.newdawn.fizzy.CollisionEvent;
+import org.newdawn.fizzy.Polygon;
 import org.newdawn.fizzy.World;
 import org.newdawn.fizzy.WorldListener;
 
@@ -21,13 +21,9 @@ public class SimpleTest {
 	public static void main(String[] argv) {
 		World world = new World();
 		
-		CircleShape cs = new CircleShape();
-		cs.m_radius = 10.0f;
-		Body body = new Body(cs, 0, 0);
+		Body body = new Body(new Circle(10.0f), 0, 0);
 		world.add(body);
-		PolygonShape ps = new PolygonShape();
-		ps.setAsBox(100.0f,5.0f);
-		Body floor = new Body(ps, 0, -50.0f, true);
+		Body floor = new Body(new Polygon(100.0f,5.0f), 0, -50.0f, true);
 		world.add(floor);
 		
 		world.addListener(new WorldListener() {

@@ -1,8 +1,5 @@
 package com.n3wt0n.G2DP;
 
-import net.phys2d.raw.StaticBody;
-import net.phys2d.raw.shapes.Box;
-
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.World;
