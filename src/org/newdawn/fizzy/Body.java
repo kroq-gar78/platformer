@@ -16,7 +16,7 @@ import org.jbox2d.dynamics.FixtureDef;
  * the rest of the world. It also holds properties about the shapes once
  * they have been created
  * 
- * @author kglass and kroq-gar78
+ * @author kglass | kroq-gar78
  */
 public class Body {
 	
@@ -68,7 +68,7 @@ public class Body {
 	public Body(org.jbox2d.collision.shapes.Shape shape, float x, float y, boolean staticBody) {
 		bd = new BodyDef();
 		bd.position = new Vec2(x,y);
-		bd.type = BodyType.DYNAMIC;
+		bd.type = (staticBody?BodyType.STATIC:BodyType.DYNAMIC);
 		this.staticBody = staticBody;
 		this.shape = shape;
 		fd = new FixtureDef();
