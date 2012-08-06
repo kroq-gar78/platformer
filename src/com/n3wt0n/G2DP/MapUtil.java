@@ -1,9 +1,10 @@
 package com.n3wt0n.G2DP;
 
-import org.jbox2d.collision.shapes.PolygonShape;
 import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.Polygon;
 import org.newdawn.fizzy.World;
 import org.newdawn.slick.tiled.TiledMap;
+import plat.entities.Platform;
 
 public class MapUtil {
 
@@ -100,10 +101,8 @@ public class MapUtil {
 						localWidth += tileWidth;
 						x++;
 					}
-
-					PolygonShape rect = new PolygonShape();
-					rect.setAsBox(localWidth/2, tileHeight/2);
-					Body body = new Body(rect, localX, y, true);
+					
+					Body body = new Body(new Polygon(localWidth/2, tileHeight/2), localX, y, true);
 					//body.setFriction(10f);
 					body.setRestitution(1f);
 					body.setWorld(world);
