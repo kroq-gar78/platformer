@@ -33,6 +33,7 @@
 			<zipfileset src="${lib.dir}/hiero.jar"/>
 			<!--<zipfileset src="${lib.dir}/ibxm.jar"/>-->
 			<zipfileset src="${lib.dir}/jargs.jar"/>
+			<zipfileset src="${lib.dir}/jbox2d-library-2.1.2.2-jar-with-dependencies.jar"/>
 			<zipfileset src="${lib.dir}/jinput.jar"/>
 			<zipfileset src="${lib.dir}/jnlp.jar"/>
 			<zipfileset src="${lib.dir}/jogg-0.0.7.jar"/>
@@ -42,7 +43,6 @@
 			<zipfileset src="${lib.dir}/lwjgl_util.jar"/>-->
 			<zipfileset src="${lib.dir}/lzma.jar"/>
 			<zipfileset src="${lib.dir}/packulike.jar"/>
-			<zipfileset src="${lib.dir}/phys2d.jar"/>
 			<!--<zipfileset src="${lib.dir}/pedigree.jar"/>
 			<zipfileset src="${lib.dir}/scalar.jar"/>-->
 			<zipfileset src="${lib.dir}/slick.jar"/>
