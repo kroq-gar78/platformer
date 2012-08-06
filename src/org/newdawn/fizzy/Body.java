@@ -1,6 +1,7 @@
 package org.newdawn.fizzy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.jbox2d.collision.shapes.MassData;
 import org.jbox2d.collision.shapes.Shape;
@@ -122,15 +123,7 @@ public class Body {
 	 * @return The number of contact points
 	 */
 	public int touchCount(Body other) {
-		int count = 0;
-		
-		for (int i=0;i<touching.size();i++) {
-			if (touching.get(i) == other) {
-				count++;
-			}
-		}
-		
-		return count;
+		return Collections.frequency(touching, other);
 	}
 	
 	/**
