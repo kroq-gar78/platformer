@@ -36,11 +36,11 @@ public class Body {
 	/** The list of bodies this body is touching */
 	private ArrayList<Body> touching = new ArrayList<Body>();
 	/** The Fixture defining all of the material properties of the body */
-	private Fixture fixture;
+	//private Fixture fixture;
 	/** The definition of the Fixture defining all of the material properties of the body */
-	private FixtureDef fd;
-	/** The shape used to represent this body */
-	private org.jbox2d.collision.shapes.Shape shape;
+	//private FixtureDef fd;
+	/** The list of containers of Fixture(Def)s and Shapes */
+	private ArrayList<FixtureShape> fixtureShapes = new ArrayList<FixtureShape>();
 	/** The userdata assigned to this body if any */
 	private Object userData;
 	/** A World the object is in */
@@ -70,12 +70,12 @@ public class Body {
 		bd.position = new Vec2(x,y);
 		bd.type = (staticBody?BodyType.STATIC:BodyType.DYNAMIC);
 		this.staticBody = staticBody;
-		this.shape = shape;
-		fd = new FixtureDef();
-		fd.shape = shape;
-		fd.density = DEFAULT_DENSITY;
-		fd.friction = DEFAULT_FRICTION;
-		fd.restitution = DEFAULT_RESTITUTION;
+		FixtureShape fixShape = new FixtureShape();
+		fixShape.fd = new FixtureDef();
+		fixShape.fd.shape = shape;
+		fixShape.fd.density = DEFAULT_DENSITY;
+		fixShape.fd.friction = DEFAULT_FRICTION;
+		fixShape.fd.restitution = DEFAULT_RESTITUTION;
 	}
 	
 	/**
