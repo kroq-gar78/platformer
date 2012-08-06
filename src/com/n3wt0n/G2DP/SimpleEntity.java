@@ -69,7 +69,9 @@ public abstract class SimpleEntity {
 		//body.setFriction(0f);
 		//body.setMaxVelocity(200, 500);
 		//body.setRotatable(false);
-		body.setWorld(world);
+		//body.setWorld(world);
+		world.add(body);
+		this.world = world;
 		setXY(x, y);
 	}
 
@@ -502,19 +504,23 @@ public abstract class SimpleEntity {
 	 */
 	protected boolean onGroundImpl(Body body) {
 		if (world == null) {
+			System.out.println("world == null");
 			return false;
 		}
 		// System.out.println ("Testing if onGroundImpl");
 
 		// loop through the collision events that have occurred in the
 		// world
+		System.out.println("There are " + world.getJBoxWorld().activeContacts + " contacts");
 		Contact contacts = world.getJBoxWorld().getContactList();
 		while( contacts != null )
 		{
+			//world.getJBoxWorld().get
 			for( ManifoldPoint contactPoint : contacts.getManifold().points )
 			{
 				// if the point of collision was below the centre of the actor
 				// i.e. near the feet
+				System.out.println(contactPoint.localPoint.x + " " + contactPoint.localPoint.y);
 				if (contactPoint.localPoint.y > getY() + (height / 4)) {
 					// check the normal to work out which body we care about
 					// if the right body is involved and a collision has happened

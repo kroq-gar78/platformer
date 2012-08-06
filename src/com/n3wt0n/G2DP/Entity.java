@@ -80,6 +80,7 @@ public abstract class Entity extends SimpleEntity {
 			if (offGroundTimer > 100) {
 				setOnGround(false);
 			}
+			System.out.println(getVelY());
 		} else {
 			offGroundTimer = 0;
 			setOnGround(true);
@@ -122,6 +123,8 @@ public abstract class Entity extends SimpleEntity {
 				jumping = false;
 			}
 		}
+		
+		//System.out.println(getVelY());
 	}
 
 	/**
@@ -216,7 +219,7 @@ public abstract class Entity extends SimpleEntity {
 			}
 			else
 			{
-				System.out.println((int)(jumpsTaken));
+				System.out.println(jumpsTaken);
 				this.applyForce(0, -jumpPower);
 			}
 			System.out.println(jumpsTaken);
