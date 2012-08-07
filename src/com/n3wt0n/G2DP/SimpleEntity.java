@@ -511,27 +511,28 @@ public abstract class SimpleEntity {
 
 		// loop through the collision events that have occurred in the
 		// world
-		System.out.println("There are " + world.getJBoxWorld().activeContacts + " contacts");
+		//System.out.println("There are " + world.getJBoxWorld().activeContacts + " contacts");
+		//org.jbox2d.
 		Contact contacts = world.getJBoxWorld().getContactList();
 		while( contacts != null )
 		{
-			//world.getJBoxWorld().get
 			for( ManifoldPoint contactPoint : contacts.getManifold().points )
 			{
 				// if the point of collision was below the centre of the actor
 				// i.e. near the feet
-				System.out.println(contactPoint.localPoint.x + " " + contactPoint.localPoint.y);
-				if (contactPoint.localPoint.y > getY() + (height / 4)) {
+				//System.out.println(contactPoint.localPoint.x + " " + contactPoint.localPoint.y);
+				Vec2 collisionPoint = new Vec2( contactPoint.localPoint.x+this.getX() , contactPoint.localPoint.y + this.getY() );
+				if (collisionPoint.y > getY() + (height / 4)) {
 					// check the normal to work out which body we care about
 					// if the right body is involved and a collision has happened
 					// below it then we're on the ground
-					if (contactPoint.localPoint.y < -0.5) {
+					if (collisionPoint.y < -0.5) {
 						if (contacts.getFixtureB() == body.getFixture()) {
 							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 							return true;
 						}
 					}
-					if (contactPoint.localPoint.y > 0.5) {
+					if (collisionPoint.y > 0.5) {
 						if (contacts.getFixtureB() == body.getFixture()) {
 							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 							return true;
