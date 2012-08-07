@@ -520,13 +520,13 @@ public abstract class SimpleEntity {
 					// if the right body is involved and a collision has happened
 					// below it then we're on the ground
 					if (contactPoint.localPoint.y < -0.5) {
-						if (contacts.getFixtureB() == body.getFixture()) {
+						if (body.hasFixture(contacts.getFixtureB())) {
 							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 							return true;
 						}
 					}
 					if (contactPoint.localPoint.y > 0.5) {
-						if (contacts.getFixtureB() == body.getFixture()) {
+						if (body.hasFixture(contacts.getFixtureB())) {
 							// System.out.println(events[i].getPoint()+","+events[i].getNormal());
 							return true;
 						}

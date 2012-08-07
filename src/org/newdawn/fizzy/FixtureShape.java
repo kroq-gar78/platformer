@@ -31,6 +31,12 @@ public class FixtureShape
 		this.fixture = fix;
 		this.shape = fix.getShape();
 	}
+	public FixtureShape(Shape shape)
+	{
+		this();
+		this.shape = shape;
+		fd.
+	}
 	
 	/**
 	 * Set the restitution applied when this body collides
@@ -43,7 +49,7 @@ public class FixtureShape
 	}
 	
 	/**
-	 * Set the density of this body
+	 * Set the density of this shape
 	 * 
 	 * @param den The density of this body
 	 */
@@ -51,6 +57,17 @@ public class FixtureShape
 	{
 		if(fixture==null) fd.density = den;
 		else fixture.m_density = den;
+	}
+	
+	/**
+	 * Set the friction of this shape
+	 * 
+	 * @param fric
+	 */
+	public void setFriction(float fric)
+	{
+		if(fixture==null) fd.friction = fric;
+		else fixture.m_friction = fric;
 	}
 	
 	public void setShape(Shape newShape)

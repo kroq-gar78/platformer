@@ -86,7 +86,8 @@ public class WorldCanvas extends Canvas {
 	 * @param body The body to be rendered
 	 */
 	private void drawBody(Graphics2D g, Body body) {
-		drawShape(g,body,body.getShape());
+		for(Shape shape : body.getShapes())
+			drawShape(g,body,shape);
 	}
 
 	/**

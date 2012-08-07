@@ -99,7 +99,8 @@ public class World {
 	 */
 	public void add(Body body) {
 		body.addToWorld(this);
-		fixtureMap.put(body.getFixture(), body);
+		for(FixtureShape fs : body.getFixtureShapes())
+			fixtureMap.put(fs.fixture, body);
 		bodies.add(body);
 	}
 
@@ -110,7 +111,8 @@ public class World {
 	 */
 	public void remove(Body body) {
 		body.removeFromWorld(this);
-		fixtureMap.remove(body.getFixture());
+		for(FixtureShape fs : body.getFixtureShapes())
+			fixtureMap.remove(fs.fixture);
 		bodies.remove(body);
 	}
 	

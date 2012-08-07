@@ -153,6 +153,29 @@ public class Body {
 		touching.remove(other);
 	}
 	
+	public ArrayList<FixtureShape> getFixtureShapes() { return this.fixtureShapes; }
+	
+	public int countShapes() { return this.fixtureShapes.size(); }
+	
+	public ArrayList<Fixture> getFixtures()
+	{
+		ArrayList<Fixture> fixtures = new ArrayList<Fixture>();
+		for(FixtureShape fs : fixtureShapes) fixtures.add(fs.fixture);
+		return fixtures;
+	}
+	
+	public boolean hasFixture(Fixture fix)
+	{
+		return getFixtures().contains(fix);
+	}
+	
+	public ArrayList<Shape> getShapes()
+	{
+		ArrayList<Shape> shapes = new ArrayList<Shape>();
+		for(FixtureShape fs : fixtureShapes) shapes.add(fs.shape);
+		return shapes;
+	}
+	
 	/**
 	 * Apply force to the body
 	 * 
@@ -247,28 +270,28 @@ public class Body {
 	 * 
 	 * @param rest The restitution applied when this body collides
 	 */
-	public void setRestitution(float rest) {
+	/*public void setRestitution(float rest) {
 		if(fixture == null) fd.restitution = rest;
 		else fixture.m_restitution = rest;
-	}
+	}*/
 
 	/**
 	 * Set the friction applied when this body collides
 	 * 
 	 * @param f The friction applied when this body collides
 	 */
-	public void setFriction(float f)
+	/*public void setFriction(float f)
 	{
 		if(fixture == null) fd.restitution = f;
 		else fixture.m_friction = f;
-	}
+	}*/
 	
 	/**
 	 * Set the density of this body
 	 * 
 	 * @param den The density of this body
 	 */
-	public void setDensity(float den)
+	/*public void setDensity(float den)
 	{
 		if(fixture==null) fd.density = den;
 		else fixture.m_density = den;
@@ -278,7 +301,7 @@ public class Body {
 	{
 		if(fixture==null) fd.shape=newShape;
 		else fixture.m_shape=newShape;
-	}
+	}*/
 	
 	/* // append a '*' to the previous '*' before this to restore this comment block to a Javadoc thing
 	 * True if this body has reached the edge of the world bounds and hence
@@ -301,14 +324,17 @@ public class Body {
 				
 		jboxBody = jboxWorld.createBody(bd);
 		//shape.createInBody(this);
-		fixture = jboxBody.createFixture(fd);
+		for( FixtureShape fs : fixtureShapes )
+		{
+			fs.fixture = jboxBody.createFixture(fs.fd);
+		}
 		
 		if (!staticBody) {
 			jboxBody.resetMassData(); // set Mass to the total of all of its fixtures
 			//MassData md = new MassData();
 			//jboxBody.getMass();
-			System.out.println("JBox2D body mass: " + jboxBody.getMass());
-			System.out.println("JBox2D fixture density: " + fixture.getDensity());
+			//System.out.println("JBox2D body mass: " + jboxBody.getMass());
+			//System.out.println("JBox2D fixture density: " + fixture.getDensity());
 		} else {
 			jboxBody.m_type = org.jbox2d.dynamics.BodyType.STATIC;
 		}
@@ -347,8 +373,8 @@ public class Body {
 	 * 
 	 * @return The fizzy shape representing this body
 	 */
-	public org.jbox2d.collision.shapes.Shape getShape() {
-		return shape;
+	public org.jbox2d.collision.shapes.Shape getShape(int index) {
+		return fixtureShapes.get(index).shape;
 	}
 	
 	/**
@@ -356,7 +382,7 @@ public class Body {
 	 * 
 	 * @return The JBox2D Fixture containing the physical properties of this body
 	 */
-	public Fixture getFixture() { return this.fixture; }
+	public Fixture getFixture(int index) { return this.fixtureShapes.get(index).fixture; }
 	
 	/**
 	 * Set the position of the body. This can only be called after the body has been added
