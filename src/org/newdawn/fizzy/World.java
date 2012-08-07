@@ -30,7 +30,7 @@ public class World {
 	private org.jbox2d.dynamics.World jboxWorld;
 	/** The list of bodies added to the world */
 	private ArrayList<Body> bodies = new ArrayList<Body>();
-	/** A map from shapes that will be reported from collision to the bodies that own them */
+	/** A map from shapes that will be reported from collision to the Fizzy bodies that own them */
 	private HashMap<Fixture, Body> fixtureMap = new HashMap<Fixture, Body>();
 	/** The list of listeners to be notified of collision events */
 	private ArrayList<WorldListener> listeners = new ArrayList<WorldListener>();
